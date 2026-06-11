@@ -25,19 +25,26 @@ function axe(page: Page) {
 }
 
 test.describe("lab accessibility", () => {
-  test("homepage loads", async ({ page }) => {
+  test("workbench home loads", async ({ page }) => {
     await page.goto("/");
+    await expect(page.getByRole("heading", { name: "SEIHouse UI Workbench" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Design review queue" })).toBeVisible();
+  });
+
+  test("/lab/raw preserves the showcase", async ({ page }) => {
+    await page.goto("/lab/raw");
     await expect(page.getByRole("navigation", { name: "Lab sections" })).toBeVisible();
     await expect(page.locator("#behavior-hardening")).toBeAttached();
   });
 
-  test("/lab loads", async ({ page }) => {
-    await page.goto("/lab");
-    await expect(page.getByRole("navigation", { name: "Lab sections" })).toBeVisible();
-    await expect(page.locator("#behavior-hardening")).toBeAttached();
+  test("/workbench shows one component with controls", async ({ page }) => {
+    await page.goto("/workbench/album-card");
+    await expect(page.getByRole("heading", { name: "Album Card" })).toBeVisible();
+    await expect(page.getByRole("navigation", { name: "Components" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "feature" })).toBeVisible();
   });
 
-  test("no critical/serious axe violations on homepage", async ({ page }) => {
+  test("no critical/serious axe violations on workbench home", async ({ page }) => {
     await page.goto("/");
     const results = await axe(page).analyze();
     const critical = results.violations.filter((v) => v.impact === "critical");
@@ -48,8 +55,19 @@ test.describe("lab accessibility", () => {
     expect(critical, JSON.stringify(critical.map((v) => v.id), null, 2)).toEqual([]);
   });
 
-  test("no critical/serious axe violations on /lab", async ({ page }) => {
-    await page.goto("/lab");
+  test("no critical/serious axe violations on /workbench", async ({ page }) => {
+    await page.goto("/workbench");
+    const results = await axe(page).analyze();
+    const critical = results.violations.filter((v) => v.impact === "critical");
+    const serious = results.violations.filter((v) => v.impact === "serious");
+    if (serious.length) {
+      console.warn("axe serious (non-blocking):", serious.map((v) => v.id).join(", "));
+    }
+    expect(critical, JSON.stringify(critical.map((v) => v.id), null, 2)).toEqual([]);
+  });
+
+  test("no critical/serious axe violations on /lab/raw", async ({ page }) => {
+    await page.goto("/lab/raw");
     const results = await axe(page).analyze();
     const critical = results.violations.filter((v) => v.impact === "critical");
     const serious = results.violations.filter((v) => v.impact === "serious");
