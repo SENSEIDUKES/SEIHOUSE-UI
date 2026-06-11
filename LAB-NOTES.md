@@ -310,6 +310,93 @@ Triggers use Base UI's `render` prop so existing SEIHouse components compose as 
 
 ---
 
+---
+
+# Phase 4 — Behavior Hardening, Mobile Drawer, A11y Tests, Reduced Motion, Variant Cleanup
+
+**Status:** Hardening phase. Strengthens the Phase 3 behavior layer for real apps — native drawer, multi-select tagging, a global command palette, automated a11y tests, a reduced-motion strategy, and promoted shared variants. Still mock-only; brand not locked.
+
+## Packages installed
+
+```bash
+npm install vaul
+npm install -D @playwright/test @axe-core/playwright
+```
+
+- `vaul@1.1.2` — drawer with swipe/snap (peer-supports React 19; built on Radix Dialog).
+- `@playwright/test@1.60` + `@axe-core/playwright@4.11` (dev) — accessibility + keyboard tests.
+- No Motion/Framer, audio, backend, auth, Supabase, or CLI tooling added.
+
+## Drawer strategy chosen
+
+Added a **new** `components/sei/behavior/sei-native-drawer.tsx` built on **vaul** (drag-to-dismiss, snap points, drag handle) for the native/mobile feel. The Phase 3 `sei-drawer.tsx` (Base-UI-Dialog modal drawer) is **kept** for lighter non-gesture modal drawers — no breaking change. vaul gives Radix Dialog accessibility (focus trap, Escape, scroll lock, focus return); SEIHouse owns all styling via `seiNativeDrawerStyles` (`side` bottom/left/right, `size` compact/default/wide, `tone` default/soft/dark/light/glass-test). vaul uses Radix `asChild` (not Base UI's `render`), so drawer triggers/closes in the showcase are styled directly with `seiButtonVariants`.
+
+## Behavior components added / upgraded
+
+| Component | File | Library |
+|---|---|---|
+| `SEINativeDrawer` (+ Trigger/Content/Header/Body/Footer/Title/Description/Close) | `sei-native-drawer.tsx` (new) | vaul |
+| `SEIMultiSelectCombobox` | `sei-multi-select-combobox.tsx` (new) | React Aria + styled chips |
+| `SEICommandPalette` | `sei-command-palette.tsx` (new) | Base UI Dialog + React Aria + custom fuzzy |
+| `fuzzyMatch` / `highlightSegments` | `fuzzy.ts` (new) | — |
+| `SEICommandPreview` / `SEIDialog` / `SEIPopover` | refactored to consume promoted variants | — |
+
+Showcase: new client component `behavior-hardening-showcase.tsx` rendered from a new “05 / Behavior Hardening” `SEISection` on `/` and `/lab` (later sections renumbered 06–09; Phase 3 section preserved).
+
+## Command palette: fuzzy-search approach
+
+`fuzzy.ts` implements a tiny dependency-free **case-insensitive subsequence matcher**: every query char must appear in order (so `ovf` → “Open Vault Fragments”). It returns matched indices (for highlighting) and a small score that rewards consecutive + word-boundary hits. It is wired to React Aria `Autocomplete`'s `filter={(textValue, input) => fuzzyMatch(textValue, input).matched}`, with the palette's input controlled via `inputValue`/`onInputChange`. Matched characters are emphasised with `highlightSegments` + a `<mark>` in sea blue.
+
+## Recent commands strategy
+
+`SEICommandPalette` keeps a `recentIds` state seeded from `mockRecentCommandIds`, hydrated from and persisted to `localStorage` (SSR-guarded, deduped, capped at 6). Selecting a command moves it to the front. A “Recent Commands” `MenuSection` renders at the top **only when the query is empty**. Recent items use composite menu keys (`group::id`) to keep React Aria collection keys unique versus their home group.
+
+## Tests added
+
+- `playwright.config.ts` — chromium project; `webServer` runs `npm run build && npm run start` on port 3100 (pre-compiled routes avoid dev lazy-compile flakiness); `reuseExistingServer` locally.
+- `tests/accessibility/lab-accessibility.spec.ts` — `/` and `/lab` load (navigation landmark + `#behavior-hardening`); axe scans assert **no critical** violations and log serious ones.
+- `tests/accessibility/behavior-keyboard.spec.ts` — dialog keyboard-open + Escape + focus return; native drawer open/close; tab arrow navigation; palette Ctrl+K **and** Meta+K; fuzzy `ovf` match; recent-commands section + virtual-focus; multi-select focus + select adds a chip; focus-visible class wired.
+- Scripts: `test:e2e` (`playwright test`), `test:a11y` (`playwright test tests/accessibility`).
+- **Run:** `npx playwright install` once, then `npm run test:a11y` / `npm run test:e2e`.
+- **Result:** 12/12 passing locally (chromium).
+
+## Reduced-motion strategy
+
+- New `components/sei/styles/reduced-motion.ts` — `motionSafe` / `motionSafeTransform` / `motionSafeFade` utility constants, a `prefersReducedMotion()` runtime check, and `reducedMotionNotes` (shown in the lab).
+- `app/globals.css` — a scoped `@media (prefers-reduced-motion: reduce)` block that **shortens** animations/transitions and disables smooth scrolling rather than deleting all transitions, preserving essential state-change feedback.
+- Principle: motion is optional; primitives work without it; interaction never depends on an animation; future motion components must honour the preference and fall back to instant state.
+
+## Variants promoted to styles/variants.ts
+
+- `seiOverlayVariants` — modal/drawer scrim (used by dialog + command palette).
+- `seiPopupSurfaceVariants` — `default/soft/dark/light/glass-test` floating-surface tones.
+- `seiInteractiveItemVariants` — focused/selected/disabled item states (menus, comboboxes, commands).
+- `seiCommandGroupHeader` — grouped-menu section header.
+Component-specific styling (drawer side/size, tabs indicator) intentionally stays local.
+
+## Mocked features
+
+All combobox options, command groups, recent history, drawer contents, and palette actions are static mock data. `onCommand` / `onChange` are demo callbacks — nothing navigates or executes.
+
+## Known issues / weak spots
+
+- **React Aria `TagGroup` crash:** rendering RAC `TagGroup`/`Tag` for the multi-select chips threw `Cannot destructure property 'onAction'` (a collection-context bug in the current RAC version). Worked around by rendering selected chips as a styled `<ul>` of accessible remove buttons (click or Backspace-to-remove). Revisit RAC `TagGroup` in a future version.
+- **axe `color-contrast` (serious):** the exploratory **light/glass style lanes** use low-contrast muted text on light surfaces. Surfaced as a non-blocking warning in the a11y suite; to be resolved when the brand/tokens are finalised (out of scope while unlocked).
+- **axe `scrollable-region-focusable`:** disabled in tests — React Aria's always-visible command/list menus use roving virtual focus rather than a tabbable scroll container (valid composite-widget pattern).
+- Command palette is still a preview (no real navigation, no nested/async commands). Fuzzy ranking exists but results are not reordered by score yet.
+- No headless browser ships in this environment by default; `npx playwright install` downloads chromium (~175 MB).
+
+## Recommended Phase 5 next steps
+
+1. Rank palette results by fuzzy score and add command categories/aliases; consider nested commands.
+2. Revisit RAC `TagGroup` once the upstream bug is fixed; add async/create-new options to the multi-select.
+3. Add a motion layer (still reduced-motion-gated) and decide whether to adopt a motion library.
+4. Resolve light/glass-lane contrast as part of finalising tokens; expand axe coverage to open overlays (dialog/drawer/palette) and add `axe` checks in the opened state.
+5. Add visual-regression snapshots and CI wiring for `test:e2e`.
+6. Only after behavior + visual direction settle: real data, auth, and registry/SAP/Vault services.
+
+---
+
 ## Historical Phase 1 suggested work
 
 1. Add accessibility-focused behavior primitives using Base UI or React Aria patterns.

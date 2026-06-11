@@ -1284,3 +1284,24 @@ button {
     grid-row: auto;
   }
 }
+/* ==========================================================================
+   Reduced motion strategy (Phase 4)
+   Honour the user's prefers-reduced-motion preference. We *shorten* animations
+   and transitions instead of deleting them, so essential state-change feedback
+   (focus, open/closed surfaces) still reads — just without travel. Smooth
+   scrolling is disabled. See components/sei/styles/reduced-motion.ts.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

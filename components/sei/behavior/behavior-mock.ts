@@ -68,9 +68,19 @@ export const mockCommandGroups: CommandGroup[] = [
     label: "Albums",
     icon: Disc3,
     items: [
+      { id: "cmd-album-card", label: "Open Album Card", hint: "Detail view", icon: Disc3, shortcut: "A" },
       { id: "cmd-album-new", label: "New release world", hint: "Album / EP / single", icon: Library, shortcut: "N" },
       { id: "cmd-album-open", label: "Open Midnight Registry", hint: "EP · Scheduled", icon: Disc3 },
       { id: "cmd-album-tag", label: "Tag release metadata", hint: "Mock metadata", icon: Tag },
+    ],
+  },
+  {
+    id: "artists",
+    label: "Artists",
+    icon: Mic2,
+    items: [
+      { id: "cmd-artist-search", label: "Search artists", hint: "Profiles", icon: Mic2 },
+      { id: "cmd-artist-open", label: "Open artist world", hint: "SENSEIDUKES", icon: Users },
     ],
   },
   {
@@ -78,7 +88,8 @@ export const mockCommandGroups: CommandGroup[] = [
     label: "Vault",
     icon: Vault,
     items: [
-      { id: "cmd-vault-search", label: "Search vault fragments", hint: "Demos · notes", icon: Vault, shortcut: "V" },
+      { id: "cmd-vault-search", label: "Search Vault Fragments", hint: "Demos · notes", icon: Vault, shortcut: "V" },
+      { id: "cmd-vault-open", label: "Open Vault Fragments", hint: "Detail view", icon: Vault },
       { id: "cmd-vault-upload", label: "Add fragment", hint: "Mock upload", icon: Upload },
       { id: "cmd-vault-tag", label: "Tag fragment", hint: "Vault tags", icon: Tag },
     ],
@@ -88,7 +99,7 @@ export const mockCommandGroups: CommandGroup[] = [
     label: "Registry",
     icon: ShieldCheck,
     items: [
-      { id: "cmd-registry-view", label: "View registry status", hint: "Mock states", icon: ShieldCheck, shortcut: "R" },
+      { id: "cmd-registry-view", label: "Review Registry Status", hint: "Mock states", icon: ShieldCheck, shortcut: "R" },
       { id: "cmd-registry-seal", label: "Explain registry seal", hint: "Verified · draft", icon: Boxes },
     ],
   },
@@ -97,8 +108,17 @@ export const mockCommandGroups: CommandGroup[] = [
     label: "Dojo",
     icon: GraduationCap,
     items: [
-      { id: "cmd-dojo-open", label: "Open Dojo modules", hint: "Learning tracks", icon: GraduationCap, shortcut: "D" },
+      { id: "cmd-dojo-launch", label: "Launch Dojo Module", hint: "Learning tracks", icon: GraduationCap, shortcut: "D" },
       { id: "cmd-dojo-template", label: "Creator campaign template", hint: "Template", icon: Hammer },
+    ],
+  },
+  {
+    id: "plugins",
+    label: "Plugins",
+    icon: Boxes,
+    items: [
+      { id: "cmd-plugin-slots", label: "View Plugin Slots", hint: "SAP · Vault Radio", icon: Boxes, shortcut: "P" },
+      { id: "cmd-player-shell", label: "Open Player Shell", hint: "Expanded player", icon: Radio },
     ],
   },
   {
@@ -111,4 +131,63 @@ export const mockCommandGroups: CommandGroup[] = [
       { id: "cmd-tools-radio", label: "Program Vault Radio", hint: "Concept", icon: Radio },
     ],
   },
+];
+
+/** Flat lookup for command id -> item, used by the palette's recent section. */
+export const mockCommandIndex: Record<string, CommandItem & { groupLabel: string }> =
+  Object.fromEntries(
+    mockCommandGroups.flatMap((group) =>
+      group.items.map((item) => [item.id, { ...item, groupLabel: group.label }]),
+    ),
+  );
+
+/** Seed for the "Recent Commands" section (most-recent first). */
+export const mockRecentCommandIds: string[] = [
+  "cmd-vault-search",
+  "cmd-registry-view",
+  "cmd-album-card",
+];
+
+/* ---- Multi-select combobox options (tags / genres / labels / categories) ---- */
+
+export interface MultiSelectOption {
+  id: string;
+  label: string;
+  hint?: string;
+  disabled?: boolean;
+}
+
+export const mockVaultTags: MultiSelectOption[] = [
+  { id: "demo", label: "Demo" },
+  { id: "master", label: "Master" },
+  { id: "arc-notes", label: "Arc Notes" },
+  { id: "vault-radio", label: "Vault Radio Eligible" },
+  { id: "needs-review", label: "Needs Review" },
+  { id: "reference", label: "Reference" },
+  { id: "cold-storage", label: "Cold Storage", disabled: true },
+];
+
+export const mockGenreOptions: MultiSelectOption[] = [
+  { id: "melodic-rap", label: "Melodic Rap" },
+  { id: "rnb", label: "R&B" },
+  { id: "alt-pop", label: "Alt Pop" },
+  { id: "electronic", label: "Electronic" },
+  { id: "soul", label: "Soul" },
+  { id: "ambient", label: "Ambient" },
+];
+
+export const mockRegistryLabels: MultiSelectOption[] = [
+  { id: "registered", label: "Registered" },
+  { id: "needs-review", label: "Needs Review" },
+  { id: "split-attached", label: "Split Attached" },
+  { id: "verified", label: "Verified" },
+  { id: "experimental", label: "Experimental" },
+];
+
+export const mockDojoCategories: MultiSelectOption[] = [
+  { id: "artist-world", label: "Artist World" },
+  { id: "dojo-template", label: "Dojo Template" },
+  { id: "registry-basics", label: "Registry Basics" },
+  { id: "vault-ops", label: "Vault Operations" },
+  { id: "creator-tools", label: "Creator Tools" },
 ];
