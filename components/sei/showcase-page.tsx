@@ -4,6 +4,7 @@ import {
   Boxes,
   Disc3,
   LayoutDashboard,
+  MousePointerClick,
   MoreHorizontal,
   Palette,
   Play,
@@ -11,6 +12,8 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+
+import { BehaviorShowcase } from "@/components/sei/behavior/behavior-showcase";
 
 import {
   mockAlbums,
@@ -108,6 +111,7 @@ const navItems = [
   "Mission",
   "Foundation",
   "Music Particles",
+  "Behavior",
   "Experience Blocks",
   "Registry",
   "Dashboard",
@@ -166,13 +170,13 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
                   SEIHOUSE UI
                 </p>
                 <p className="font-mono text-xs text-[var(--sh-color-mist)]">
-                  {route} · Phase 2 music-business lab
+                  {route} · Phase 3 behavior primitives lab
                 </p>
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <SEIBadge variant="soft" icon={Sparkles}>
-                Phase 2
+                Phase 3
               </SEIBadge>
               <SEIBadge variant="registry">Mock data only</SEIBadge>
               <SEIButton
@@ -347,7 +351,16 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
         </SEISection>
 
         <SEISection
-          eyebrow="04 / Experience Blocks"
+          eyebrow="04 / Behavior Primitives"
+          title="Accessible interaction foundations powered by Base UI and React Aria."
+          description="Phase 3 adds the first headless behavior libraries. Base UI and React Aria provide focus management, keyboard navigation, and ARIA wiring; SEIHouse keeps full visual control through Tailwind variants. Everything below is mocked — no audio, backend, auth, or registry runtime."
+          aside={<SEIBadge variant="soft" icon={MousePointerClick}>Headless behavior</SEIBadge>}
+        >
+          <BehaviorShowcase />
+        </SEISection>
+
+        <SEISection
+          eyebrow="05 / Experience Blocks"
           title="Hero, player shell, and future plugin placeholders."
           description="These particles preview higher-order product surfaces without adding runtime behavior."
           aside={<SEIBadge variant="warning" icon={Play}>Visual only</SEIBadge>}
@@ -369,7 +382,7 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
         </SEISection>
 
         <SEISection
-          eyebrow="05 / Registry / Status"
+          eyebrow="06 / Registry / Status"
           title="Registry panels and status seals for mocked verification states."
           description="RegistryPanel composes SEIPanel, RegistrySeal, badges, and buttons as a reusable product particle. No registry service or database is included."
           aside={<SEIBadge variant="registry" icon={ShieldCheck}>Status systems</SEIBadge>}
@@ -391,7 +404,7 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
         </SEISection>
 
         <SEISection
-          eyebrow="06 / Dashboard / Utility"
+          eyebrow="07 / Dashboard / Utility"
           title="Metrics and actions for internal dashboards and creator tools."
           description="MetricCard and ActionStrip support quick dashboard summaries, creator operations, and responsive action rows."
           aside={<SEIBadge variant="soft" icon={LayoutDashboard}>Utility</SEIBadge>}
@@ -431,7 +444,7 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
         </SEISection>
 
         <SEISection
-          eyebrow="07 / Style Lanes"
+          eyebrow="08 / Style Lanes"
           title="Exploratory visual directions, not final identity decisions."
           description="Clean, soft, dark, light, media, and glass lanes expose a flexible palette for future testing across primitives and Phase 2 particles."
           aside={<SEIBadge variant="warning">Not final brand system</SEIBadge>}
@@ -465,8 +478,8 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
         </SEISection>
 
         <footer className="relative z-10 flex flex-col gap-3 border-t border-white/10 py-10 text-sm text-[var(--sh-color-mist)] sm:flex-row sm:items-center sm:justify-between">
-          <span>SEIHOUSE-UI · Phase 2 music-business component lab</span>
-          <span className="font-mono text-xs">components/sei · particles · mock data · Tailwind CSS v4</span>
+          <span>SEIHOUSE-UI · Phase 3 behavior primitives lab</span>
+          <span className="font-mono text-xs">components/sei · behavior · Base UI · React Aria · Tailwind CSS v4</span>
         </footer>
       </div>
     </main>
