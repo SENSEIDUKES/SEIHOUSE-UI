@@ -104,6 +104,7 @@ import {
 import { seiButtonVariants } from "@/components/sei/styles/variants";
 
 import type { ComponentPreviewProps } from "./component-registry";
+import { MockSwitchRow } from "./context-registry";
 
 /* ------------------------------------------------------------------ */
 /* Workbench previews                                                   */
@@ -312,13 +313,7 @@ export function NativeDrawerPreview({ variant, mockIndex }: ComponentPreviewProp
           {isPlugin ? (
             <div className="space-y-2 pb-4">
               {["Enable visualizer", "Auto-tag metadata", "Vault Radio eligible"].map((label) => (
-                <label
-                  key={label}
-                  className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-[var(--sh-color-cloud)]"
-                >
-                  {label}
-                  <span className="h-5 w-9 rounded-full bg-[rgba(0,122,255,0.4)]" aria-hidden="true" />
-                </label>
+                <MockSwitchRow key={label} label={label} />
               ))}
             </div>
           ) : (

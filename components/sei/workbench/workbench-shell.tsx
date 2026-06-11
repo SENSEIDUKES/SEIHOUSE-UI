@@ -134,9 +134,10 @@ function DesignNotes({ slug }: { slug: string }) {
             id={`note-${slug}-${field.key}`}
             rows={2}
             value={loaded ? notes[field.key] : ""}
+            disabled={!loaded}
             onChange={(event) => update(field.key, event.target.value)}
             placeholder={field.placeholder}
-            className="w-full resize-y rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-xs leading-relaxed text-[var(--sh-color-ivory)] placeholder:text-[var(--sh-color-mist)]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sh-color-sea)]"
+            className="w-full resize-y rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-xs leading-relaxed text-[var(--sh-color-ivory)] placeholder:text-[var(--sh-color-mist)]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sh-color-sea)] disabled:opacity-50"
           />
         </div>
       ))}

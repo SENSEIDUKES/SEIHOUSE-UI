@@ -7,8 +7,12 @@ import { WorkbenchNav } from "@/components/sei/workbench/workbench-nav";
 import { cn } from "@/components/sei/styles/cn";
 
 export default function ContextsPage() {
-  const [activeId, setActiveId] = useState(contextRegistry[0].id);
+  const [activeId, setActiveId] = useState(contextRegistry[0]?.id);
   const active = contextRegistry.find((entry) => entry.id === activeId) ?? contextRegistry[0];
+
+  if (!active) {
+    return null;
+  }
   const ActiveContext = active.component;
 
   return (

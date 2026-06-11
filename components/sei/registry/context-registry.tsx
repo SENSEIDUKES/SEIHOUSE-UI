@@ -59,6 +59,20 @@ export interface ContextEntry {
   component: ComponentType;
 }
 
+/** Mock settings toggle backed by a real (visually hidden) checkbox so it stays keyboard-accessible. */
+export function MockSwitchRow({ label }: { label: string }) {
+  return (
+    <label className="flex cursor-pointer items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-[var(--sh-color-cloud)]">
+      {label}
+      <input type="checkbox" defaultChecked className="peer sr-only" />
+      <span
+        aria-hidden="true"
+        className="relative h-5 w-9 shrink-0 rounded-full bg-white/10 transition-colors after:absolute after:left-0.5 after:top-0.5 after:size-4 after:rounded-full after:bg-white/60 after:transition-transform peer-checked:bg-[rgba(0,122,255,0.55)] peer-checked:after:translate-x-4 peer-checked:after:bg-white peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--sh-color-sea)]"
+      />
+    </label>
+  );
+}
+
 function SeaPortalShellContext() {
   return (
     <SEIPanel variant="dark" padding="md" className="w-full">
@@ -221,13 +235,7 @@ function PluginSettingsDrawerContext() {
             <SEINativeDrawerBody>
               <div className="space-y-2">
                 {["Enable visualizer", "Auto-tag metadata", "Vault Radio eligible"].map((label) => (
-                  <label
-                    key={label}
-                    className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-[var(--sh-color-cloud)]"
-                  >
-                    {label}
-                    <span className="h-5 w-9 rounded-full bg-[rgba(0,122,255,0.4)]" aria-hidden="true" />
-                  </label>
+                  <MockSwitchRow key={label} label={label} />
                 ))}
               </div>
             </SEINativeDrawerBody>
