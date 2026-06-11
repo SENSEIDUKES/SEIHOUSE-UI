@@ -2,11 +2,12 @@ import { test, expect } from "@playwright/test";
 
 /**
  * Keyboard + ARIA behavior smoke tests for the Phase 3 / Phase 4 behavior layer.
- * These are a safety net, not exhaustive coverage. All run against `/lab`.
+ * These are a safety net, not exhaustive coverage. All run against `/lab/raw`
+ * (the preserved all-in-one showcase).
  */
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/lab");
+  await page.goto("/lab/raw");
 });
 
 test("dialog opens by keyboard and closes with Escape, returning focus", async ({ page }) => {

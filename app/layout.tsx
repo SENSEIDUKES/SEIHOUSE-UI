@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SEIHOUSE-UI — Component Core Lab",
+  title: "SEIHouse UI Workbench",
   description:
-    "Experimental workbench for building the reusable SEIHouse component system.",
+    "Internal workbench to inspect and design SEIHouse components before they become final.",
 };
 
 export default function RootLayout({

@@ -410,3 +410,53 @@ All combobox options, command groups, recent history, drawer contents, and palet
 ---
 
 This lab is exploratory by design. Components should remain adaptable until the final SEIHouse product and brand direction is established.
+---
+
+# Phase 5 — SEIHouse Component Workbench (internal design review)
+
+The all-in-one showcase became too overwhelming to judge individual designs, so the repo
+is now an internal design inspection tool. Nothing was deleted — the original showcase
+moved to `/lab/raw` (`/lab` redirects there).
+
+## Routes
+
+- `/` — Workbench Home: what the workbench is, section links, and a Design Review Queue
+  (Needs review / Experimental / Approved foundation) computed from the registry.
+- `/workbench` and `/workbench/[slug]` — one component at a time. Left: searchable grouped
+  component list. Center: solo preview on a controllable canvas. Right: variant selector,
+  mock-data selector, canvas (dark/light/plain/glass), width (mobile/tablet/desktop),
+  mode (solo/variants/context), status badge, and design notes (What works / What feels
+  wrong / Change request / Founder verdict — saved to localStorage per component).
+- `/gallery` — shadcn-style grouped text list, no previews.
+- `/contexts` — components inside product situations (SEA Portal shell, album world hero,
+  vault fragment list, SAP player dock, registry confirmation, creator dashboard, plugin
+  settings drawer). Review environments, not final designs.
+- `/lab/raw` — the preserved Phase 1–4 showcase.
+
+## Component registry
+
+`components/sei/registry/component-registry.ts` holds one entry per reviewable component:
+name, slug, category, layer (foundation / behavior / music-particle / registry / layout),
+status (not-designed / rough / reviewing / approved-foundation / experimental), plain
+description, variants, mockDataOptions, preview component, context examples, and a
+reviewNotes placeholder. Previews live in `registry/previews.tsx`; context environments in
+`registry/context-registry.tsx`; the shell in `components/sei/workbench/`.
+
+## Bug fixed along the way
+
+`app/globals.css` had an **unlayered** `* { margin:0; padding:0 }` reset and
+`button { border:none; background:none }`. Tailwind v4 emits utilities inside
+`@layer utilities`, and unlayered CSS beats layered CSS, so every margin/padding/border/
+background utility was being silently overridden (buttons rendered with no background,
+cards with no padding). The custom reset/base styles now live inside `@layer base`.
+
+## Verification
+
+- `npm run build` — all routes compile; 26 workbench slugs prerendered.
+- `npm run test:a11y` — 14/14 pass: existing keyboard/ARIA specs now run against
+  `/lab/raw`; axe scans cover `/`, `/workbench`, and `/lab/raw`.
+
+## Statuses are placeholders
+
+Component statuses in the registry are starting points for review, not decisions. The
+founder moves things between rough / reviewing / approved as designs get judged.

@@ -1,5 +1,5 @@
-import { SEIComponentShowcase } from "@/components/sei/showcase-page";
+import { redirect } from "next/navigation";
 
 export default function LabPage() {
-  return <SEIComponentShowcase route="/lab" />;
+  redirect("/lab/raw");
 }
