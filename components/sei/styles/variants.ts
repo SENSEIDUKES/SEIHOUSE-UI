@@ -208,9 +208,67 @@ export const registrySealVariants = tv({
   },
 });
 
+/* ------------------------------------------------------------------ */
+/* Phase 4 — promoted shared behavior variants                         */
+/* These patterns were stable across the Phase 3 behavior components    */
+/* (dialog / drawer / popover / command) and are now shared. Component- */
+/* specific styling (drawer side/size, tabs indicator) stays local.     */
+/* ------------------------------------------------------------------ */
+
+/** Modal/drawer scrim shared by dialog, drawer, and the command palette. */
+export const seiOverlayVariants = tv({
+  base: [
+    "fixed inset-0 z-40 bg-black/60 backdrop-blur-sm",
+    "transition-opacity duration-200 ease-out",
+    "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+  ],
+  variants: {
+    tone: {
+      default: "",
+      heavy: "bg-black/75",
+      soft: "bg-black/45",
+    },
+  },
+  defaultVariants: { tone: "default" },
+});
+
+/** Floating surface tone map shared by dialog, popover, and palette popups. */
+export const seiPopupSurfaceVariants = tv({
+  base: "border shadow-[0_30px_90px_rgba(0,0,0,0.5)]",
+  variants: {
+    tone: {
+      default: "border-white/12 bg-[rgba(18,20,26,0.97)] text-[var(--sh-color-ivory)] backdrop-blur-xl",
+      soft: "border-[rgba(0,122,255,0.22)] bg-[rgba(8,16,30,0.97)] text-[var(--sh-color-ivory)] backdrop-blur-xl",
+      dark: "border-white/10 bg-[#07080c] text-white",
+      light: "border-black/10 bg-white text-[#111318]",
+      "glass-test":
+        "border-white/16 bg-white/[0.08] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-2xl",
+    },
+  },
+  defaultVariants: { tone: "default" },
+});
+
+/** Focused/selected item states shared by menus, comboboxes, and commands. */
+export const seiInteractiveItemVariants = tv({
+  base: [
+    "flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2 text-sm outline-none",
+    "text-[var(--sh-color-cloud)]",
+    "data-[focused]:bg-white/[0.07] data-[focused]:text-white",
+    "data-[hovered]:bg-white/[0.05]",
+    "data-[selected]:text-white",
+    "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-40",
+  ],
+});
+
+/** Section header style for grouped menus / command palettes. */
+export const seiCommandGroupHeader =
+  "flex items-center gap-2 px-3 pb-1 pt-2 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-[var(--sh-color-mist)]";
+
 export type SEIButtonVariantProps = VariantProps<typeof seiButtonVariants>;
 export type SEIBadgeVariantProps = VariantProps<typeof seiBadgeVariants>;
 export type SEIPanelVariantProps = VariantProps<typeof seiPanelVariants>;
 export type SEICardVariantProps = VariantProps<typeof seiCardVariants>;
 export type SEISectionVariantProps = VariantProps<typeof seiSectionVariants>;
 export type RegistrySealVariantProps = VariantProps<typeof registrySealVariants>;
+export type SEIOverlayVariantProps = VariantProps<typeof seiOverlayVariants>;
+export type SEIPopupSurfaceVariantProps = VariantProps<typeof seiPopupSurfaceVariants>;

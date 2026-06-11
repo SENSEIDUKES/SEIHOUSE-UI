@@ -13,6 +13,10 @@ import {
 } from "react-aria-components";
 
 import { cn } from "@/components/sei/styles/cn";
+import {
+  seiCommandGroupHeader,
+  seiInteractiveItemVariants,
+} from "@/components/sei/styles/variants";
 import { mockCommandGroups, type CommandGroup } from "./behavior-mock";
 
 /**
@@ -71,7 +75,7 @@ export function SEICommandPreview({
         >
           {groups.map((group) => (
             <MenuSection key={group.id} className="mb-1 last:mb-0">
-              <Header className="flex items-center gap-2 px-3 pb-1 pt-2 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-[var(--sh-color-mist)]">
+              <Header className={seiCommandGroupHeader}>
                 <group.icon aria-hidden="true" className="size-3.5" />
                 {group.label}
               </Header>
@@ -80,10 +84,7 @@ export function SEICommandPreview({
                   key={item.id}
                   id={item.id}
                   textValue={`${group.label} ${item.label} ${item.hint ?? ""}`}
-                  className={cn(
-                    "flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2 text-sm text-[var(--sh-color-cloud)] outline-none",
-                    "data-[focused]:bg-white/[0.07] data-[focused]:text-white",
-                  )}
+                  className={seiInteractiveItemVariants()}
                 >
                   <item.icon
                     aria-hidden="true"

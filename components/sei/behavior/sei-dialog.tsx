@@ -7,7 +7,11 @@ import { Dialog } from "@base-ui/react/dialog";
 import { tv, type VariantProps } from "tailwind-variants";
 
 import { cn } from "@/components/sei/styles/cn";
-import { focusRing, transitionSurface } from "@/components/sei/styles/variants";
+import {
+  focusRing,
+  seiOverlayVariants,
+  transitionSurface,
+} from "@/components/sei/styles/variants";
 
 /**
  * SEIDialog — accessible modal dialog powered by Base UI Dialog.
@@ -20,11 +24,6 @@ import { focusRing, transitionSurface } from "@/components/sei/styles/variants";
 
 export const seiDialogStyles = tv({
   slots: {
-    backdrop: [
-      "fixed inset-0 z-40 bg-black/60 backdrop-blur-sm",
-      "transition-opacity duration-200 ease-out",
-      "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
-    ],
     popup: [
       "fixed left-1/2 top-1/2 z-50 w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2",
       "max-h-[calc(100vh-2rem)] overflow-y-auto rounded-[1.35rem] border p-6 shadow-[0_40px_120px_rgba(0,0,0,0.55)]",
@@ -121,7 +120,7 @@ export function SEIDialogContent({
   return (
     <SEIDialogContext.Provider value={variant}>
       <Dialog.Portal>
-        <Dialog.Backdrop className={cn(styles.backdrop(), backdropClassName)} />
+        <Dialog.Backdrop className={cn(seiOverlayVariants(), backdropClassName)} />
         <Dialog.Popup className={cn(styles.popup(), className)} {...props}>
           {children}
           {!hideClose ? (
