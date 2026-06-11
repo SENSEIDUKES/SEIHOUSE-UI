@@ -218,6 +218,98 @@ Phase 2 intentionally does **not** add:
 6. Explore behavior primitives only after choosing a strategy; do not add Base UI or React Aria unless Phase 3 explicitly approves it.
 7. Define richer mock flows for SEA Portal, Vault Radio, SAP, Dojo, and Registry concepts before adding real service logic.
 
+---
+
+# Phase 3 — Accessible Behavior Primitives
+
+**Status:** First phase to add headless behavior libraries. Behavior comes from Base UI and React Aria; **all visual styling stays in the SEIHouse Tailwind / tailwind-variants system.** Still no backend, audio, auth, or brand lock-in.
+
+## Packages installed
+
+```bash
+npm install @base-ui/react react-aria-components
+```
+
+- `@base-ui/react` (v1.5.x) — the current official package name for Base UI (the `mui/base-ui` headless library). The older `@base-ui-components/react` RC name was **not** used.
+- `react-aria-components` (v1.18.x) — Adobe React Aria Components.
+- Nothing else was added: no Motion/Framer Motion, no audio libraries, no Supabase/auth/database, no CLI tooling.
+
+## Behavior components added
+
+All live in `components/sei/behavior/` (separate from Phase 1 `primitives/` and Phase 2 `particles/`). Every component is a `"use client"` component, accepts `className`, merges via `cn()`, and uses local `tv()` variants with `--sh-*` tokens plus the shared `focusRing` / `transitionSurface` from `styles/variants.ts`.
+
+| Component | File | Library | Variants |
+|---|---|---|---|
+| `SEIDialog` (+ Trigger/Content/Title/Description/Close) | `sei-dialog.tsx` | Base UI Dialog | `default, soft, dark, light, glass-test` |
+| `SEIDrawer` (+ Trigger/Content/Header/Body/Footer/Title/Description/Close) | `sei-drawer.tsx` | Base UI Dialog | side `right/left/bottom` · size `compact/default/wide` · tone `dark/light` |
+| `SEITabs` (+ List/Trigger/Panel) | `sei-tabs.tsx` | Base UI Tabs | `default, underline, pill, panel, dark, light` |
+| `SEIPopover` (+ Trigger/Content/Title/Description/Close) | `sei-popover.tsx` | Base UI Popover | `default, soft, dark, light` |
+| `SEITooltip` (+ Provider/Trigger/Content) | `sei-tooltip.tsx` | Base UI Tooltip | `default, dark, light` |
+| `SEIComboboxPreview` | `sei-combobox-preview.tsx` | React Aria Components | n/a (mock search) |
+| `SEICommandPreview` | `sei-command-preview.tsx` | React Aria Components | n/a (grouped mock palette) |
+
+Mock data for the previews lives in `components/sei/behavior/behavior-mock.ts` (artist/vault-tag combobox options, grouped command palette). A barrel `components/sei/behavior/index.ts` re-exports everything.
+
+## Base UI usage
+
+- **Dialog** (`@base-ui/react/dialog`): `Root/Trigger/Portal/Backdrop/Popup/Title/Description/Close`. Provides focus trap, Escape, scroll lock, outside-click dismissal, and focus return to the trigger. Open/close transitions use the `data-[starting-style]` / `data-[ending-style]` / `data-[open]` attributes with CSS transitions only.
+- **Drawer**: SEIDrawer is built on the **Dialog** primitive (not the newer Base UI `drawer` primitive). The Dialog popup is a plain portalled element, which lets SEIHouse fully own side/bottom positioning, sizing, and slide direction without fighting the Drawer's built-in swipe/viewport transforms. Accessibility guarantees are identical (Dialog).
+- **Tabs** (`@base-ui/react/tabs`): `Root/List/Tab/Indicator/Panel`. Roving-tabindex arrow-key navigation, `data-[selected]` active state, `disabled` triggers, and `Tabs.Indicator` (driven by `--active-tab-*` CSS vars) for the underline/pill variants.
+- **Popover** (`@base-ui/react/popover`): `Root/Trigger/Portal/Positioner/Popup/Arrow/Title/Description`. Anchored positioning (flip/shift) via `Positioner` (`side`/`align`/`sideOffset` exposed as props).
+- **Tooltip** (`@base-ui/react/tooltip`): `Provider/Root/Trigger/Portal/Positioner/Popup`. `SEITooltipProvider` sets a shared open `delay`; tooltips open on hover **and** keyboard focus.
+
+Triggers use Base UI's `render` prop so existing SEIHouse components compose as triggers (e.g. `<SEIDialogTrigger render={<SEIButton…/>} />`, `<SEIPopoverTrigger render={<…RegistrySeal/>} />`). React 19 passes `ref` as a regular prop, and the Phase 1/2 components spread props to their DOM node, so behavior + ref flow through without `forwardRef`.
+
+## React Aria usage
+
+- **SEIComboboxPreview**: `ComboBox` + `Label` + `Input` + `Button` + `Popover` + `ListBox` + `ListBoxItem`. Type-to-filter (built-in `contains`), arrow/Enter/Escape navigation, associated label, and an empty state via `ListBox renderEmptyState`.
+- **SEICommandPreview**: `Autocomplete` + `useFilter` + `SearchField`/`Input` + `Menu` + `MenuSection` + `Header` + `MenuItem`. `Autocomplete` keeps focus in the search field while forwarding arrow/Enter navigation into the grouped menu; `Menu renderEmptyState` covers no-matches. `onAction` is a mock callback — nothing executes.
+
+## Accessibility notes
+
+- **Dialog / Drawer:** focus trap, Escape close, outside-click (backdrop), scroll lock, and focus return to trigger — all native to Base UI Dialog. `Title`/`Description` are wired for screen readers (where a card is shown instead of text, an `sr-only` title/description is provided).
+- **Tabs:** roving tabindex, arrow/Home/End navigation, `aria-selected`, disabled state, and a visible focus ring (`focusRing`).
+- **Popover:** keyboard dismissal and focus management native to Base UI. Triggers are real focusable `<button>`s.
+- **Tooltip:** reachable by keyboard focus (not hover-only) and has an open delay. Each trigger is a focusable button/control.
+- **Combobox / Command:** full React Aria listbox/menu semantics, labelled inputs, keyboard navigation, and empty states.
+- Every interactive element keeps the shared `focusRing` for a visible focus-visible state on the dark theme.
+
+## Mocked features
+
+- Combobox options (artists, vault tags) and the command palette groups (Albums, Vault, Registry, Dojo, Creator Tools) are static mock data.
+- Dialog/drawer actions ("Confirm", "Tag fragment", "Register work") do nothing. Command selection only calls a mock `onCommand`.
+- The bottom-drawer "player queue" is a static list — no audio or queue logic.
+
+## Deferred / weak spots
+
+- **Native Base UI Drawer** (swipe gestures + snap points) is available and could replace the Dialog-based SEIDrawer in a future phase if drag-to-dismiss is wanted.
+- **SEICommandPreview** is a *preview*: it is a filtered menu, not a global command system (no global hotkey to open, no recent/most-used ranking, no nested command execution).
+- **SEIComboboxPreview** is single-select preview only — no multi-select tag chips, async loading, or create-new-option behavior yet.
+- Popover/Tooltip arrows are minimal; arrow styling was kept simple and is opt-in (`showArrow`).
+- Reduced-motion: transitions are short CSS transitions; no explicit `prefers-reduced-motion` gating was added yet.
+
+## Issues encountered
+
+- The task spec said `@base-ui/react`; confirmed via npm that this is the correct current official package (repo `mui/base-ui`), with `@base-ui-components/react` being the older RC name. Used `@base-ui/react`.
+- `npm install` reports 2 pre-existing moderate advisories (unchanged from earlier phases); no `audit fix --force` was run to avoid breaking-change upgrades.
+- No headless browser was available in the environment, so verification was done via `next build` + `next start` HTTP smoke tests rather than captured screenshots.
+
+## Verification
+
+- `npm run build` passes (Next 15 / React 19, TypeScript type-check clean).
+- `npm run start` serves `/` and `/lab` with HTTP 200; the "04 / Behavior Primitives" section (`id="behavior"`) renders all seven components.
+
+## Recommended Phase 4 next steps
+
+1. Adopt the native Base UI **Drawer** primitive for swipe-to-dismiss / snap points where it improves mobile UX.
+2. Promote `SEIComboboxPreview` to a real multi-select tag input and wire the command palette to a global hotkey.
+3. Add automated tests (Playwright/axe) for keyboard flows and ARIA correctness across the behavior layer.
+4. Add `prefers-reduced-motion` handling and a shared motion strategy (still without Motion/Framer unless approved).
+5. Consider graduating the behavior `tv()` surfaces into shared tokens in `styles/variants.ts` if the variant sets stabilize.
+6. Only after behavior + visual direction settle: revisit real data, auth, and registry/SAP/Vault services.
+
+---
+
 ## Historical Phase 1 suggested work
 
 1. Add accessibility-focused behavior primitives using Base UI or React Aria patterns.
