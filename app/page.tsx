@@ -1,5 +1,5 @@
-import { SEIHouseShowcase } from "@/components/seihouse-core/Showcase";
+import { SEIComponentShowcase } from "@/components/sei/showcase-page";
 
 export default function HomePage() {
-  return <SEIHouseShowcase route="/" />;
+  return <SEIComponentShowcase route="/" />;
 }
