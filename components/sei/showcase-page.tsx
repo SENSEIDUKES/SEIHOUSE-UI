@@ -3,8 +3,8 @@ import {
   BadgeCheck,
   Boxes,
   Disc3,
-  Layers,
-  Music2,
+  LayoutDashboard,
+  MoreHorizontal,
   Palette,
   Play,
   Radio,
@@ -12,10 +12,31 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import { MediaCard } from "@/components/sei/particles/media-card";
-import { PlayerShellPreview } from "@/components/sei/particles/player-shell-preview";
-import { RegistrySeal } from "@/components/sei/particles/registry-seal";
-import { ShowcaseBlock } from "@/components/sei/particles/showcase-block";
+import {
+  mockAlbums,
+  mockArtists,
+  mockDojoModules,
+  mockMetrics,
+  mockPlayerTracks,
+  mockRegistryItems,
+  mockShowcaseEntries,
+  mockVaultFragments,
+} from "@/components/sei/examples";
+import {
+  ActionStrip,
+  AlbumCard,
+  ArtistCard,
+  DojoModuleCard,
+  MetricCard,
+  PlayerShellExpanded,
+  PlayerShellPreview,
+  PluginSlotPreview,
+  RegistryPanel,
+  RegistrySeal,
+  ShowcaseBlock,
+  ShowcaseHero,
+  VaultFragmentCard,
+} from "@/components/sei/particles";
 import { SEIBadge } from "@/components/sei/primitives/sei-badge";
 import { SEIButton } from "@/components/sei/primitives/sei-button";
 import { SEICard } from "@/components/sei/primitives/sei-card";
@@ -44,14 +65,14 @@ const styleLanes = [
     description: "High-contrast neutral lane to test non-dark contexts.",
   },
   {
-    name: "Glass Test",
-    variant: "glass-test",
-    description: "Frosted overlay experiments inspired by player shells and panels.",
-  },
-  {
     name: "Media Test",
     variant: "media-test",
     description: "Music-forward gradients for cards, players, and campaign surfaces.",
+  },
+  {
+    name: "Glass Test",
+    variant: "glass-test",
+    description: "Frosted overlay experiments inspired by player shells and panels.",
   },
 ] as const;
 
@@ -83,39 +104,41 @@ const badgeVariants = [
   "registry",
 ] as const;
 
-const mediaExamples = [
+const navItems = [
+  "Mission",
+  "Foundation",
+  "Music Particles",
+  "Experience Blocks",
+  "Registry",
+  "Dashboard",
+  "Style Lanes",
+] as const;
+
+const pluginSlots = [
   {
-    title: "Expanded Album World",
-    subtitle: "Album / artist world",
-    description:
-      "A reusable media card for releases, campaigns, playlists, or project fragments.",
-    category: "Album",
-    status: "Draft lane",
-    meta: "SH-042",
-    accent: "sea",
-    icon: Disc3,
+    slotName: "SAP",
+    description: "Visual placeholder for future song asset package controls and metadata surfaces.",
+    status: "mocked",
   },
   {
-    title: "Vault Radio Concept",
-    subtitle: "Streaming shell preview",
-    description:
-      "Visual direction for future audio surfaces without adding playback behavior yet.",
-    category: "Radio",
-    status: "Visual only",
-    meta: "No backend",
-    accent: "accent",
-    icon: Radio,
+    slotName: "Vault Radio",
+    description: "A non-playing slot for future radio, queue, and fragment programming concepts.",
+    status: "planned",
   },
   {
-    title: "Creator Fragment",
-    subtitle: "Reusable showcase item",
-    description:
-      "Flexible enough for artists, projects, collections, or registry-linked works.",
-    category: "Fragment",
-    status: "Verified mock",
-    meta: "SEI-LAB",
-    accent: "success",
-    icon: Music2,
+    slotName: "Environment Engine",
+    description: "Mock controls for ambience, context, and adaptive player environments.",
+    status: "experimental",
+  },
+  {
+    slotName: "Registry Seal",
+    description: "Placeholder area for future verification visuals without registry logic.",
+    status: "mocked",
+  },
+  {
+    slotName: "Creator Tools",
+    description: "Future slot for rollout tasks, split reminders, templates, and internal actions.",
+    status: "planned",
   },
 ] as const;
 
@@ -132,81 +155,72 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
       />
 
       <header className="sticky top-0 z-30 border-b border-white/10 bg-[#050609]/75 backdrop-blur-2xl">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between lg:px-6">
-          <div className="flex min-w-0 items-center gap-3">
-            <div className="grid size-10 place-items-center rounded-full border border-dashed border-[rgba(0,122,255,0.62)] bg-[rgba(0,122,255,0.08)] text-xs font-black tracking-[0.14em] text-[var(--sh-color-sea)] shadow-[0_0_28px_rgba(0,122,255,0.16)]">
-              SEI
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-5 py-4 lg:px-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="grid size-10 place-items-center rounded-full border border-dashed border-[rgba(0,122,255,0.62)] bg-[rgba(0,122,255,0.08)] text-xs font-black tracking-[0.14em] text-[var(--sh-color-sea)] shadow-[0_0_28px_rgba(0,122,255,0.16)]">
+                SEI
+              </div>
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-white">
+                  SEIHOUSE UI
+                </p>
+                <p className="font-mono text-xs text-[var(--sh-color-mist)]">
+                  {route} · Phase 2 music-business lab
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-white">
-                SEIHOUSE UI
-              </p>
-              <p className="font-mono text-xs text-[var(--sh-color-mist)]">
-                {route} · component lab
-              </p>
+            <div className="flex flex-wrap items-center gap-2">
+              <SEIBadge variant="soft" icon={Sparkles}>
+                Phase 2
+              </SEIBadge>
+              <SEIBadge variant="registry">Mock data only</SEIBadge>
+              <SEIButton
+                variant="ghost"
+                size="sm"
+                iconRight={<ArrowRight className="size-3.5" />}
+              >
+                One-page lab
+              </SEIButton>
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <SEIBadge variant="soft" icon={Sparkles}>
-              Phase 1
-            </SEIBadge>
-            <SEIBadge variant="registry">Tailwind variants</SEIBadge>
-            <SEIButton
-              variant="ghost"
-              size="sm"
-              iconRight={<ArrowRight className="size-3.5" />}
-            >
-              Showcase
-            </SEIButton>
-          </div>
+          <nav className="flex gap-2 overflow-x-auto pb-1 text-xs" aria-label="Lab sections">
+            {navItems.map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase().replaceAll(" ", "-")}`}
+                className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 font-semibold text-[var(--sh-color-cloud)] transition-colors hover:border-white/20 hover:text-white"
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
         </div>
       </header>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-20 lg:px-6">
-        <section className="grid gap-6 py-10 sm:py-16 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
-          <SEIPanel variant="media-test" padding="lg" className="min-h-[28rem]">
-            <div className="flex h-full flex-col justify-between gap-10">
-              <div className="space-y-6">
-                <SEIBadge variant="glass-test" icon={Boxes}>
-                  Reusable UI playground
-                </SEIBadge>
-                <div className="space-y-5">
-                  <h1 className="max-w-4xl text-5xl font-black uppercase leading-[0.88] tracking-[-0.09em] text-white sm:text-7xl lg:text-8xl">
-                    Component lab, not a final brand lockup.
-                  </h1>
-                  <p className="max-w-2xl text-base leading-relaxed text-[var(--sh-color-cloud)] sm:text-xl">
-                    Phase 1 turns SEIHOUSE-UI into a practical playground for reusable components,
-                    experimental style lanes, and music-aware product surfaces without backend,
-                    auth, audio, registry, or CLI scope.
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <SEIButton variant="solid" size="lg" icon={Play}>
-                  Explore components
-                </SEIButton>
-                <SEIButton variant="glass-test" size="lg" icon={Palette}>
-                  Compare lanes
-                </SEIButton>
-                <SEIButton variant="outline" size="lg" icon={ShieldCheck}>
-                  Keep flexible
-                </SEIButton>
-              </div>
-            </div>
-          </SEIPanel>
+        <section id="mission" className="grid gap-6 py-10 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+          <ShowcaseHero
+            variant="media"
+            entry={mockShowcaseEntries[0]}
+            primaryAction="Explore Phase 2"
+            secondaryAction="Keep it visual"
+            preview={<PlayerShellExpanded track={mockPlayerTracks[0]} variant="compact" />}
+            className="min-h-[34rem]"
+          />
 
           <div className="grid gap-6">
-            <PlayerShellPreview className="max-w-none" />
+            <PlayerShellPreview className="max-w-none" progress={52} />
             <ShowcaseBlock
               variant="glass-test"
-              title="Phase 1 boundary"
-              description="The lab borrows component organization ideas from shadcn/ui and composition/primitives thinking from coss, Origin UI, Base UI, React Aria, and Magic UI — conceptually only."
+              title="Phase 2 boundary"
+              description="This lab evolves the Phase 1 component system into music-business particles. Everything is mocked: no playback, backend, auth, Supabase, registry database, or plugin runtime."
             >
               <div className="flex flex-wrap gap-2">
-                <SEIBadge variant="success">UI only</SEIBadge>
-                <SEIBadge variant="warning">No playback</SEIBadge>
-                <SEIBadge variant="outline">No auth</SEIBadge>
-                <SEIBadge variant="soft">No registry logic</SEIBadge>
+                <SEIBadge variant="success">Particles only</SEIBadge>
+                <SEIBadge variant="warning">No audio playback</SEIBadge>
+                <SEIBadge variant="outline">No backend</SEIBadge>
+                <SEIBadge variant="soft">No brand lock</SEIBadge>
               </div>
             </ShowcaseBlock>
           </div>
@@ -214,120 +228,64 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
 
         <SEISection
           eyebrow="01 / Mission"
-          title="A flexible foundation for trying component directions."
-          description="These pieces are intentionally adaptable. The goal is to test primitives, composition, and visual lanes without overcommitting to a permanent SEIHouse brand system."
+          title="Music-business UI particles built on the Phase 1 foundation."
+          description="Phase 2 adds reusable blocks for albums, artists, vault fragments, Dojo modules, registry states, player shells, plugins, metrics, and actions — all visual-only and mock-driven."
           aside={
-            <SEIBadge variant="registry" icon={Layers}>
-              Component-first
+            <SEIBadge variant="registry" icon={Boxes}>
+              Product-aware, logic-free
             </SEIBadge>
           }
         >
           <div className="grid gap-5 md:grid-cols-3">
-            <ShowcaseBlock title="Reusable primitives" variant="default">
+            <ShowcaseBlock title="Reusable particles" variant="default">
               <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">
-                Buttons, badges, panels, cards, and sections use tailwind-variants for consistent
-                styling lanes and support class overrides for fast experiments.
+                Each particle accepts className, composes Phase 1 primitives, and exposes local variants only where the particle needs product-specific styling.
               </p>
             </ShowcaseBlock>
-            <ShowcaseBlock title="Music-aware particles" variant="soft">
+            <ShowcaseBlock title="Music-business aware" variant="soft">
               <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">
-                Media cards, player previews, and registry seals feel useful for music products while
-                staying broad enough for other surfaces.
+                Mock content covers release worlds, creators, registry panels, vault recovery, learning modules, and internal dashboard summaries.
               </p>
             </ShowcaseBlock>
-            <ShowcaseBlock title="Future-ready behavior" variant="outline">
+            <ShowcaseBlock title="Deferred behavior" variant="outline">
               <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">
-                Behavior primitives, accessibility patterns, motion, and registry tooling are deferred
-                so Phase 1 remains clean and UI-focused.
+                Audio playback, auth, APIs, registry databases, plugin execution, and final brand-system decisions remain out of scope.
               </p>
             </ShowcaseBlock>
           </div>
         </SEISection>
 
         <SEISection
-          eyebrow="02 / Buttons"
-          title="SEIButton variants, sizes, icons, and overrides."
-          description="Buttons use shared focus states, optional Lucide icons, size variants, and tailwind-merge-friendly class overrides."
+          eyebrow="02 / Primitive Foundation"
+          title="Phase 1 primitives remain visible and unchanged."
+          description="Buttons, badges, panels, cards, and sections continue to provide the reusable foundation for every Phase 2 particle."
+          aside={<SEIBadge variant="soft">Tailwind variants</SEIBadge>}
         >
-          <ShowcaseBlock
-            title="Variant lane sweep"
-            variant="glass-test"
-            contentClassName="flex flex-wrap gap-3"
-          >
-            {buttonVariants.map((variant) => (
-              <SEIButton key={variant} variant={variant} icon={Sparkles}>
-                {variant}
-              </SEIButton>
-            ))}
-          </ShowcaseBlock>
-          <div className="mt-5 grid gap-5 md:grid-cols-2">
+          <div id="foundation" className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
             <ShowcaseBlock
-              title="Sizes"
-              variant="default"
-              contentClassName="flex flex-wrap items-center gap-3"
+              title="SEIButton variants"
+              variant="glass-test"
+              contentClassName="flex flex-wrap gap-3"
             >
-              <SEIButton size="sm" variant="outline">
-                Small
-              </SEIButton>
-              <SEIButton size="md" variant="solid">
-                Medium
-              </SEIButton>
-              <SEIButton size="lg" variant="media-test">
-                Large
-              </SEIButton>
+              {buttonVariants.map((variant) => (
+                <SEIButton key={variant} variant={variant} icon={Sparkles}>
+                  {variant}
+                </SEIButton>
+              ))}
             </ShowcaseBlock>
-            <ShowcaseBlock title="Override example" variant="soft" contentClassName="flex flex-wrap gap-3">
-              <SEIButton
-                variant="outline"
-                className="rounded-xl border-[var(--sh-color-accent)] text-[var(--sh-color-accent)]"
-              >
-                Custom class override
-              </SEIButton>
-              <SEIButton variant="ghost" disabled>
-                Disabled
-              </SEIButton>
+            <ShowcaseBlock
+              title="SEIBadge variants"
+              variant="default"
+              contentClassName="flex flex-wrap gap-3"
+            >
+              {badgeVariants.map((variant) => (
+                <SEIBadge key={variant} variant={variant} icon={BadgeCheck}>
+                  {variant}
+                </SEIBadge>
+              ))}
             </ShowcaseBlock>
           </div>
-        </SEISection>
-
-        <SEISection
-          eyebrow="03 / Badges"
-          title="SEIBadge labels for statuses, categories, registry, and content."
-          description="Badges are compact status primitives that can carry icons, categories, or registry labels."
-        >
-          <ShowcaseBlock variant="default" title="Badge set" contentClassName="flex flex-wrap gap-3">
-            {badgeVariants.map((variant) => (
-              <SEIBadge key={variant} variant={variant} icon={BadgeCheck}>
-                {variant}
-              </SEIBadge>
-            ))}
-          </ShowcaseBlock>
-        </SEISection>
-
-        <SEISection
-          eyebrow="04 / Panels"
-          title="SEIPanel surfaces for layout, overlays, and experiments."
-          description="Panels are flexible containers with padding, interaction, and multiple visual lanes."
-        >
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {styleLanes.map((lane) => (
-              <SEIPanel key={lane.name} variant={lane.variant} interactive padding="md">
-                <div className="space-y-4">
-                  <SEIBadge variant={lane.variant === "light" ? "light" : "outline"}>{lane.name}</SEIBadge>
-                  <h3 className="text-xl font-semibold tracking-[-0.04em]">{lane.name} panel</h3>
-                  <p className="text-sm leading-relaxed text-[var(--sh-color-mist)]">{lane.description}</p>
-                </div>
-              </SEIPanel>
-            ))}
-          </div>
-        </SEISection>
-
-        <SEISection
-          eyebrow="05 / Cards"
-          title="SEICard layout areas for content and actions."
-          description="Cards expose slots for media, eyebrow, title, metadata, actions, body content, and footer."
-        >
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="mt-5 grid gap-5 md:grid-cols-3">
             <SEICard
               variant="default"
               interactive
@@ -335,7 +293,6 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
               title="SEA Portal shell"
               description="A reusable card for showing routes, tools, or projects without binding to app logic."
               metadata="UI mock"
-              actions={<SEIButton variant="ghost" size="sm" icon={ArrowRight} aria-label="Open SEA Portal shell" />}
               footer="metadata · actions · footer"
             />
             <SEICard
@@ -360,59 +317,126 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
         </SEISection>
 
         <SEISection
-          eyebrow="06 / Media Cards"
-          title="Reusable mock content cards for music-related surfaces."
-          description="MediaCard composes SEICard, SEIBadge, and SEIButton. It stays visual-only and can represent albums, artists, projects, fragments, or showcase items."
+          eyebrow="03 / Music-Business Particles"
+          title="Albums, artists, vault fragments, and Dojo modules."
+          description="These components are reusable product-style particles, not app workflows. They use realistic fake data and stay flexible across style lanes."
+          aside={<SEIBadge variant="media-test" icon={Disc3}>Particles</SEIBadge>}
         >
-          <div className="grid gap-5 lg:grid-cols-3">
-            {mediaExamples.map((item) => (
-              <MediaCard key={item.title} {...item} />
-            ))}
+          <div id="music-particles" className="space-y-6">
+            <div className="grid gap-5 lg:grid-cols-3">
+              <AlbumCard album={mockAlbums[0]} variant="feature" />
+              <AlbumCard album={mockAlbums[1]} variant="dark" />
+              <AlbumCard album={mockAlbums[2]} variant="light" />
+            </div>
+            <div className="grid gap-5 lg:grid-cols-3">
+              <ArtistCard artist={mockArtists[0]} variant="profile" />
+              <ArtistCard artist={mockArtists[1]} variant="default" />
+              <ArtistCard artist={mockArtists[2]} variant="compact" />
+            </div>
+            <div className="grid gap-5 lg:grid-cols-3">
+              <VaultFragmentCard fragment={mockVaultFragments[0]} variant="recovery" />
+              <VaultFragmentCard fragment={mockVaultFragments[1]} variant="default" />
+              <VaultFragmentCard fragment={mockVaultFragments[2]} variant="archive" />
+            </div>
+            <div className="grid gap-5 lg:grid-cols-3">
+              <DojoModuleCard module={mockDojoModules[0]} variant="lesson" />
+              <DojoModuleCard module={mockDojoModules[1]} variant="template" />
+              <DojoModuleCard module={mockDojoModules[2]} variant="skill" />
+            </div>
           </div>
         </SEISection>
 
         <SEISection
-          eyebrow="07 / Player Shell Preview"
-          title="A visual-only future player interface."
-          description="This preview includes artwork, track information, progress, controls, and volume UI without audio playback or state."
+          eyebrow="04 / Experience Blocks"
+          title="Hero, player shell, and future plugin placeholders."
+          description="These particles preview higher-order product surfaces without adding runtime behavior."
+          aside={<SEIBadge variant="warning" icon={Play}>Visual only</SEIBadge>}
         >
-          <div className="grid gap-5 lg:grid-cols-[1fr_0.85fr] lg:items-start">
-            <PlayerShellPreview className="max-w-none" progress={48} />
+          <div id="experience-blocks" className="space-y-6">
+            <ShowcaseHero
+              variant="soft"
+              entry={mockShowcaseEntries[1]}
+              primaryAction="Preview portal"
+              secondaryAction="Map modules"
+            />
+            <PlayerShellExpanded track={mockPlayerTracks[1]} variant="expanded" />
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {pluginSlots.map((slot) => (
+                <PluginSlotPreview key={slot.slotName} {...slot} />
+              ))}
+            </div>
+          </div>
+        </SEISection>
+
+        <SEISection
+          eyebrow="05 / Registry / Status"
+          title="Registry panels and status seals for mocked verification states."
+          description="RegistryPanel composes SEIPanel, RegistrySeal, badges, and buttons as a reusable product particle. No registry service or database is included."
+          aside={<SEIBadge variant="registry" icon={ShieldCheck}>Status systems</SEIBadge>}
+        >
+          <div id="registry" className="space-y-6">
+            <div className="grid gap-5 lg:grid-cols-3">
+              {mockRegistryItems.map((item) => (
+                <RegistryPanel key={item.id} item={item} />
+              ))}
+            </div>
+            <ShowcaseBlock variant="media-test" title="RegistrySeal state sweep" contentClassName="flex flex-wrap gap-3">
+              <RegistrySeal status="draft" registryId="D-001" />
+              <RegistrySeal status="registered" registryId="SEI-042" />
+              <RegistrySeal status="verified" registryId="V-777" />
+              <RegistrySeal status="archived" registryId="A-009" />
+              <RegistrySeal status="experimental" registryId="X-100" />
+            </ShowcaseBlock>
+          </div>
+        </SEISection>
+
+        <SEISection
+          eyebrow="06 / Dashboard / Utility"
+          title="Metrics and actions for internal dashboards and creator tools."
+          description="MetricCard and ActionStrip support quick dashboard summaries, creator operations, and responsive action rows."
+          aside={<SEIBadge variant="soft" icon={LayoutDashboard}>Utility</SEIBadge>}
+        >
+          <div id="dashboard" className="space-y-6">
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {mockMetrics.map((metric, index) => (
+                <MetricCard
+                  key={metric.label}
+                  {...metric}
+                  variant={index % 5 === 0 ? "soft" : index % 5 === 1 ? "default" : index % 5 === 2 ? "outline" : index % 5 === 3 ? "dark" : "light"}
+                />
+              ))}
+            </div>
             <ShowcaseBlock
-              variant="outline"
-              title="Deferred by design"
-              description="Playback, playlists, streaming sources, persistence, and keyboard media behavior are Phase 2+ concerns."
+              variant="glass-test"
+              title="ActionStrip examples"
+              description="Reusable responsive action row composed entirely from SEIButton."
             >
-              <div className="grid gap-3">
-                <SEIBadge variant="warning">No audio element</SEIBadge>
-                <SEIBadge variant="outline">No player state</SEIBadge>
-                <SEIBadge variant="soft">Ready for behavior primitives later</SEIBadge>
+              <div className="space-y-4">
+                <ActionStrip
+                  primary={{ label: "Launch showcase", icon: <ArrowRight className="size-3.5" /> }}
+                  secondary={{ label: "Save draft" }}
+                  iconActions={[
+                    { label: "Radio", icon: <Radio className="size-4" /> },
+                    { label: "More", icon: <MoreHorizontal className="size-4" /> },
+                  ]}
+                />
+                <ActionStrip
+                  align="start"
+                  primary={{ label: "Register work" }}
+                  secondary={{ label: "Review splits" }}
+                />
               </div>
             </ShowcaseBlock>
           </div>
         </SEISection>
 
         <SEISection
-          eyebrow="08 / Registry Seals"
-          title="Status indicators for draft, registered, verified, archived, and experimental states."
-          description="RegistrySeal is a simple visual primitive only. No verification logic or registry integrations are included in Phase 1."
-        >
-          <ShowcaseBlock variant="media-test" title="Seal statuses" contentClassName="flex flex-wrap gap-3">
-            <RegistrySeal status="draft" registryId="D-001" />
-            <RegistrySeal status="registered" registryId="SEI-042" />
-            <RegistrySeal status="verified" registryId="V-777" />
-            <RegistrySeal status="archived" registryId="A-009" />
-            <RegistrySeal status="experimental" registryId="X-100" />
-          </ShowcaseBlock>
-        </SEISection>
-
-        <SEISection
-          eyebrow="09 / Style Lanes"
+          eyebrow="07 / Style Lanes"
           title="Exploratory visual directions, not final identity decisions."
-          description="Clean, soft, dark, light, glass, and media lanes expose a flexible palette for future testing."
+          description="Clean, soft, dark, light, media, and glass lanes expose a flexible palette for future testing across primitives and Phase 2 particles."
           aside={<SEIBadge variant="warning">Not final brand system</SEIBadge>}
         >
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div id="style-lanes" className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {styleLanes.map((lane) => (
               <ShowcaseBlock
                 key={lane.name}
@@ -430,7 +454,7 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <SEIBadge variant={lane.variant === "light" ? "light" : "outline"}>{lane.name}</SEIBadge>
-                    <SEIButton size="sm" variant={lane.variant} icon={Sparkles}>
+                    <SEIButton size="sm" variant={lane.variant} icon={Palette}>
                       Test
                     </SEIButton>
                   </div>
@@ -441,8 +465,8 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
         </SEISection>
 
         <footer className="relative z-10 flex flex-col gap-3 border-t border-white/10 py-10 text-sm text-[var(--sh-color-mist)] sm:flex-row sm:items-center sm:justify-between">
-          <span>SEIHOUSE-UI · Phase 1 component lab</span>
-          <span className="font-mono text-xs">components/sei · tailwind-variants · Tailwind CSS v4</span>
+          <span>SEIHOUSE-UI · Phase 2 music-business component lab</span>
+          <span className="font-mono text-xs">components/sei · particles · mock data · Tailwind CSS v4</span>
         </footer>
       </div>
     </main>

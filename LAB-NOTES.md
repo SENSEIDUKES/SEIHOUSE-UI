@@ -130,7 +130,95 @@ Production build check:
 npm run build
 ```
 
-## Suggested Phase 2 work
+## Phase 2 — Music-Business Particles
+
+Phase 2 evolved the generic component lab into a music-business UI lab while preserving the Phase 1 architecture and constraints.
+
+### Components added
+
+New Phase 2 particles:
+
+```text
+components/
+  sei/
+    particles/
+      action-strip.tsx
+      album-card.tsx
+      artist-card.tsx
+      dojo-module-card.tsx
+      metric-card.tsx
+      player-shell-expanded.tsx
+      plugin-slot-preview.tsx
+      registry-panel.tsx
+      showcase-hero.tsx
+      vault-fragment-card.tsx
+      index.ts
+    examples/
+      mock-data.ts
+      index.ts
+```
+
+- `AlbumCard` — album/EP/single preview particle with artwork, release metadata, tags, description, and actions. Local variants include `default`, `compact`, `feature`, `dark`, `light`, and `media-test`.
+- `ArtistCard` — creator/artist profile particle with avatar, role, bio, status, tags, and actions. Local variants include `default`, `compact`, `profile`, `dark`, and `light`.
+- `VaultFragmentCard` — visual card for demos, mixes, notes, archives, fake duration, and recovery/archive status. Local variants include `default`, `recovery`, `archive`, `compact`, and `dark`.
+- `DojoModuleCard` — education/training particle for modules, difficulty, category, progress, and status. Local variants include `default`, `lesson`, `template`, `skill`, `dark`, and `light`.
+- `ShowcaseHero` — reusable hero section for lab, portal, media, or experimental previews. Local variants include `clean`, `soft`, `dark`, `light`, `media`, and `experimental`.
+- `PlayerShellExpanded` — richer visual-only SAP/player mock with artwork, fake controls, fake timeline, queue, and metadata/environment area. Local variants include `compact`, `expanded`, `docked`, `dark`, and `light`.
+- `RegistryPanel` — reusable registry/status product particle composed from `SEIPanel`, `RegistrySeal`, `SEIBadge`, and `SEIButton`.
+- `PluginSlotPreview` — visual placeholder for future plugin slots such as SAP, Vault Radio, Environment Engine, Registry Seal, and Creator Tools.
+- `MetricCard` — dashboard stat card for plays, saves, registered works, vault items, active modules, revenue-style metrics, and completion values.
+- `ActionStrip` — responsive action row composed from `SEIButton` for primary, secondary, and optional icon actions.
+
+### Files changed
+
+- Added realistic mock data in `components/sei/examples/mock-data.ts` for Album, Artist, Vault Fragment, Dojo Module, Registry Item, Showcase Entry, Player Track, and dashboard metrics.
+- Added simple barrel exports in `components/sei/examples/index.ts` and `components/sei/particles/index.ts`.
+- Updated `components/sei/showcase-page.tsx` into a one-page Phase 2 music-business lab with sections for:
+  1. Intro / Mission
+  2. Primitive Foundation
+  3. Music-Business Particles
+  4. Experience Blocks
+  5. Registry / Status
+  6. Dashboard / Utility
+  7. Style Lanes
+
+### Mocked features
+
+- Albums, artists, vault fragments, Dojo modules, registry records, showcase entries, player tracks, plugin slots, metrics, and dashboard actions are mocked only.
+- Player controls and timelines are visual-only. There is no audio element, playback state, queue logic, media-session behavior, or streaming integration.
+- Registry states, IDs, seals, timestamps, and verification lines are fake display data only.
+- Plugin slots are placeholders only and do not load plugins or connect to runtime systems.
+
+### Deferred features
+
+Phase 2 intentionally does **not** add:
+
+- Backend/API logic
+- Audio playback
+- Authentication
+- Supabase or database packages
+- Registry databases or verification services
+- SAP/Vault runtime behavior
+- CLI tooling
+- Base UI, React Aria, Motion/Framer Motion, or audio libraries
+- Final brand-system lock-in
+
+### Issues encountered
+
+- One interrupted write occurred while updating the showcase, so the file was verified afterward before continuing.
+- No new packages were installed.
+
+### Recommended Phase 3 work
+
+1. Add prop documentation and usage examples for each Phase 2 particle.
+2. Consider a lightweight component index page or route grouping if the one-page lab becomes too dense.
+3. Add accessibility review passes for keyboard focus order, button labeling, landmark structure, and visual contrast.
+4. Decide whether any particle-local variant patterns should graduate into the global primitive variant system.
+5. Add snapshot or smoke tests for rendering the showcase and all particles with mock data.
+6. Explore behavior primitives only after choosing a strategy; do not add Base UI or React Aria unless Phase 3 explicitly approves it.
+7. Define richer mock flows for SEA Portal, Vault Radio, SAP, Dojo, and Registry concepts before adding real service logic.
+
+## Historical Phase 1 suggested work
 
 1. Add accessibility-focused behavior primitives using Base UI or React Aria patterns.
 2. Add automated visual examples or Storybook-style isolated previews if desired.
