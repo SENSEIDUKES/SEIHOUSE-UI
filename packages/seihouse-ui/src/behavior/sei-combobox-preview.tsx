@@ -40,7 +40,7 @@ export function SEIComboboxPreview({
 }: SEIComboboxPreviewProps) {
   return (
     <ComboBox
-      defaultItems={options}
+      items={options}
       menuTrigger="focus"
       onSelectionChange={(key) => onSelect?.(key == null ? null : String(key))}
       className={cn("flex w-full flex-col gap-2", className)}

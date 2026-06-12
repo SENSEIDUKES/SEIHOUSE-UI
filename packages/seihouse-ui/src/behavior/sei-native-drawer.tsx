@@ -137,7 +137,11 @@ export interface SEINativeDrawerProps {
 }
 
 export function SEINativeDrawer({ side = "bottom", ...props }: SEINativeDrawerProps) {
-  return <Drawer.Root direction={side} {...props} />;
+  return (
+    <SEINativeDrawerContext.Provider value={{ tone: "default", side }}>
+      <Drawer.Root direction={side} {...props} />
+    </SEINativeDrawerContext.Provider>
+  );
 }
 
 export interface SEINativeDrawerTriggerProps
@@ -160,7 +164,7 @@ export interface SEINativeDrawerContentProps
 }
 
 export function SEINativeDrawerContent({
-  side = "bottom",
+  side,
   tone = "default",
   size = "default",
   className,
@@ -169,10 +173,12 @@ export function SEINativeDrawerContent({
   children,
   ...props
 }: SEINativeDrawerContentProps) {
-  const styles = seiNativeDrawerStyles({ side, tone, size });
-  const handleVisible = showHandle ?? side === "bottom";
+  const context = useContext(SEINativeDrawerContext);
+  const resolvedSide = side ?? context.side;
+  const styles = seiNativeDrawerStyles({ side: resolvedSide, tone, size });
+  const handleVisible = showHandle ?? resolvedSide === "bottom";
   return (
-    <SEINativeDrawerContext.Provider value={{ tone: tone ?? "default", side: side ?? "bottom" }}>
+    <SEINativeDrawerContext.Provider value={{ tone: tone ?? "default", side: resolvedSide }}>
       <Drawer.Portal>
         <Drawer.Overlay className={cn(styles.overlay(), overlayClassName)} />
         <Drawer.Content className={cn(styles.content(), className)} {...props}>
