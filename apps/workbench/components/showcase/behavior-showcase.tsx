@@ -2,11 +2,7 @@
 
 import { Info, Layers, MessageSquare, Search, ShieldCheck, Sparkles } from "lucide-react";
 
-import {
-  mockAlbums,
-  mockMetrics,
-  mockVaultFragments,
-} from "@/lib/mock-data/examples";
+import { mockAlbums, mockMetrics, mockVaultFragments } from "@/lib/mock-data/examples";
 import { AlbumCard } from "@seihouse/ui";
 import { RegistrySeal } from "@seihouse/ui";
 import { ShowcaseBlock } from "@seihouse/ui";
@@ -33,12 +29,7 @@ import {
   SEIDrawerTitle,
   SEIDrawerTrigger,
 } from "@seihouse/ui";
-import {
-  SEITabs,
-  SEITabsList,
-  SEITabsPanel,
-  SEITabsTrigger,
-} from "@seihouse/ui";
+import { SEITabs, SEITabsList, SEITabsPanel, SEITabsTrigger } from "@seihouse/ui";
 import {
   SEIPopover,
   SEIPopoverContent,
@@ -46,15 +37,14 @@ import {
   SEIPopoverTitle,
   SEIPopoverTrigger,
 } from "@seihouse/ui";
-import {
-  SEITooltip,
-  SEITooltipContent,
-  SEITooltipProvider,
-  SEITooltipTrigger,
-} from "@seihouse/ui";
+import { SEITooltip, SEITooltipContent, SEITooltipProvider, SEITooltipTrigger } from "@seihouse/ui";
 import { SEIComboboxPreview } from "@seihouse/ui";
 import { SEICommandPreview } from "@seihouse/ui";
-import { mockArtistOptions, mockCommandGroups, mockVaultTagOptions } from "@/lib/mock-data/behavior-mock";
+import {
+  mockArtistOptions,
+  mockCommandGroups,
+  mockVaultTagOptions,
+} from "@/lib/mock-data/behavior-mock";
 
 const registryTabs = [
   {
@@ -132,7 +122,11 @@ export function BehaviorShowcase() {
             {/* Confirm-action dialog */}
             <SEIDialog>
               <SEIDialogTrigger
-                render={<SEIButton variant="solid" icon={ShieldCheck}>Confirm action</SEIButton>}
+                render={
+                  <SEIButton variant="solid" icon={ShieldCheck}>
+                    Confirm action
+                  </SEIButton>
+                }
               />
               <SEIDialogContent variant="default" className="max-w-md">
                 <SEIDialogTitle>Register this work?</SEIDialogTitle>
@@ -150,7 +144,11 @@ export function BehaviorShowcase() {
             {/* AlbumCard inside a dialog */}
             <SEIDialog>
               <SEIDialogTrigger
-                render={<SEIButton variant="soft" icon={Layers}>View album details</SEIButton>}
+                render={
+                  <SEIButton variant="soft" icon={Layers}>
+                    View album details
+                  </SEIButton>
+                }
               />
               <SEIDialogContent variant="glass-test" className="max-w-md">
                 <SEIDialogTitle className="sr-only">Album details</SEIDialogTitle>
@@ -170,7 +168,11 @@ export function BehaviorShowcase() {
             {/* VaultFragmentCard details in a right drawer */}
             <SEIDrawer>
               <SEIDrawerTrigger
-                render={<SEIButton variant="solid" icon={Layers}>Open vault details</SEIButton>}
+                render={
+                  <SEIButton variant="solid" icon={Layers}>
+                    Open vault details
+                  </SEIButton>
+                }
               />
               <SEIDrawerContent side="right" size="wide" tone="dark">
                 <SEIDrawerHeader>
@@ -197,24 +199,27 @@ export function BehaviorShowcase() {
                 </SEIDrawerHeader>
                 <SEIDrawerBody className="max-h-72">
                   <ul className="space-y-2">
-                    {["Midnight Registry", "House Keys Intro", "North Dock reprise", "Light Leak Reference"].map(
-                      (track, i) => (
-                        <li
-                          key={track}
-                          className="flex items-center justify-between rounded-xl border border-white/8 bg-white/[0.03] px-3 py-2 text-sm"
-                        >
-                          <span className="text-[var(--sh-color-cloud)]">
-                            <span className="mr-2 font-mono text-xs text-[var(--sh-color-mist)]">
-                              {String(i + 1).padStart(2, "0")}
-                            </span>
-                            {track}
+                    {[
+                      "Midnight Registry",
+                      "House Keys Intro",
+                      "North Dock reprise",
+                      "Light Leak Reference",
+                    ].map((track, i) => (
+                      <li
+                        key={track}
+                        className="flex items-center justify-between rounded-xl border border-white/8 bg-white/[0.03] px-3 py-2 text-sm"
+                      >
+                        <span className="text-[var(--sh-color-cloud)]">
+                          <span className="mr-2 font-mono text-xs text-[var(--sh-color-mist)]">
+                            {String(i + 1).padStart(2, "0")}
                           </span>
-                          <SEIBadge size="sm" variant="outline">
-                            mock
-                          </SEIBadge>
-                        </li>
-                      ),
-                    )}
+                          {track}
+                        </span>
+                        <SEIBadge size="sm" variant="outline">
+                          mock
+                        </SEIBadge>
+                      </li>
+                    ))}
                   </ul>
                 </SEIDrawerBody>
                 <SEIDrawerFooter>
@@ -230,7 +235,11 @@ export function BehaviorShowcase() {
           variant="soft"
           title="SEITabs"
           description="Keyboard-navigable tabs (arrow keys, Home/End) shown inside a registry-style panel. Active/disabled states and the underline indicator are SEI-styled."
-          actions={<SEIBadge variant="soft" size="sm">Base UI</SEIBadge>}
+          actions={
+            <SEIBadge variant="soft" size="sm">
+              Base UI
+            </SEIBadge>
+          }
         >
           <div className="space-y-5">
             <SEITabs defaultValue="overview" variant="underline">
@@ -299,7 +308,11 @@ export function BehaviorShowcase() {
 
             <SEIPopover>
               <SEIPopoverTrigger
-                render={<SEIButton variant="outline" icon={Info}>Metadata info</SEIButton>}
+                render={
+                  <SEIButton variant="outline" icon={Info}>
+                    Metadata info
+                  </SEIButton>
+                }
               />
               <SEIPopoverContent variant="default" side="bottom">
                 <SEIPopoverTitle>Quick actions</SEIPopoverTitle>
@@ -350,7 +363,9 @@ export function BehaviorShowcase() {
                   </button>
                 }
               />
-              <SEITooltipContent>Explains what a registry badge represents (mock).</SEITooltipContent>
+              <SEITooltipContent>
+                Explains what a registry badge represents (mock).
+              </SEITooltipContent>
             </SEITooltip>
           </Demo>
         </div>
@@ -361,7 +376,11 @@ export function BehaviorShowcase() {
             variant="default"
             title="SEIComboboxPreview"
             description="Searchable, keyboard-navigable combobox with an accessible label and empty state. Mock data for artist search and vault tags."
-            actions={<SEIBadge variant="media-test" size="sm">React Aria</SEIBadge>}
+            actions={
+              <SEIBadge variant="media-test" size="sm">
+                React Aria
+              </SEIBadge>
+            }
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <SEIComboboxPreview label="Search artists" options={mockArtistOptions} />
@@ -377,7 +396,11 @@ export function BehaviorShowcase() {
             variant="default"
             title="SEICommandPreview"
             description="Command-palette preview: type to filter grouped commands (Albums, Vault, Registry, Dojo, Creator Tools) with full keyboard navigation. Nothing executes."
-            actions={<SEIBadge variant="media-test" size="sm">React Aria</SEIBadge>}
+            actions={
+              <SEIBadge variant="media-test" size="sm">
+                React Aria
+              </SEIBadge>
+            }
           >
             <SEICommandPreview groups={mockCommandGroups} />
           </ShowcaseBlock>

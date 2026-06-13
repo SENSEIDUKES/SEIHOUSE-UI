@@ -7,11 +7,7 @@ import { Dialog } from "@base-ui/react/dialog";
 import { tv, type VariantProps } from "tailwind-variants";
 
 import { cn } from "../styles/cn";
-import {
-  focusRing,
-  seiOverlayVariants,
-  transitionSurface,
-} from "../styles/variants";
+import { focusRing, seiOverlayVariants, transitionSurface } from "../styles/variants";
 
 /**
  * SEIDialog — accessible modal dialog powered by Base UI Dialog.
@@ -53,7 +49,8 @@ export const seiDialogStyles = tv({
         popup: "border-[rgba(0,122,255,0.22)] bg-[rgba(8,16,30,0.96)] text-[var(--sh-color-ivory)]",
         title: "text-[#bcdcff]",
         description: "text-[var(--sh-color-cloud)]",
-        close: "border-[rgba(0,122,255,0.28)] bg-[rgba(0,122,255,0.1)] hover:bg-[rgba(0,122,255,0.18)]",
+        close:
+          "border-[rgba(0,122,255,0.28)] bg-[rgba(0,122,255,0.1)] hover:bg-[rgba(0,122,255,0.18)]",
       },
       dark: {
         popup: "border-white/10 bg-[#07080c] text-white",
@@ -89,8 +86,10 @@ export function SEIDialog(props: SEIDialogProps) {
   return <Dialog.Root {...props} />;
 }
 
-export interface SEIDialogTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Dialog.Trigger>, "className"> {
+export interface SEIDialogTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Dialog.Trigger>,
+  "className"
+> {
   className?: string;
 }
 
@@ -98,8 +97,10 @@ export function SEIDialogTrigger({ className, ...props }: SEIDialogTriggerProps)
   return <Dialog.Trigger className={className} {...props} />;
 }
 
-export interface SEIDialogContentProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Dialog.Popup>, "className"> {
+export interface SEIDialogContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Dialog.Popup>,
+  "className"
+> {
   variant?: SEIDialogVariant;
   className?: string;
   backdropClassName?: string;
@@ -134,8 +135,10 @@ export function SEIDialogContent({
   );
 }
 
-export interface SEIDialogTitleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Dialog.Title>, "className"> {
+export interface SEIDialogTitleProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Dialog.Title>,
+  "className"
+> {
   className?: string;
 }
 
@@ -145,8 +148,10 @@ export function SEIDialogTitle({ className, ...props }: SEIDialogTitleProps) {
   return <Dialog.Title className={cn(styles.title(), className)} {...props} />;
 }
 
-export interface SEIDialogDescriptionProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Dialog.Description>, "className"> {
+export interface SEIDialogDescriptionProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Dialog.Description>,
+  "className"
+> {
   className?: string;
 }
 

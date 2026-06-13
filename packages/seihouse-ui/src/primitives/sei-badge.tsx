@@ -2,14 +2,9 @@ import type { HTMLAttributes, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 
 import { cn } from "../styles/cn";
-import {
-  seiBadgeVariants,
-  type SEIBadgeVariantProps,
-} from "../styles/variants";
+import { seiBadgeVariants, type SEIBadgeVariantProps } from "../styles/variants";
 
-export interface SEIBadgeProps
-  extends HTMLAttributes<HTMLSpanElement>,
-    SEIBadgeVariantProps {
+export interface SEIBadgeProps extends HTMLAttributes<HTMLSpanElement>, SEIBadgeVariantProps {
   icon?: LucideIcon;
   iconLeft?: ReactNode;
 }

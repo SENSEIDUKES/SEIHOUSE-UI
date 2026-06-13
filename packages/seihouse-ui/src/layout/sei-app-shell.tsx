@@ -3,8 +3,7 @@ import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "../styles/cn";
 import { seiLayer } from "../styles/layering";
 
-export interface SEIAppShellProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+export interface SEIAppShellProps extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
   /** Top app bar — rendered sticky at the top of the shell. */
   header?: ReactNode;
   /** Optional navigation rail — collapses (hidden) on small screens. */
@@ -63,19 +62,14 @@ export function SEIAppShell({
       ) : null}
 
       {sidebar ? (
-        <aside
-          aria-label={sidebarLabel}
-          className="hidden border-r border-white/10 md:block"
-        >
+        <aside aria-label={sidebarLabel} className="hidden border-r border-white/10 md:block">
           {sidebar}
         </aside>
       ) : null}
 
       <main className="min-w-0 overflow-y-auto">{children}</main>
 
-      {footer ? (
-        <footer className="col-span-full border-t border-white/10">{footer}</footer>
-      ) : null}
+      {footer ? <footer className="col-span-full border-t border-white/10">{footer}</footer> : null}
     </div>
   );
 }

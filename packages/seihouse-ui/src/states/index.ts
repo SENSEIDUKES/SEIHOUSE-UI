@@ -1,10 +1,6 @@
 export { SEISkeleton, type SEISkeletonProps } from "./sei-skeleton";
 export { SEISpinner, type SEISpinnerProps } from "./sei-spinner";
-export {
-  SEIProgressBar,
-  clampProgress,
-  type SEIProgressBarProps,
-} from "./sei-progress-bar";
+export { SEIProgressBar, clampProgress, type SEIProgressBarProps } from "./sei-progress-bar";
 export {
   SEIStatusDot,
   SEIStatusLine,

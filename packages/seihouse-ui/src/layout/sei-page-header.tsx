@@ -2,8 +2,7 @@ import type { HTMLAttributes, ReactNode } from "react";
 
 import { cn } from "../styles/cn";
 
-export interface SEIPageHeaderProps
-  extends Omit<HTMLAttributes<HTMLElement>, "title"> {
+export interface SEIPageHeaderProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   /** Small uppercase label above the title. */
   eyebrow?: ReactNode;
   /** Page title (required). */

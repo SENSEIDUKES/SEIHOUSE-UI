@@ -2,13 +2,7 @@ import type { ElementType, HTMLAttributes } from "react";
 
 import { cn } from "../styles/cn";
 
-type SEIContainerElement =
-  | "div"
-  | "section"
-  | "article"
-  | "main"
-  | "header"
-  | "footer";
+type SEIContainerElement = "div" | "section" | "article" | "main" | "header" | "footer";
 
 type SEIContainerSize = "sm" | "md" | "lg" | "xl" | "full";
 
@@ -48,11 +42,7 @@ export function SEIContainer({
   const Component = as as ElementType;
 
   const paddingClass =
-    padding === true
-      ? paddingClasses.md
-      : padding === false
-        ? ""
-        : paddingClasses[padding];
+    padding === true ? paddingClasses.md : padding === false ? "" : paddingClasses[padding];
 
   return (
     <Component

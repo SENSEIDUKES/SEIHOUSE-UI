@@ -35,8 +35,7 @@ export const seiFieldControlVariants = tv({
     },
     invalid: {
       true: "border-[rgba(255,69,58,0.5)] focus-visible:ring-[var(--sh-color-danger)]",
-      false:
-        "border-white/12 hover:border-white/20 focus-within:border-[rgba(0,122,255,0.45)]",
+      false: "border-white/12 hover:border-white/20 focus-within:border-[rgba(0,122,255,0.45)]",
     },
   },
   defaultVariants: {
@@ -107,9 +106,7 @@ export function SEIField({
   const describedBy = hasError ? errorId : helperText != null ? helperId : undefined;
 
   const control =
-    typeof children === "function"
-      ? children({ describedBy, helperId, errorId })
-      : children;
+    typeof children === "function" ? children({ describedBy, helperId, errorId }) : children;
 
   return (
     <div

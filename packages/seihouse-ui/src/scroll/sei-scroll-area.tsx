@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type HTMLAttributes,
-} from "react";
+import { useCallback, useEffect, useRef, useState, type HTMLAttributes } from "react";
 
 import { cn } from "../styles/cn";
 

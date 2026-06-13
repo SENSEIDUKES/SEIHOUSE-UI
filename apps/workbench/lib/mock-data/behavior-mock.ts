@@ -68,9 +68,26 @@ export const mockCommandGroups: CommandGroup[] = [
     label: "Albums",
     icon: Disc3,
     items: [
-      { id: "cmd-album-card", label: "Open Album Card", hint: "Detail view", icon: Disc3, shortcut: "A" },
-      { id: "cmd-album-new", label: "New release world", hint: "Album / EP / single", icon: Library, shortcut: "N" },
-      { id: "cmd-album-open", label: "Open Midnight Registry", hint: "EP · Scheduled", icon: Disc3 },
+      {
+        id: "cmd-album-card",
+        label: "Open Album Card",
+        hint: "Detail view",
+        icon: Disc3,
+        shortcut: "A",
+      },
+      {
+        id: "cmd-album-new",
+        label: "New release world",
+        hint: "Album / EP / single",
+        icon: Library,
+        shortcut: "N",
+      },
+      {
+        id: "cmd-album-open",
+        label: "Open Midnight Registry",
+        hint: "EP · Scheduled",
+        icon: Disc3,
+      },
       { id: "cmd-album-tag", label: "Tag release metadata", hint: "Mock metadata", icon: Tag },
     ],
   },
@@ -88,7 +105,13 @@ export const mockCommandGroups: CommandGroup[] = [
     label: "Vault",
     icon: Vault,
     items: [
-      { id: "cmd-vault-search", label: "Search Vault Fragments", hint: "Demos · notes", icon: Vault, shortcut: "V" },
+      {
+        id: "cmd-vault-search",
+        label: "Search Vault Fragments",
+        hint: "Demos · notes",
+        icon: Vault,
+        shortcut: "V",
+      },
       { id: "cmd-vault-open", label: "Open Vault Fragments", hint: "Detail view", icon: Vault },
       { id: "cmd-vault-upload", label: "Add fragment", hint: "Mock upload", icon: Upload },
       { id: "cmd-vault-tag", label: "Tag fragment", hint: "Vault tags", icon: Tag },
@@ -99,8 +122,19 @@ export const mockCommandGroups: CommandGroup[] = [
     label: "Registry",
     icon: ShieldCheck,
     items: [
-      { id: "cmd-registry-view", label: "Review Registry Status", hint: "Mock states", icon: ShieldCheck, shortcut: "R" },
-      { id: "cmd-registry-seal", label: "Explain registry seal", hint: "Verified · draft", icon: Boxes },
+      {
+        id: "cmd-registry-view",
+        label: "Review Registry Status",
+        hint: "Mock states",
+        icon: ShieldCheck,
+        shortcut: "R",
+      },
+      {
+        id: "cmd-registry-seal",
+        label: "Explain registry seal",
+        hint: "Verified · draft",
+        icon: Boxes,
+      },
     ],
   },
   {
@@ -108,8 +142,19 @@ export const mockCommandGroups: CommandGroup[] = [
     label: "Dojo",
     icon: GraduationCap,
     items: [
-      { id: "cmd-dojo-launch", label: "Launch Dojo Module", hint: "Learning tracks", icon: GraduationCap, shortcut: "D" },
-      { id: "cmd-dojo-template", label: "Creator campaign template", hint: "Template", icon: Hammer },
+      {
+        id: "cmd-dojo-launch",
+        label: "Launch Dojo Module",
+        hint: "Learning tracks",
+        icon: GraduationCap,
+        shortcut: "D",
+      },
+      {
+        id: "cmd-dojo-template",
+        label: "Creator campaign template",
+        hint: "Template",
+        icon: Hammer,
+      },
     ],
   },
   {
@@ -117,7 +162,13 @@ export const mockCommandGroups: CommandGroup[] = [
     label: "Plugins",
     icon: Boxes,
     items: [
-      { id: "cmd-plugin-slots", label: "View Plugin Slots", hint: "SAP · Vault Radio", icon: Boxes, shortcut: "P" },
+      {
+        id: "cmd-plugin-slots",
+        label: "View Plugin Slots",
+        hint: "SAP · Vault Radio",
+        icon: Boxes,
+        shortcut: "P",
+      },
       { id: "cmd-player-shell", label: "Open Player Shell", hint: "Expanded player", icon: Radio },
     ],
   },

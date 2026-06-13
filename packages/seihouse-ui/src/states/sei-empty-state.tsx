@@ -3,8 +3,7 @@ import { Inbox, type LucideIcon } from "lucide-react";
 
 import { StateShell, type StateSize } from "./state-shell";
 
-export interface SEIEmptyStateProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+export interface SEIEmptyStateProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   icon?: LucideIcon;
   title: ReactNode;
   description?: ReactNode;

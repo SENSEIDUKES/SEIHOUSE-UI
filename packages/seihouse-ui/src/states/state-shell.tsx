@@ -44,15 +44,11 @@ export const stateSizeScale = {
 
 /** Tone-driven classes for the icon tile. */
 export const stateIconTones = {
-  neutral:
-    "border-white/10 bg-white/[0.05] text-[var(--sh-color-cloud)]",
+  neutral: "border-white/10 bg-white/[0.05] text-[var(--sh-color-cloud)]",
   sea: "border-[rgba(0,122,255,0.28)] bg-[rgba(0,122,255,0.12)] text-[#8fc8ff]",
-  success:
-    "border-[rgba(52,199,89,0.3)] bg-[rgba(52,199,89,0.12)] text-[#8ff0aa]",
-  warning:
-    "border-[rgba(255,159,10,0.3)] bg-[rgba(255,159,10,0.12)] text-[#ffd08a]",
-  danger:
-    "border-[rgba(255,69,58,0.3)] bg-[rgba(255,69,58,0.12)] text-[#ff9b94]",
+  success: "border-[rgba(52,199,89,0.3)] bg-[rgba(52,199,89,0.12)] text-[#8ff0aa]",
+  warning: "border-[rgba(255,159,10,0.3)] bg-[rgba(255,159,10,0.12)] text-[#ffd08a]",
+  danger: "border-[rgba(255,69,58,0.3)] bg-[rgba(255,69,58,0.12)] text-[#ff9b94]",
 } as const;
 
 export type StateIconTone = keyof typeof stateIconTones;
@@ -116,10 +112,7 @@ export function StateShell({
         </TitleTag>
         {description ? (
           <p
-            className={cn(
-              "mt-1.5 leading-relaxed text-[var(--sh-color-mist)]",
-              scale.description,
-            )}
+            className={cn("mt-1.5 leading-relaxed text-[var(--sh-color-mist)]", scale.description)}
           >
             {description}
           </p>

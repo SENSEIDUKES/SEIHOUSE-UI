@@ -211,7 +211,12 @@ export function SEICommandPalette({
             close.
           </Dialog.Description>
 
-          <SEICommand surface={false} filter={fuzzyFilter} inputValue={query} onInputChange={setQuery}>
+          <SEICommand
+            surface={false}
+            filter={fuzzyFilter}
+            inputValue={query}
+            onInputChange={setQuery}
+          >
             <SEICommandInput autoFocus placeholder="Type a command or search…">
               <SEICommandShortcut className="hidden sm:block">ESC</SEICommandShortcut>
             </SEICommandInput>

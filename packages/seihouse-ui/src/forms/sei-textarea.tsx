@@ -6,8 +6,7 @@ import { cn } from "../styles/cn";
 import { seiFieldControlVariants, type SEIFieldControlVariantProps } from "./sei-field";
 
 export interface SEITextareaProps
-  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size">,
-    SEIFieldControlVariantProps {}
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size">, SEIFieldControlVariantProps {}
 
 /**
  * SEITextarea — styled native `<textarea>` reusing the shared control surface.

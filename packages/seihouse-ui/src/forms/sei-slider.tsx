@@ -12,8 +12,7 @@ import {
 import { cn } from "../styles/cn";
 import { focusRing, transitionSurface } from "../styles/variants";
 
-export interface SEISliderProps
-  extends Omit<AriaSliderProps<number>, "className" | "children"> {
+export interface SEISliderProps extends Omit<AriaSliderProps<number>, "className" | "children"> {
   label?: React.ReactNode;
   /** Render the current value next to the label. */
   showValue?: boolean;
@@ -46,7 +45,7 @@ export function SEISlider({
       )}
       {...props}
     >
-      {(label != null || showValue) ? (
+      {label != null || showValue ? (
         <div className="flex items-center justify-between">
           {label != null ? (
             <Label className="text-sm font-semibold leading-none text-[var(--sh-color-cloud)]">

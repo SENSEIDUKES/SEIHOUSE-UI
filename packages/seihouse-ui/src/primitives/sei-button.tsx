@@ -2,14 +2,10 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 
 import { cn } from "../styles/cn";
-import {
-  seiButtonVariants,
-  type SEIButtonVariantProps,
-} from "../styles/variants";
+import { seiButtonVariants, type SEIButtonVariantProps } from "../styles/variants";
 
 export interface SEIButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    SEIButtonVariantProps {
+  extends ButtonHTMLAttributes<HTMLButtonElement>, SEIButtonVariantProps {
   icon?: LucideIcon;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;

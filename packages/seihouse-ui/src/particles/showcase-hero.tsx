@@ -12,8 +12,7 @@ const showcaseHeroStyles = tv({
   slots: {
     panel: "relative overflow-hidden",
     grid: "relative z-10 grid gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-center",
-    headline:
-      "max-w-4xl text-4xl font-black leading-[0.95] tracking-[-0.075em] sm:text-6xl",
+    headline: "max-w-4xl text-4xl font-black leading-[0.95] tracking-[-0.075em] sm:text-6xl",
     preview:
       "min-h-64 overflow-hidden rounded-[1.35rem] border border-white/12 bg-white/[0.055] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]",
   },
@@ -80,7 +79,9 @@ export function ShowcaseHero({
   const heroEyebrow = eyebrow ?? entry?.eyebrow ?? "SEIHouse lab";
   const heroHeadline = headline ?? entry?.headline ?? "Reusable music-business UI particles.";
   const heroSubheadline =
-    subheadline ?? entry?.subheadline ?? "Mocked, reusable interface blocks for future product concepts.";
+    subheadline ??
+    entry?.subheadline ??
+    "Mocked, reusable interface blocks for future product concepts.";
   const heroBadges = badges ?? entry?.badges ?? ["Mock data", "UI only", "Reusable"];
 
   return (

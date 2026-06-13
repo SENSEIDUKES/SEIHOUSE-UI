@@ -1,16 +1,11 @@
 import type { ElementType, HTMLAttributes } from "react";
 
 import { cn } from "../styles/cn";
-import {
-  seiPanelVariants,
-  type SEIPanelVariantProps,
-} from "../styles/variants";
+import { seiPanelVariants, type SEIPanelVariantProps } from "../styles/variants";
 
 type SEIPanelElement = "div" | "section" | "article" | "aside" | "header" | "footer";
 
-export interface SEIPanelProps
-  extends HTMLAttributes<HTMLElement>,
-    SEIPanelVariantProps {
+export interface SEIPanelProps extends HTMLAttributes<HTMLElement>, SEIPanelVariantProps {
   as?: SEIPanelElement;
 }
 

@@ -150,15 +150,23 @@ export function SEICommandList({
   );
 }
 
-export interface SEICommandGroupProps
-  extends Omit<MenuSectionProps<object>, "className" | "children"> {
+export interface SEICommandGroupProps extends Omit<
+  MenuSectionProps<object>,
+  "className" | "children"
+> {
   label: string;
   icon?: LucideIcon;
   className?: string;
   children?: ReactNode;
 }
 
-export function SEICommandGroup({ label, icon: Icon, className, children, ...props }: SEICommandGroupProps) {
+export function SEICommandGroup({
+  label,
+  icon: Icon,
+  className,
+  children,
+  ...props
+}: SEICommandGroupProps) {
   return (
     <MenuSection className={cn("mb-1 last:mb-0", className)} {...props}>
       <Header className={seiCommandGroupHeader}>

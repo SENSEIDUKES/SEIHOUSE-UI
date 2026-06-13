@@ -16,8 +16,7 @@ const gapClasses = {
   lg: "gap-6",
 } as const;
 
-export interface SEISplitPaneProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+export interface SEISplitPaneProps extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
   /** Leading region (list / sidebar). */
   start: ReactNode;
   /** Trailing region (detail / content). */
@@ -50,12 +49,7 @@ export function SEISplitPane({
 }: SEISplitPaneProps) {
   return (
     <div
-      className={cn(
-        "grid w-full",
-        stackGridClasses[stackOn],
-        gapClasses[gap],
-        className,
-      )}
+      className={cn("grid w-full", stackGridClasses[stackOn], gapClasses[gap], className)}
       style={{ ["--sh-split-start" as string]: startWidth, ...style }}
       {...props}
     >

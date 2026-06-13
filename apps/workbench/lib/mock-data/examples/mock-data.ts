@@ -1,9 +1,4 @@
-export type RegistryState =
-  | "draft"
-  | "registered"
-  | "verified"
-  | "archived"
-  | "experimental";
+export type RegistryState = "draft" | "registered" | "verified" | "archived" | "experimental";
 
 export interface Album {
   id: string;
@@ -251,7 +246,8 @@ export const mockShowcaseEntries: ShowcaseEntry[] = [
   {
     id: "show-001",
     eyebrow: "SEIHouse music-business lab",
-    headline: "Reusable particles for releases, artists, vaults, dashboards, and future creator systems.",
+    headline:
+      "Reusable particles for releases, artists, vaults, dashboards, and future creator systems.",
     subheadline:
       "Phase 2 keeps everything mocked and visual-only while making the lab feel closer to real product surfaces.",
     badges: ["Albums", "Artists", "Registry", "Dojo", "Vault Radio"],

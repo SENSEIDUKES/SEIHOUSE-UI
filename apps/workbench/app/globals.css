@@ -117,9 +117,14 @@
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     radial-gradient(circle at 12% 8%, rgba(0, 122, 255, 0.28), transparent 32rem),
     radial-gradient(circle at 85% 10%, rgba(255, 107, 53, 0.15), transparent 30rem),
-    radial-gradient(circle at 50% 100%, rgba(52, 199, 89, 0.08), transparent 26rem),
-    #050609;
-  background-size: 44px 44px, 44px 44px, auto, auto, auto, auto;
+    radial-gradient(circle at 50% 100%, rgba(52, 199, 89, 0.08), transparent 26rem), #050609;
+  background-size:
+    44px 44px,
+    44px 44px,
+    auto,
+    auto,
+    auto,
+    auto;
 }
 
 .sh-showcase__ambient {
@@ -481,7 +486,10 @@
   overflow: hidden;
   border-radius: 26px;
   background: rgba(18, 20, 26, 0.86);
-  transition: transform var(--sh-transition-base), border-color var(--sh-transition-base), box-shadow var(--sh-transition-base);
+  transition:
+    transform var(--sh-transition-base),
+    border-color var(--sh-transition-base),
+    box-shadow var(--sh-transition-base);
 }
 
 .sh-surface-card:hover,
@@ -491,7 +499,9 @@
 .sh-layout-cell:hover {
   transform: translateY(-3px);
   border-color: rgba(0, 122, 255, 0.28);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38), 0 0 34px rgba(0, 122, 255, 0.08);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.38),
+    0 0 34px rgba(0, 122, 255, 0.08);
 }
 
 .sh-surface-card--glass {
@@ -572,9 +582,18 @@
   background: rgba(255, 255, 255, 0.16);
 }
 
-.sh-surface-preview--glass span:first-child { top: 44px; }
-.sh-surface-preview--glass span:nth-child(2) { top: 68px; width: 48%; }
-.sh-surface-preview--glass span:nth-child(3) { top: 104px; width: 72%; background: rgba(0, 122, 255, 0.34); }
+.sh-surface-preview--glass span:first-child {
+  top: 44px;
+}
+.sh-surface-preview--glass span:nth-child(2) {
+  top: 68px;
+  width: 48%;
+}
+.sh-surface-preview--glass span:nth-child(3) {
+  top: 104px;
+  width: 72%;
+  background: rgba(0, 122, 255, 0.34);
+}
 
 .sh-surface-preview--deep {
   background: radial-gradient(circle at 50% 50%, rgba(0, 122, 255, 0.18), transparent 42%), #07090d;
@@ -618,8 +637,13 @@
   background: rgba(255, 255, 255, 0.16);
 }
 
-.sh-surface-preview--card span:nth-child(2) { bottom: 42px; }
-.sh-surface-preview--card span:nth-child(3) { bottom: 24px; width: 44%; }
+.sh-surface-preview--card span:nth-child(2) {
+  bottom: 42px;
+}
+.sh-surface-preview--card span:nth-child(3) {
+  bottom: 24px;
+  width: 44%;
+}
 
 .sh-surface-preview--dock {
   display: flex;
@@ -628,8 +652,7 @@
   gap: 10px;
   padding: 18px;
   background:
-    radial-gradient(circle at 50% 20%, rgba(0, 122, 255, 0.2), transparent 44%),
-    rgba(0, 0, 0, 0.24);
+    radial-gradient(circle at 50% 20%, rgba(0, 122, 255, 0.2), transparent 44%), rgba(0, 0, 0, 0.24);
 }
 
 .sh-surface-preview--dock span {
@@ -658,7 +681,11 @@
   line-height: 1;
   border: 1px solid transparent;
   border-radius: 999px;
-  transition: transform var(--sh-transition-fast), border-color var(--sh-transition-fast), background var(--sh-transition-fast), box-shadow var(--sh-transition-fast);
+  transition:
+    transform var(--sh-transition-fast),
+    border-color var(--sh-transition-fast),
+    background var(--sh-transition-fast),
+    box-shadow var(--sh-transition-fast);
 }
 
 .sh-button:hover:not(:disabled) {
@@ -731,7 +758,10 @@
   padding: 18px;
   border-radius: 24px;
   background: rgba(18, 20, 26, 0.82);
-  transition: transform var(--sh-transition-base), border-color var(--sh-transition-base), box-shadow var(--sh-transition-base);
+  transition:
+    transform var(--sh-transition-base),
+    border-color var(--sh-transition-base),
+    box-shadow var(--sh-transition-base);
 }
 
 .sh-action-card__icon {
@@ -788,7 +818,10 @@
   overflow: hidden;
   border-radius: 26px;
   background: rgba(16, 18, 24, 0.88);
-  transition: transform var(--sh-transition-base), border-color var(--sh-transition-base), box-shadow var(--sh-transition-base);
+  transition:
+    transform var(--sh-transition-base),
+    border-color var(--sh-transition-base),
+    box-shadow var(--sh-transition-base);
 }
 
 .sh-card-preview__media {
@@ -844,9 +877,15 @@
   letter-spacing: 0.16em;
 }
 
-.sh-card-preview--accent .sh-card-preview__eyebrow { color: var(--sh-color-accent); }
-.sh-card-preview--success .sh-card-preview__eyebrow { color: var(--sh-color-success); }
-.sh-card-preview--default .sh-card-preview__eyebrow { color: var(--sh-color-cloud); }
+.sh-card-preview--accent .sh-card-preview__eyebrow {
+  color: var(--sh-color-accent);
+}
+.sh-card-preview--success .sh-card-preview__eyebrow {
+  color: var(--sh-color-success);
+}
+.sh-card-preview--default .sh-card-preview__eyebrow {
+  color: var(--sh-color-cloud);
+}
 
 .sh-card-preview small {
   display: block;
@@ -926,9 +965,18 @@
   box-shadow: 0 0 30px rgba(0, 122, 255, 0.1);
 }
 
-.sh-seal--lg { width: 132px; height: 132px; }
-.sh-seal--md { width: 102px; height: 102px; }
-.sh-seal--sm { width: 76px; height: 76px; }
+.sh-seal--lg {
+  width: 132px;
+  height: 132px;
+}
+.sh-seal--md {
+  width: 102px;
+  height: 102px;
+}
+.sh-seal--sm {
+  width: 76px;
+  height: 76px;
+}
 
 .sh-seal span {
   font-weight: 900;
@@ -991,7 +1039,10 @@
   background:
     radial-gradient(circle at 88% 18%, rgba(0, 122, 255, 0.14), transparent 44%),
     rgba(255, 255, 255, 0.04);
-  transition: transform var(--sh-transition-base), border-color var(--sh-transition-base), box-shadow var(--sh-transition-base);
+  transition:
+    transform var(--sh-transition-base),
+    border-color var(--sh-transition-base),
+    box-shadow var(--sh-transition-base);
 }
 
 .sh-layout-cell::after {
@@ -1005,9 +1056,16 @@
   border-radius: 999px;
 }
 
-.sh-layout-cell--wide { grid-column: span 3; }
-.sh-layout-cell--tall { grid-column: span 2; grid-row: span 2; }
-.sh-layout-cell--normal { grid-column: span 2; }
+.sh-layout-cell--wide {
+  grid-column: span 3;
+}
+.sh-layout-cell--tall {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.sh-layout-cell--normal {
+  grid-column: span 2;
+}
 
 .sh-layout-cell span {
   color: var(--sh-color-mist);
@@ -1067,7 +1125,10 @@
   border: 1px dashed rgba(255, 255, 255, 0.12);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.035);
-  transition: transform var(--sh-transition-base), border-color var(--sh-transition-base), box-shadow var(--sh-transition-base);
+  transition:
+    transform var(--sh-transition-base),
+    border-color var(--sh-transition-base),
+    box-shadow var(--sh-transition-base);
 }
 
 .sh-plugin-slot--attached {

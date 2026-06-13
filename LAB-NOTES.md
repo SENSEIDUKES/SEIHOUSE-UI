@@ -238,15 +238,15 @@ npm install @base-ui/react react-aria-components
 
 All live in `components/sei/behavior/` (separate from Phase 1 `primitives/` and Phase 2 `particles/`). Every component is a `"use client"` component, accepts `className`, merges via `cn()`, and uses local `tv()` variants with `--sh-*` tokens plus the shared `focusRing` / `transitionSurface` from `styles/variants.ts`.
 
-| Component | File | Library | Variants |
-|---|---|---|---|
-| `SEIDialog` (+ Trigger/Content/Title/Description/Close) | `sei-dialog.tsx` | Base UI Dialog | `default, soft, dark, light, glass-test` |
-| `SEIDrawer` (+ Trigger/Content/Header/Body/Footer/Title/Description/Close) | `sei-drawer.tsx` | Base UI Dialog | side `right/left/bottom` · size `compact/default/wide` · tone `dark/light` |
-| `SEITabs` (+ List/Trigger/Panel) | `sei-tabs.tsx` | Base UI Tabs | `default, underline, pill, panel, dark, light` |
-| `SEIPopover` (+ Trigger/Content/Title/Description/Close) | `sei-popover.tsx` | Base UI Popover | `default, soft, dark, light` |
-| `SEITooltip` (+ Provider/Trigger/Content) | `sei-tooltip.tsx` | Base UI Tooltip | `default, dark, light` |
-| `SEIComboboxPreview` | `sei-combobox-preview.tsx` | React Aria Components | n/a (mock search) |
-| `SEICommandPreview` | `sei-command-preview.tsx` | React Aria Components | n/a (grouped mock palette) |
+| Component                                                                  | File                       | Library               | Variants                                                                   |
+| -------------------------------------------------------------------------- | -------------------------- | --------------------- | -------------------------------------------------------------------------- |
+| `SEIDialog` (+ Trigger/Content/Title/Description/Close)                    | `sei-dialog.tsx`           | Base UI Dialog        | `default, soft, dark, light, glass-test`                                   |
+| `SEIDrawer` (+ Trigger/Content/Header/Body/Footer/Title/Description/Close) | `sei-drawer.tsx`           | Base UI Dialog        | side `right/left/bottom` · size `compact/default/wide` · tone `dark/light` |
+| `SEITabs` (+ List/Trigger/Panel)                                           | `sei-tabs.tsx`             | Base UI Tabs          | `default, underline, pill, panel, dark, light`                             |
+| `SEIPopover` (+ Trigger/Content/Title/Description/Close)                   | `sei-popover.tsx`          | Base UI Popover       | `default, soft, dark, light`                                               |
+| `SEITooltip` (+ Provider/Trigger/Content)                                  | `sei-tooltip.tsx`          | Base UI Tooltip       | `default, dark, light`                                                     |
+| `SEIComboboxPreview`                                                       | `sei-combobox-preview.tsx` | React Aria Components | n/a (mock search)                                                          |
+| `SEICommandPreview`                                                        | `sei-command-preview.tsx`  | React Aria Components | n/a (grouped mock palette)                                                 |
 
 Mock data for the previews lives in `components/sei/behavior/behavior-mock.ts` (artist/vault-tag combobox options, grouped command palette). A barrel `components/sei/behavior/index.ts` re-exports everything.
 
@@ -283,7 +283,7 @@ Triggers use Base UI's `render` prop so existing SEIHouse components compose as 
 ## Deferred / weak spots
 
 - **Native Base UI Drawer** (swipe gestures + snap points) is available and could replace the Dialog-based SEIDrawer in a future phase if drag-to-dismiss is wanted.
-- **SEICommandPreview** is a *preview*: it is a filtered menu, not a global command system (no global hotkey to open, no recent/most-used ranking, no nested command execution).
+- **SEICommandPreview** is a _preview_: it is a filtered menu, not a global command system (no global hotkey to open, no recent/most-used ranking, no nested command execution).
 - **SEIComboboxPreview** is single-select preview only — no multi-select tag chips, async loading, or create-new-option behavior yet.
 - Popover/Tooltip arrows are minimal; arrow styling was kept simple and is opt-in (`showArrow`).
 - Reduced-motion: transitions are short CSS transitions; no explicit `prefers-reduced-motion` gating was added yet.
@@ -333,13 +333,13 @@ Added a **new** `components/sei/behavior/sei-native-drawer.tsx` built on **vaul*
 
 ## Behavior components added / upgraded
 
-| Component | File | Library |
-|---|---|---|
-| `SEINativeDrawer` (+ Trigger/Content/Header/Body/Footer/Title/Description/Close) | `sei-native-drawer.tsx` (new) | vaul |
-| `SEIMultiSelectCombobox` | `sei-multi-select-combobox.tsx` (new) | React Aria + styled chips |
-| `SEICommandPalette` | `sei-command-palette.tsx` (new) | Base UI Dialog + React Aria + custom fuzzy |
-| `fuzzyMatch` / `highlightSegments` | `fuzzy.ts` (new) | — |
-| `SEICommandPreview` / `SEIDialog` / `SEIPopover` | refactored to consume promoted variants | — |
+| Component                                                                        | File                                    | Library                                    |
+| -------------------------------------------------------------------------------- | --------------------------------------- | ------------------------------------------ |
+| `SEINativeDrawer` (+ Trigger/Content/Header/Body/Footer/Title/Description/Close) | `sei-native-drawer.tsx` (new)           | vaul                                       |
+| `SEIMultiSelectCombobox`                                                         | `sei-multi-select-combobox.tsx` (new)   | React Aria + styled chips                  |
+| `SEICommandPalette`                                                              | `sei-command-palette.tsx` (new)         | Base UI Dialog + React Aria + custom fuzzy |
+| `fuzzyMatch` / `highlightSegments`                                               | `fuzzy.ts` (new)                        | —                                          |
+| `SEICommandPreview` / `SEIDialog` / `SEIPopover`                                 | refactored to consume promoted variants | —                                          |
 
 Showcase: new client component `behavior-hardening-showcase.tsx` rendered from a new “05 / Behavior Hardening” `SEISection` on `/` and `/lab` (later sections renumbered 06–09; Phase 3 section preserved).
 
@@ -372,7 +372,7 @@ Showcase: new client component `behavior-hardening-showcase.tsx` rendered from a
 - `seiPopupSurfaceVariants` — `default/soft/dark/light/glass-test` floating-surface tones.
 - `seiInteractiveItemVariants` — focused/selected/disabled item states (menus, comboboxes, commands).
 - `seiCommandGroupHeader` — grouped-menu section header.
-Component-specific styling (drawer side/size, tabs indicator) intentionally stays local.
+  Component-specific styling (drawer side/size, tabs indicator) intentionally stays local.
 
 ## Mocked features
 
@@ -409,8 +409,7 @@ All combobox options, command groups, recent history, drawer contents, and palet
 
 ---
 
-This lab is exploratory by design. Components should remain adaptable until the final SEIHouse product and brand direction is established.
----
+## This lab is exploratory by design. Components should remain adaptable until the final SEIHouse product and brand direction is established.
 
 # Phase 5 — SEIHouse Component Workbench (internal design review)
 
@@ -466,7 +465,7 @@ founder moves things between rough / reviewing / approved as designs get judged.
 # Phase 6 — Foundation Gap Audit + Core UI Infrastructure
 
 A senior design-system audit of the platform **before** real product UI (Vault, Audio
-Player, Registry/SEA, Dojo) is built. Goal: turn the repo from a component *showcase* into
+Player, Registry/SEA, Dojo) is built. Goal: turn the repo from a component _showcase_ into
 a production-ready **Core UI Infrastructure Layer** — standardized application states,
 form primitives, layout shells, scroll/overflow systems, media fallbacks, and consolidated
 surface / elevation / layering utilities — while staying mock-only and brand-unlocked.
@@ -498,20 +497,21 @@ apps lean on every day was missing or scattered:
 
 ## Foundation gaps discovered
 
-| Area | Gap |
-|---|---|
-| Visual infra | Tokens app-only; no z-index scale; surface/glass/glow strings duplicated |
-| States | No empty/loading/skeleton/spinner/error/success/progress/status primitives |
-| Forms | No field/input/textarea/select/switch/checkbox/radio/slider |
-| Layout | No app shell/page header/toolbar/action bar/filter bar/split pane/sticky footer/safe area/container |
-| Scroll | No scroll area, scroll shadows, horizontal lanes, or shared scrollbar styling |
-| Media | No thumbnail/avatar/aspect-ratio/media-row; no broken-image handling |
-| Interaction | Hover/active/focus/disabled/selected/loading not centralized |
-| Diagnostics | Workbench exposed finished components, not the infrastructure underneath |
+| Area         | Gap                                                                                                 |
+| ------------ | --------------------------------------------------------------------------------------------------- |
+| Visual infra | Tokens app-only; no z-index scale; surface/glass/glow strings duplicated                            |
+| States       | No empty/loading/skeleton/spinner/error/success/progress/status primitives                          |
+| Forms        | No field/input/textarea/select/switch/checkbox/radio/slider                                         |
+| Layout       | No app shell/page header/toolbar/action bar/filter bar/split pane/sticky footer/safe area/container |
+| Scroll       | No scroll area, scroll shadows, horizontal lanes, or shared scrollbar styling                       |
+| Media        | No thumbnail/avatar/aspect-ratio/media-row; no broken-image handling                                |
+| Interaction  | Hover/active/focus/disabled/selected/loading not centralized                                        |
+| Diagnostics  | Workbench exposed finished components, not the infrastructure underneath                            |
 
 ## Infrastructure implemented
 
 ### Core visual infrastructure (package-owned)
+
 - **`styles/tokens.css`** — design tokens promoted out of the workbench into the package
   (single source of truth, imported by `globals.css`). Brand tokens unchanged. **New
   infrastructure tokens:** z-index layering scale (`--sh-z-base…toast`), elevation scale
@@ -526,38 +526,46 @@ apps lean on every day was missing or scattered:
   focus-visible / disabled / selected / busy) as one shared expression.
 
 ### State primitives — `src/states/`
+
 `SEISkeleton`, `SEISpinner`, `SEIProgressBar` (+ pure `clampProgress`), `SEIStatusDot` /
 `SEIStatusLine`, `SEIEmptyState`, `SEILoadingState`, `SEIErrorState`, `SEISuccessState`.
 Application-agnostic, share a consistent `StateShell`, real a11y (`role`, `aria-live`,
 `sr-only` labels), reduced-motion safe.
 
 ### Form primitives — `src/forms/`
+
 `SEIField` (label / helper / error / required / disabled, compact|comfortable sizing) +
 `seiFieldControlVariants`, `SEIInput`, `SEITextarea`, `SEISelect` (styled native), and
 React-Aria-based `SEISwitch`, `SEICheckbox`, `SEIRadioGroup`/`SEIRadio`, `SEISlider`.
 Practical primitives, not a form framework.
 
 ### Layout primitives — `src/layout/`
+
 `SEIContainer`, `SEIAppShell`, `SEIPageHeader`, `SEIToolbar`/`SEIActionBar`, `SEIFilterBar`,
 `SEISplitPane` (static; draggable resize deferred), `SEIStickyFooter`, `SEISafeArea`.
 Semantic landmarks; sticky regions use the shared layering scale and safe-area tokens.
 
 ### Scroll/overflow — `src/scroll/`
+
 `SEIScrollArea` (styled scrollbar, top/bottom scroll shadows, keyboard-accessible,
-+ pure `getScrollShadows` helper) and `SEIScrollLane` (horizontal snap lane).
+
+- pure `getScrollShadows` helper) and `SEIScrollLane` (horizontal snap lane).
 
 ### Media — `src/media/`
+
 `SEIAspectRatio`, `SEIThumbnail` (broken-image fallback + lazy/async), `SEIAvatar`
 (image → initials fallback), `SEIMediaRow` (compact, list-friendly).
 
 ### Workbench — Foundation Diagnostics
-New `/foundations` route (tabbed, mirrors `/contexts`) that exposes the *infrastructure*
+
+New `/foundations` route (tabbed, mirrors `/contexts`) that exposes the _infrastructure_
 rather than finished components: typography & token scales; surfaces / elevation / blur /
 glass / glow; interaction states; application states; form states; layout shells; scroll &
 overflow; media fallbacks; overlay/portal layering; mobile safe-area; dense list mode;
 reduced motion. Linked from the nav and the home page.
 
 ### Tests
+
 Vitest unit tests for the pure helpers (`clampProgress`, `getScrollShadows`, layering
 scale). New Playwright/axe spec `test/accessibility/foundations.spec.ts` covering the
 `/foundations` route (no critical/serious violations) and keyboard interaction for the new
@@ -594,3 +602,41 @@ form + scroll primitives. Existing a11y specs continue to pass.
 2. Add the motion layer (still reduced-motion-gated) once premium interactions are designed.
 3. Resolve light/glass contrast as part of finalizing brand tokens.
 4. Wire CI (typecheck + unit + a11y) now that the foundation is stable.
+
+# Phase 7 — Consolidate Foundation, CI, Core App Primitives
+
+## What changed
+
+- **Foundation primitives are now reviewable.** Phase 6 state, form, layout, scroll, and
+  media primitives were added to the workbench registry with per-component previews and
+  gallery grouping. New layers: States, Forms, and Media; layout and scroll stay under
+  Layout.
+- **New review contexts.** Added a form/state registry intake context and a layout/media
+  list context so foundation pieces can be judged inside realistic app surfaces.
+- **Ship-readiness tooling.** Added GitHub Actions CI for install, typecheck, unit tests,
+  lint, build, Playwright browser install, and a11y tests. Added flat ESLint and Prettier
+  configs plus root `lint`, `format`, and `format:check` scripts.
+- **Menu / Dropdown.** Added `SEIMenu` parts on Base UI Menu: trigger, content, item,
+  checkbox item, radio group/item, group, label, and separator. Styling reuses shared
+  popup surface, interactive item, command label, and layering utilities.
+- **Toast / notifications.** Added `SEIToastProvider`, `useSEIToast()`, and pure
+  `toastReducer`. Toasts render through a portal at the shared toast layer, support tones,
+  dismiss buttons, auto-dismiss with hover/focus pause, and polite/assertive live regions.
+- **Data Table.** Added semantic table parts, sticky sortable headers, compact/comfortable
+  density, zebra/hover rows, checkbox selection, and pure stable `sortRows` /
+  `compareSortValues` helpers. No virtualization was added.
+
+## Tests
+
+- Added Vitest coverage for `sortRows` (stable ordering, mixed numeric values, immutability,
+  empty values last) and `toastReducer` (add, dismiss, dedupe, cap, clear).
+- Added component a11y coverage for opened Menu axe scan, toast announcement, and Data Table
+  sortable header / keyboard behavior.
+
+## Still deferred
+
+- Virtualized tables/lists.
+- Motion layer / animation library.
+- Draggable SplitPane resize.
+- Light-mode and final brand/theming decisions.
+- Storybook.

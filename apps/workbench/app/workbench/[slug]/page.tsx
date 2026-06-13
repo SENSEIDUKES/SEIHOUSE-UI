@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import {
-  componentRegistry,
-  getComponentBySlug,
-} from "@/registry/component-registry";
+import { componentRegistry, getComponentBySlug } from "@/registry/component-registry";
 import { WorkbenchShell } from "@/components/workbench/workbench-shell";
 
 interface WorkbenchComponentPageProps {
@@ -15,9 +12,7 @@ export function generateStaticParams() {
   return componentRegistry.map((entry) => ({ slug: entry.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: WorkbenchComponentPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: WorkbenchComponentPageProps): Promise<Metadata> {
   const { slug } = await params;
   const entry = getComponentBySlug(slug);
   return {

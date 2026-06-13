@@ -1,14 +1,10 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
 import { cn } from "../styles/cn";
-import {
-  seiSectionVariants,
-  type SEISectionVariantProps,
-} from "../styles/variants";
+import { seiSectionVariants, type SEISectionVariantProps } from "../styles/variants";
 
 export interface SEISectionProps
-  extends Omit<HTMLAttributes<HTMLElement>, "title">,
-    SEISectionVariantProps {
+  extends Omit<HTMLAttributes<HTMLElement>, "title">, SEISectionVariantProps {
   eyebrow?: ReactNode;
   title?: ReactNode;
   description?: ReactNode;

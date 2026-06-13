@@ -10,8 +10,7 @@ import { cn } from "../styles/cn";
 const dojoModuleCardStyles = tv({
   slots: {
     card: "h-full",
-    icon:
-      "grid size-12 place-items-center rounded-2xl border border-white/12 bg-white/[0.055] text-white",
+    icon: "grid size-12 place-items-center rounded-2xl border border-white/12 bg-white/[0.055] text-white",
     progressTrack: "h-2 overflow-hidden rounded-full bg-white/10",
     progressFill: "h-full rounded-full bg-[var(--sh-color-sea)]",
   },
@@ -59,7 +58,8 @@ export interface DojoModuleCardProps extends VariantProps<typeof dojoModuleCardS
 export function DojoModuleCard({ module, variant = "default", className }: DojoModuleCardProps) {
   const styles = dojoModuleCardStyles({ variant });
   const safeProgress = Math.min(100, Math.max(0, module.progress));
-  const Icon = module.status === "Complete" ? CheckCircle2 : variant === "template" ? Layers3 : BookOpen;
+  const Icon =
+    module.status === "Complete" ? CheckCircle2 : variant === "template" ? Layers3 : BookOpen;
 
   return (
     <SEICard
@@ -88,7 +88,9 @@ export function DojoModuleCard({ module, variant = "default", className }: DojoM
             </SEIBadge>
           </div>
           <h3 className="text-xl font-semibold tracking-[-0.04em]">{module.title}</h3>
-          <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">{module.description}</p>
+          <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">
+            {module.description}
+          </p>
         </div>
 
         <div className="space-y-2">

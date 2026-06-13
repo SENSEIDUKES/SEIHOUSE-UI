@@ -12,8 +12,7 @@ import {
 import { cn } from "../styles/cn";
 import { transitionSurface } from "../styles/variants";
 
-export interface SEIRadioGroupProps
-  extends Omit<AriaRadioGroupProps, "className" | "children"> {
+export interface SEIRadioGroupProps extends Omit<AriaRadioGroupProps, "className" | "children"> {
   label?: React.ReactNode;
   description?: React.ReactNode;
   errorMessage?: React.ReactNode;

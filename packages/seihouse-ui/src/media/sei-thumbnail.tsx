@@ -13,8 +13,10 @@ const radiusClasses = {
   lg: "rounded-2xl",
 } as const;
 
-export interface SEIThumbnailProps
-  extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "alt"> {
+export interface SEIThumbnailProps extends Omit<
+  ImgHTMLAttributes<HTMLImageElement>,
+  "src" | "alt"
+> {
   /** Image source. When absent or it fails to load, the fallback renders. */
   src?: string;
   /** Alt text (required). */

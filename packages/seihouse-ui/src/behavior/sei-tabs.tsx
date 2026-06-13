@@ -37,8 +37,7 @@ export const seiTabsStyles = tv({
       },
       underline: {
         list: "gap-4 border-b border-white/10 pb-0",
-        trigger:
-          "rounded-none px-1 pb-3 data-[selected]:text-white hover:text-white",
+        trigger: "rounded-none px-1 pb-3 data-[selected]:text-white hover:text-white",
         indicator:
           "bottom-0 left-0 h-0.5 w-[var(--active-tab-width)] translate-x-[var(--active-tab-left)] rounded-full bg-[var(--sh-color-sea)] transition-all duration-200 ease-out",
       },
@@ -71,8 +70,10 @@ type SEITabsVariant = NonNullable<VariantProps<typeof seiTabsStyles>["variant"]>
 
 const SEITabsContext = createContext<SEITabsVariant>("default");
 
-export interface SEITabsProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Tabs.Root>, "className"> {
+export interface SEITabsProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Tabs.Root>,
+  "className"
+> {
   variant?: SEITabsVariant;
   className?: string;
 }
@@ -85,8 +86,10 @@ export function SEITabs({ variant = "default", className, ...props }: SEITabsPro
   );
 }
 
-export interface SEITabsListProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Tabs.List>, "className"> {
+export interface SEITabsListProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Tabs.List>,
+  "className"
+> {
   className?: string;
   children?: ReactNode;
 }
@@ -104,8 +107,10 @@ export function SEITabsList({ className, children, ...props }: SEITabsListProps)
   );
 }
 
-export interface SEITabsTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Tabs.Tab>, "className"> {
+export interface SEITabsTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Tabs.Tab>,
+  "className"
+> {
   className?: string;
 }
 
@@ -115,8 +120,10 @@ export function SEITabsTrigger({ className, ...props }: SEITabsTriggerProps) {
   return <Tabs.Tab className={cn(styles.trigger(), className)} {...props} />;
 }
 
-export interface SEITabsPanelProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Tabs.Panel>, "className"> {
+export interface SEITabsPanelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Tabs.Panel>,
+  "className"
+> {
   className?: string;
 }
 

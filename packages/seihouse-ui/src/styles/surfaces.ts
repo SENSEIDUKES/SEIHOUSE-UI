@@ -15,14 +15,11 @@ export const seiSurfaceVariants = tv({
   variants: {
     surface: {
       base: "border-white/10 bg-[var(--sh-surface-base)] text-[var(--sh-color-ivory)]",
-      elevated:
-        "border-white/10 bg-[var(--sh-surface-elevated)] text-[var(--sh-color-ivory)]",
-      raised:
-        "border-white/12 bg-[var(--sh-surface-raised)] text-[var(--sh-color-ivory)]",
+      elevated: "border-white/10 bg-[var(--sh-surface-elevated)] text-[var(--sh-color-ivory)]",
+      raised: "border-white/12 bg-[var(--sh-surface-raised)] text-[var(--sh-color-ivory)]",
       glass:
         "border-[var(--sh-glass-border)] bg-[var(--sh-glass-bg)] text-white backdrop-blur-[var(--sh-blur-md)]",
-      sunken:
-        "border-black/30 bg-[rgba(0,0,0,0.28)] text-[var(--sh-color-cloud)]",
+      sunken: "border-black/30 bg-[rgba(0,0,0,0.28)] text-[var(--sh-color-cloud)]",
     },
     elevation: {
       0: "shadow-none",

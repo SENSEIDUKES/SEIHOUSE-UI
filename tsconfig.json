@@ -1,7 +1,4 @@
 {
   "files": [],
-  "references": [
-    { "path": "./packages/seihouse-ui" },
-    { "path": "./apps/workbench" }
-  ]
+  "references": [{ "path": "./packages/seihouse-ui" }, { "path": "./apps/workbench" }]
 }

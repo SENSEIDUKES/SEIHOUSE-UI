@@ -39,8 +39,7 @@ import { focusRing, seiInteractiveItemVariants } from "../styles/variants";
  * For a quick data-driven combobox, prefer the SEIComboboxPreview convenience.
  */
 
-export interface SEIComboboxProps<T extends object>
-  extends Omit<ComboBoxProps<T>, "className"> {
+export interface SEIComboboxProps<T extends object> extends Omit<ComboBoxProps<T>, "className"> {
   className?: string;
 }
 
@@ -92,7 +91,9 @@ export function SEIComboboxControl({
         className,
       )}
     >
-      {icon ?? <Search aria-hidden="true" className="size-4 shrink-0 text-[var(--sh-color-mist)]" />}
+      {icon ?? (
+        <Search aria-hidden="true" className="size-4 shrink-0 text-[var(--sh-color-mist)]" />
+      )}
       <Input
         placeholder={placeholder}
         onKeyDown={onInputKeyDown}
@@ -134,8 +135,7 @@ export function SEIComboboxPopover({ className, ...props }: SEIComboboxPopoverPr
   );
 }
 
-export interface SEIComboboxListProps<T extends object>
-  extends Omit<ListBoxProps<T>, "className"> {
+export interface SEIComboboxListProps<T extends object> extends Omit<ListBoxProps<T>, "className"> {
   className?: string;
   emptyMessage?: ReactNode;
 }

@@ -105,8 +105,10 @@ export function SEIDrawer(props: SEIDrawerProps) {
   return <Dialog.Root {...props} />;
 }
 
-export interface SEIDrawerTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Dialog.Trigger>, "className"> {
+export interface SEIDrawerTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Dialog.Trigger>,
+  "className"
+> {
   className?: string;
 }
 
@@ -115,7 +117,8 @@ export function SEIDrawerTrigger({ className, ...props }: SEIDrawerTriggerProps)
 }
 
 export interface SEIDrawerContentProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Dialog.Popup>, "className">,
+  extends
+    Omit<React.ComponentPropsWithoutRef<typeof Dialog.Popup>, "className">,
     SEIDrawerVariantProps {
   className?: string;
   backdropClassName?: string;
@@ -190,8 +193,10 @@ export function SEIDrawerFooter({ className, children }: SEIDrawerFooterProps) {
   return <div className={cn(styles.footer(), className)}>{children}</div>;
 }
 
-export interface SEIDrawerTitleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Dialog.Title>, "className"> {
+export interface SEIDrawerTitleProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Dialog.Title>,
+  "className"
+> {
   className?: string;
 }
 
@@ -200,8 +205,10 @@ export function SEIDrawerTitle({ className, ...props }: SEIDrawerTitleProps) {
   return <Dialog.Title className={cn(styles.title(), className)} {...props} />;
 }
 
-export interface SEIDrawerDescriptionProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Dialog.Description>, "className"> {
+export interface SEIDrawerDescriptionProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Dialog.Description>,
+  "className"
+> {
   className?: string;
 }
 

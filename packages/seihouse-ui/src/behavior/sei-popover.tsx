@@ -33,12 +33,14 @@ export const seiPopoverStyles = tv({
   variants: {
     variant: {
       default: {
-        popup: "border-white/12 bg-[rgba(18,20,26,0.97)] text-[var(--sh-color-ivory)] backdrop-blur-xl",
+        popup:
+          "border-white/12 bg-[rgba(18,20,26,0.97)] text-[var(--sh-color-ivory)] backdrop-blur-xl",
         title: "text-white",
         description: "text-[var(--sh-color-cloud)]",
       },
       soft: {
-        popup: "border-[rgba(0,122,255,0.24)] bg-[rgba(8,16,30,0.97)] text-[var(--sh-color-ivory)] backdrop-blur-xl",
+        popup:
+          "border-[rgba(0,122,255,0.24)] bg-[rgba(8,16,30,0.97)] text-[var(--sh-color-ivory)] backdrop-blur-xl",
         title: "text-[#bcdcff]",
         description: "text-[var(--sh-color-cloud)]",
       },
@@ -67,8 +69,10 @@ export function SEIPopover(props: SEIPopoverProps) {
   return <Popover.Root {...props} />;
 }
 
-export interface SEIPopoverTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Popover.Trigger>, "className"> {
+export interface SEIPopoverTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Popover.Trigger>,
+  "className"
+> {
   className?: string;
 }
 
@@ -78,8 +82,10 @@ export function SEIPopoverTrigger({ className, ...props }: SEIPopoverTriggerProp
 
 type PositionerProps = React.ComponentPropsWithoutRef<typeof Popover.Positioner>;
 
-export interface SEIPopoverContentProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Popover.Popup>, "className"> {
+export interface SEIPopoverContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Popover.Popup>,
+  "className"
+> {
   variant?: SEIPopoverVariant;
   className?: string;
   side?: PositionerProps["side"];
@@ -129,8 +135,10 @@ export function SEIPopoverContent({
   );
 }
 
-export interface SEIPopoverTitleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Popover.Title>, "className"> {
+export interface SEIPopoverTitleProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Popover.Title>,
+  "className"
+> {
   className?: string;
 }
 
@@ -140,8 +148,10 @@ export function SEIPopoverTitle({ className, ...props }: SEIPopoverTitleProps) {
   return <Popover.Title className={cn(styles.title(), className)} {...props} />;
 }
 
-export interface SEIPopoverDescriptionProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Popover.Description>, "className"> {
+export interface SEIPopoverDescriptionProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Popover.Description>,
+  "className"
+> {
   className?: string;
 }
 
