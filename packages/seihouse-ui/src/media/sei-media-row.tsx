@@ -47,11 +47,13 @@ export function SEIMediaRow({
 }: SEIMediaRowProps) {
   const Component = as as ElementType;
   const clickable = interactive && Boolean(onClick);
-  const isNativeButton = as === "a";
+  // An anchor (`as="a"`) is a link, not a button — it has its own native
+  // activation, so we skip the synthetic keyboard/role handling for it.
+  const isLink = as === "a";
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     onKeyDown?.(event);
-    if (!clickable || isNativeButton || event.defaultPrevented) return;
+    if (!clickable || isLink || event.defaultPrevented) return;
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       onClick?.(event as unknown as Parameters<NonNullable<typeof onClick>>[0]);
@@ -62,8 +64,8 @@ export function SEIMediaRow({
     <Component
       onClick={onClick}
       onKeyDown={clickable ? handleKeyDown : onKeyDown}
-      role={clickable && !isNativeButton ? "button" : undefined}
-      tabIndex={clickable && !isNativeButton ? 0 : undefined}
+      role={clickable && !isLink ? "button" : undefined}
+      tabIndex={clickable && !isLink ? 0 : undefined}
       className={cn(
         "flex w-full items-center gap-3 rounded-2xl border border-transparent px-3 py-2 text-left",
         transitionSurface,

@@ -8,8 +8,11 @@ import { motionSafe } from "../styles/reduced-motion";
  * round to the nearest integer. Pure + exported for unit testing.
  */
 export function clampProgress(value: number): number {
-  if (Number.isNaN(value)) return 0;
-  return Math.round(Math.min(100, Math.max(0, value)));
+  // Coerce first: callers from plain JS may pass undefined / a string, which
+  // would slip past a bare `Number.isNaN(value)` and render `NaN%`.
+  const num = Number(value);
+  if (Number.isNaN(num)) return 0;
+  return Math.round(Math.min(100, Math.max(0, num)));
 }
 
 const toneMap = {

@@ -42,7 +42,10 @@ export const SEISelect = forwardRef<HTMLSelectElement, SEISelectProps>(function 
       </select>
       <ChevronsUpDown
         aria-hidden="true"
-        className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-[var(--sh-color-mist)]"
+        className={cn(
+          "pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-[var(--sh-color-mist)]",
+          disabled && "opacity-45",
+        )}
       />
     </div>
   );

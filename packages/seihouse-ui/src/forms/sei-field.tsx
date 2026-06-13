@@ -23,6 +23,10 @@ export const seiFieldControlVariants = tv({
     transitionSurface,
     "disabled:pointer-events-none disabled:opacity-45",
     "aria-disabled:pointer-events-none aria-disabled:opacity-45",
+    // Wrapper-based controls (e.g. SEIInput with icons, SEISelect) dim via the
+    // `data-disabled` flag set on their bordered wrapper `<div>`, since the
+    // native `:disabled` pseudo-class does not apply to non-form elements.
+    "data-[disabled]:pointer-events-none data-[disabled]:opacity-45",
   ],
   variants: {
     size: {
@@ -111,7 +115,9 @@ export function SEIField({
     <div
       className={cn(
         "flex w-full flex-col gap-1.5",
-        disabled && "pointer-events-none opacity-45",
+        // Dim the label/helper individually below — NOT the whole wrapper — so
+        // we don't compound with the control's own `disabled:opacity-45`.
+        disabled && "pointer-events-none",
         className,
       )}
       data-disabled={disabled || undefined}
@@ -122,6 +128,7 @@ export function SEIField({
           className={cn(
             "flex items-center gap-1 font-semibold leading-none text-[var(--sh-color-cloud)]",
             size === "compact" ? "text-xs" : "text-sm",
+            disabled && "opacity-45",
           )}
         >
           {label}
@@ -138,11 +145,17 @@ export function SEIField({
 
       {hasMessage ? (
         hasError ? (
-          <p id={errorId} className="text-xs font-medium text-[#ff9b94]">
+          <p
+            id={errorId}
+            className={cn("text-xs font-medium text-[#ff9b94]", disabled && "opacity-45")}
+          >
             {error}
           </p>
         ) : (
-          <p id={helperId} className="text-xs text-[var(--sh-color-mist)]">
+          <p
+            id={helperId}
+            className={cn("text-xs text-[var(--sh-color-mist)]", disabled && "opacity-45")}
+          >
             {helperText}
           </p>
         )

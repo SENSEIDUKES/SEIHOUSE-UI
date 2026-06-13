@@ -85,12 +85,24 @@ export function SEIScrollArea({
     const el = viewportRef.current;
     if (!el) return;
     recompute();
-    const observer = new ResizeObserver(() => recompute());
-    observer.observe(el);
-    for (const child of Array.from(el.children)) {
-      observer.observe(child);
-    }
-    return () => observer.disconnect();
+
+    // One ResizeObserver on the viewport handles size changes; a MutationObserver
+    // catches dynamically added/removed/changed content (more robust + cheaper
+    // than observing every child).
+    const resizeObserver = new ResizeObserver(() => recompute());
+    resizeObserver.observe(el);
+
+    const mutationObserver = new MutationObserver(() => recompute());
+    mutationObserver.observe(el, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+
+    return () => {
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
+    };
   }, [recompute]);
 
   return (

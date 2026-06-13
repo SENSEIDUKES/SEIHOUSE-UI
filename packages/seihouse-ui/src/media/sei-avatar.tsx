@@ -37,6 +37,8 @@ export interface SEIAvatarProps
 
 /** Initials from a name, capped at two letters (first + last word). */
 function getInitials(name: string): string {
+  // Defensive: dynamic data may hand us a null/undefined/non-string name.
+  if (!name || typeof name !== "string") return "";
   const words = name.trim().split(/\s+/).filter(Boolean);
   if (words.length === 0) return "";
   const first = words[0]?.[0] ?? "";
