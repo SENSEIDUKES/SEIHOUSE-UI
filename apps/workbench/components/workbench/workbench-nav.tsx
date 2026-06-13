@@ -5,6 +5,7 @@ import { cn } from "@seihouse/ui";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/workbench", label: "Workbench" },
+  { href: "/foundations", label: "Foundations" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contexts", label: "Contexts" },
   { href: "/lab/raw", label: "Raw Lab" },

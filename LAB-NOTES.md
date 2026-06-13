@@ -460,3 +460,137 @@ cards with no padding). The custom reset/base styles now live inside `@layer bas
 
 Component statuses in the registry are starting points for review, not decisions. The
 founder moves things between rough / reviewing / approved as designs get judged.
+
+---
+
+# Phase 6 — Foundation Gap Audit + Core UI Infrastructure
+
+A senior design-system audit of the platform **before** real product UI (Vault, Audio
+Player, Registry/SEA, Dojo) is built. Goal: turn the repo from a component *showcase* into
+a production-ready **Core UI Infrastructure Layer** — standardized application states,
+form primitives, layout shells, scroll/overflow systems, media fallbacks, and consolidated
+surface / elevation / layering utilities — while staying mock-only and brand-unlocked.
+
+Scope decisions (with the founder): **broad core, defer heavy**; **promote design tokens
+into the package** so `@seihouse/ui` is self-contained; **new `/foundations` diagnostics
+route**.
+
+## Audit summary
+
+The Phase 1–5 foundation is directionally correct: strong primitives, accessible behavior
+components, app-shaped particles, and a review workbench. But the layer that production
+apps lean on every day was missing or scattered:
+
+- **No standardized application states** — no skeleton / spinner / empty / loading / error
+  / success / progress / status primitives. Each future screen would reinvent them.
+- **No form primitives** — only the combobox family existed; no field/input/textarea/
+  select/switch/checkbox/radio/slider.
+- **No layout shells** — no app shell, page header, toolbar/action bar, filter bar, split
+  pane, sticky footer, safe-area, or container helper.
+- **No scroll/overflow system** — overflow was ad-hoc across ~17 files; no shared scroll
+  area, scroll shadows, horizontal lanes, or keyboard-accessible scroll containers.
+- **No media fallbacks** — broken images, avatars, aspect-ratio, and compact media rows
+  were hand-rolled inside particles.
+- **Scattered infrastructure** — z-index literals (`z-40`/`z-50`) in 12 files, and surface
+  / glass / glow Tailwind strings duplicated across primitives and particles.
+- **Tokens lived only in the app** (`apps/workbench/app/globals.css`), so the package was
+  not self-contained.
+
+## Foundation gaps discovered
+
+| Area | Gap |
+|---|---|
+| Visual infra | Tokens app-only; no z-index scale; surface/glass/glow strings duplicated |
+| States | No empty/loading/skeleton/spinner/error/success/progress/status primitives |
+| Forms | No field/input/textarea/select/switch/checkbox/radio/slider |
+| Layout | No app shell/page header/toolbar/action bar/filter bar/split pane/sticky footer/safe area/container |
+| Scroll | No scroll area, scroll shadows, horizontal lanes, or shared scrollbar styling |
+| Media | No thumbnail/avatar/aspect-ratio/media-row; no broken-image handling |
+| Interaction | Hover/active/focus/disabled/selected/loading not centralized |
+| Diagnostics | Workbench exposed finished components, not the infrastructure underneath |
+
+## Infrastructure implemented
+
+### Core visual infrastructure (package-owned)
+- **`styles/tokens.css`** — design tokens promoted out of the workbench into the package
+  (single source of truth, imported by `globals.css`). Brand tokens unchanged. **New
+  infrastructure tokens:** z-index layering scale (`--sh-z-base…toast`), elevation scale
+  (`--sh-elevation-0…5`), glass/blur (`--sh-blur-*`, `--sh-glass-*`), glow (`--sh-glow-*`),
+  scroll-shadow gradients, and mobile safe-area insets (`--sh-safe-*`). The
+  prefers-reduced-motion block moved here too.
+- **`styles/layering.ts`** — `SEI_Z_INDEX` (numeric) + `seiLayer` (Tailwind classes); the
+  shared overlay scrim and sticky regions now reference it instead of literals.
+- **`styles/surfaces.ts`** — `seiSurfaceVariants` (surface × elevation × glow) plus
+  `seiGlass` / `seiGlowSea` / `seiGlowAccent`, consolidating repeated treatments.
+- **`styles/variants.ts`** — added `interactionStates` (hover / active-pressed /
+  focus-visible / disabled / selected / busy) as one shared expression.
+
+### State primitives — `src/states/`
+`SEISkeleton`, `SEISpinner`, `SEIProgressBar` (+ pure `clampProgress`), `SEIStatusDot` /
+`SEIStatusLine`, `SEIEmptyState`, `SEILoadingState`, `SEIErrorState`, `SEISuccessState`.
+Application-agnostic, share a consistent `StateShell`, real a11y (`role`, `aria-live`,
+`sr-only` labels), reduced-motion safe.
+
+### Form primitives — `src/forms/`
+`SEIField` (label / helper / error / required / disabled, compact|comfortable sizing) +
+`seiFieldControlVariants`, `SEIInput`, `SEITextarea`, `SEISelect` (styled native), and
+React-Aria-based `SEISwitch`, `SEICheckbox`, `SEIRadioGroup`/`SEIRadio`, `SEISlider`.
+Practical primitives, not a form framework.
+
+### Layout primitives — `src/layout/`
+`SEIContainer`, `SEIAppShell`, `SEIPageHeader`, `SEIToolbar`/`SEIActionBar`, `SEIFilterBar`,
+`SEISplitPane` (static; draggable resize deferred), `SEIStickyFooter`, `SEISafeArea`.
+Semantic landmarks; sticky regions use the shared layering scale and safe-area tokens.
+
+### Scroll/overflow — `src/scroll/`
+`SEIScrollArea` (styled scrollbar, top/bottom scroll shadows, keyboard-accessible,
++ pure `getScrollShadows` helper) and `SEIScrollLane` (horizontal snap lane).
+
+### Media — `src/media/`
+`SEIAspectRatio`, `SEIThumbnail` (broken-image fallback + lazy/async), `SEIAvatar`
+(image → initials fallback), `SEIMediaRow` (compact, list-friendly).
+
+### Workbench — Foundation Diagnostics
+New `/foundations` route (tabbed, mirrors `/contexts`) that exposes the *infrastructure*
+rather than finished components: typography & token scales; surfaces / elevation / blur /
+glass / glow; interaction states; application states; form states; layout shells; scroll &
+overflow; media fallbacks; overlay/portal layering; mobile safe-area; dense list mode;
+reduced motion. Linked from the nav and the home page.
+
+### Tests
+Vitest unit tests for the pure helpers (`clampProgress`, `getScrollShadows`, layering
+scale). New Playwright/axe spec `test/accessibility/foundations.spec.ts` covering the
+`/foundations` route (no critical/serious violations) and keyboard interaction for the new
+form + scroll primitives. Existing a11y specs continue to pass.
+
+## Intentionally deferred (documented for later)
+
+- **Virtualized lists** for Vault-scale datasets — premature without real data; revisit
+  with `@tanstack/react-virtual` when list sizes and row shapes settle.
+- **Dense-mode data table** — `SEIMediaRow` + scroll area cover dense lists for now; a full
+  sortable/virtualized table is a later phase.
+- **Draggable `SEISplitPane` resize** — shipped static; add pointer-driven resize + storage
+  later.
+- **Motion layer / motion library** — reduced-motion scaffolding is in place; no Framer/
+  Motion adopted yet (avoid large deps until interactions are designed).
+- **Storybook** — the workbench + `/foundations` already serve as the review surface; not
+  justified yet.
+- **Light/glass contrast** — still surfaced as non-blocking axe `serious` findings; resolve
+  when brand tokens are finalized.
+- **Performance work** — blur/glass budget guidelines, image strategy, and large
+  command-menu virtualization documented as recommendations, not yet enforced.
+
+## Verification
+
+- `pnpm typecheck` — package + workbench clean.
+- `pnpm build` — all routes compile, including `/foundations`.
+- `pnpm test:unit` — pure-helper unit tests pass.
+- `pnpm test:a11y` — existing specs + new foundations spec pass (needs
+  `npx playwright install` for chromium).
+
+## Recommended next steps
+
+1. Adopt virtualization for the first real Vault list; promote a dense table primitive.
+2. Add the motion layer (still reduced-motion-gated) once premium interactions are designed.
+3. Resolve light/glass contrast as part of finalizing brand tokens.
+4. Wire CI (typecheck + unit + a11y) now that the foundation is stable.

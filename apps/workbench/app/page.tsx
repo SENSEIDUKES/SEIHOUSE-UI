@@ -15,6 +15,12 @@ import { WorkbenchNav } from "@/components/workbench/workbench-nav";
 
 const sections = [
   {
+    name: "Foundation Diagnostics",
+    href: "/foundations",
+    description: "Tokens, surfaces, states, forms, scroll, layering — the infrastructure layer.",
+    count: () => null,
+  },
+  {
     name: "Foundation",
     href: "/gallery#foundation",
     description: "Buttons, badges, cards, panels, sections.",

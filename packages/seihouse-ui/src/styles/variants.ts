@@ -1,10 +1,30 @@
 import { tv, type VariantProps } from "tailwind-variants";
 
+import { seiLayer } from "./layering";
+
 export const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sh-color-sea)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sh-color-black)]";
 
 export const transitionSurface =
   "transition-[background,border-color,box-shadow,color,opacity,transform] duration-200 ease-out";
+
+/**
+ * Shared interaction-state class set (Phase 6).
+ *
+ * One consistent expression of the standard interaction states so every
+ * interactive surface (buttons, list items, toggles, cards) reads the same:
+ * hover lift / glow, pressed settle, focus-visible ring, disabled dim, and a
+ * busy/loading affordance. Compose with `cn(...)`; pair with `transitionSurface`.
+ */
+export const interactionStates = [
+  focusRing,
+  "hover:border-[rgba(0,122,255,0.28)] hover:bg-white/[0.05]",
+  "active:translate-y-px active:bg-white/[0.08]",
+  "disabled:pointer-events-none disabled:opacity-45",
+  "aria-disabled:pointer-events-none aria-disabled:opacity-45",
+  "data-[selected=true]:border-[rgba(0,122,255,0.45)] data-[selected=true]:bg-[rgba(0,122,255,0.12)] data-[selected=true]:text-white",
+  "aria-busy:cursor-progress",
+].join(" ");
 
 export const seiButtonVariants = tv({
   base: [
@@ -218,7 +238,7 @@ export const registrySealVariants = tv({
 /** Modal/drawer scrim shared by dialog, drawer, and the command palette. */
 export const seiOverlayVariants = tv({
   base: [
-    "fixed inset-0 z-40 bg-black/60 backdrop-blur-sm",
+    `fixed inset-0 ${seiLayer.overlay} bg-black/60 backdrop-blur-sm`,
     "transition-opacity duration-200 ease-out",
     "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
   ],

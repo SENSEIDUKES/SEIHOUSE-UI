@@ -150,9 +150,102 @@ export { SEIMultiSelectCombobox, type SEIMultiSelectComboboxProps } from "./beha
 export { fuzzyMatch, highlightSegments, type FuzzyResult } from "./behavior/fuzzy";
 export { pushRecent } from "./behavior/recent";
 
+// --- State primitives (Phase 6) ---
+export {
+  SEISkeleton,
+  SEISpinner,
+  SEIProgressBar,
+  clampProgress,
+  SEIStatusDot,
+  SEIStatusLine,
+  SEIEmptyState,
+  SEILoadingState,
+  SEIErrorState,
+  SEISuccessState,
+  type SEISkeletonProps,
+  type SEISpinnerProps,
+  type SEIProgressBarProps,
+  type SEIStatusDotProps,
+  type SEIStatusLineProps,
+  type SEIEmptyStateProps,
+  type SEILoadingStateProps,
+  type SEIErrorStateProps,
+  type SEISuccessStateProps,
+} from "./states";
+
+// --- Form primitives (Phase 6) ---
+export {
+  SEIField,
+  seiFieldControlVariants,
+  SEIInput,
+  SEITextarea,
+  SEISelect,
+  SEISwitch,
+  SEICheckbox,
+  SEIRadioGroup,
+  SEIRadio,
+  SEISlider,
+  type SEIFieldProps,
+  type SEIFieldSize,
+  type SEIFieldControlVariantProps,
+  type SEIInputProps,
+  type SEITextareaProps,
+  type SEISelectProps,
+  type SEISwitchProps,
+  type SEISwitchSize,
+  type SEICheckboxProps,
+  type SEIRadioGroupProps,
+  type SEIRadioProps,
+  type SEISliderProps,
+} from "./forms";
+
+// --- Layout primitives (Phase 6) ---
+export {
+  SEIContainer,
+  SEIAppShell,
+  SEIPageHeader,
+  SEIToolbar,
+  SEIActionBar,
+  SEIFilterBar,
+  SEISplitPane,
+  SEIStickyFooter,
+  SEISafeArea,
+  type SEIContainerProps,
+  type SEIAppShellProps,
+  type SEIPageHeaderProps,
+  type SEIToolbarProps,
+  type SEIActionBarProps,
+  type SEIFilterBarProps,
+  type SEISplitPaneProps,
+  type SEIStickyFooterProps,
+  type SEISafeAreaProps,
+} from "./layout";
+
+// --- Scroll / overflow (Phase 6) ---
+export {
+  SEIScrollArea,
+  SEIScrollLane,
+  getScrollShadows,
+  type SEIScrollAreaProps,
+  type SEIScrollLaneProps,
+} from "./scroll";
+
+// --- Media primitives (Phase 6) ---
+export {
+  SEIAspectRatio,
+  SEIThumbnail,
+  SEIAvatar,
+  SEIMediaRow,
+  type SEIAspectRatioProps,
+  type SEIThumbnailProps,
+  type SEIAvatarProps,
+  type SEIMediaRowProps,
+} from "./media";
+
 export { cn } from "./styles/cn";
 export {
   focusRing,
+  interactionStates,
   registrySealVariants,
   seiBadgeVariants,
   seiButtonVariants,
@@ -173,6 +266,15 @@ export {
   type SEIPopupSurfaceVariantProps,
   type SEISectionVariantProps,
 } from "./styles/variants";
+// --- Shared infrastructure utilities (Phase 6) ---
+export { SEI_Z_INDEX, seiLayer, type SEILayer } from "./styles/layering";
+export {
+  seiSurfaceVariants,
+  seiGlass,
+  seiGlowSea,
+  seiGlowAccent,
+  type SEISurfaceVariantProps,
+} from "./styles/surfaces";
 export { motionSafe, motionSafeFade, motionSafeTransform, prefersReducedMotion, reducedMotionNotes } from "./styles/reduced-motion";
 
 export type {
