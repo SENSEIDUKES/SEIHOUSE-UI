@@ -134,17 +134,18 @@ export function SEICommandPalette({
     [commandIndex, recentIds],
   );
 
-  // Rank each group's items by fuzzy score while the user types.
+  // Rank each group's items by fuzzy score while the user types. Scores are
+  // precomputed once per item (O(N)) instead of recomputed inside the sort
+  // comparator (O(N log N)) so typing stays responsive on large command sets.
   const rankedGroups = useMemo(() => {
     const q = query.trim();
     if (!q) return groups;
     return groups.map((group) => ({
       ...group,
-      items: [...group.items].sort(
-        (a, b) =>
-          fuzzyMatch(itemText(group.label, b), q).score -
-          fuzzyMatch(itemText(group.label, a), q).score,
-      ),
+      items: group.items
+        .map((item) => ({ item, score: fuzzyMatch(itemText(group.label, item), q).score }))
+        .sort((a, b) => b.score - a.score)
+        .map(({ item }) => item),
     }));
   }, [groups, query]);
 
