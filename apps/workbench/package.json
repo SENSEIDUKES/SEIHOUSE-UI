@@ -1,23 +1,17 @@
 {
-  "name": "seihouse-ui-monorepo",
+  "name": "@seihouse/workbench",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@11.1.1",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
-    "dev": "pnpm --dir apps/workbench dev",
-    "build": "pnpm --dir apps/workbench build",
-    "start": "pnpm --dir apps/workbench start",
-    "lint": "pnpm --dir apps/workbench lint",
-    "test:e2e": "playwright test",
-    "test:a11y": "playwright test test/accessibility",
-    "typecheck": "pnpm --dir packages/seihouse-ui typecheck && pnpm --dir apps/workbench typecheck"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
+    "@seihouse/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.3.0",
     "clsx": "^2.1.1",
     "lucide-react": "^1.17.0",
@@ -31,8 +25,6 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.11.3",
-    "@playwright/test": "^1.60.0",
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
