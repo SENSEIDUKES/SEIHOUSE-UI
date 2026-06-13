@@ -1,103 +1,16 @@
 @import "tailwindcss";
+/* Design tokens promoted to the package (Phase 6) — single source of truth,
+   shared by every app. Includes brand tokens + infrastructure tokens
+   (z-index layering, elevation, glass/blur, glow, scroll shadows, safe-area)
+   and the prefers-reduced-motion block. */
+@import "../../../packages/seihouse-ui/src/styles/tokens.css";
 @source "../../../packages/seihouse-ui/src";
 
 /* ==========================================================================
-   SEIHOUSE-UI — Design Tokens & Global Styles
-   Premium component workbench styling
+   SEIHOUSE-UI — Workbench Global Styles
+   App-level base styles + the preserved /lab/raw showcase CSS.
+   (Design tokens now live in @seihouse/ui/styles/tokens.css.)
    ========================================================================== */
-
-:root {
-  /* ---- Color palette ---- */
-  --sh-color-black: #0a0a0a;
-  --sh-color-charcoal: #141416;
-  --sh-color-iron: #1c1c1e;
-  --sh-color-steel: #2c2c2e;
-  --sh-color-slate: #3a3a3c;
-  --sh-color-mist: #8e8e93;
-  --sh-color-cloud: #aeaeb2;
-  --sh-color-ivory: #f2f2f7;
-  --sh-color-white: #ffffff;
-
-  --sh-color-sea: #007aff;
-  --sh-color-sea-deep: #0055b3;
-  --sh-color-sea-glow: rgba(0, 122, 255, 0.15);
-  --sh-color-sea-subtle: rgba(0, 122, 255, 0.06);
-
-  --sh-color-accent: #ff6b35;
-  --sh-color-accent-glow: rgba(255, 107, 53, 0.15);
-
-  --sh-color-success: #34c759;
-  --sh-color-warning: #ff9f0a;
-  --sh-color-danger: #ff453a;
-
-  /* ---- Surfaces ---- */
-  --sh-surface-base: var(--sh-color-charcoal);
-  --sh-surface-elevated: var(--sh-color-iron);
-  --sh-surface-raised: var(--sh-color-steel);
-  --sh-surface-glass: rgba(28, 28, 30, 0.72);
-  --sh-surface-glass-border: rgba(255, 255, 255, 0.06);
-
-  /* ---- Typography ---- */
-  --sh-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
-  --sh-font-mono: "SF Mono", "JetBrains Mono", "Fira Code", monospace;
-
-  --sh-text-xs: 0.75rem;
-  --sh-text-sm: 0.875rem;
-  --sh-text-base: 1rem;
-  --sh-text-lg: 1.125rem;
-  --sh-text-xl: 1.25rem;
-  --sh-text-2xl: 1.5rem;
-  --sh-text-3xl: 1.875rem;
-  --sh-text-4xl: 2.25rem;
-
-  --sh-weight-normal: 400;
-  --sh-weight-medium: 500;
-  --sh-weight-semibold: 600;
-  --sh-weight-bold: 700;
-
-  --sh-leading-tight: 1.15;
-  --sh-leading-snug: 1.375;
-  --sh-leading-normal: 1.5;
-  --sh-leading-relaxed: 1.625;
-
-  --sh-tracking-tight: -0.025em;
-  --sh-tracking-normal: 0;
-  --sh-tracking-wide: 0.05em;
-
-  /* ---- Spacing ---- */
-  --sh-space-1: 0.25rem;
-  --sh-space-2: 0.5rem;
-  --sh-space-3: 0.75rem;
-  --sh-space-4: 1rem;
-  --sh-space-5: 1.25rem;
-  --sh-space-6: 1.5rem;
-  --sh-space-8: 2rem;
-  --sh-space-10: 2.5rem;
-  --sh-space-12: 3rem;
-  --sh-space-16: 4rem;
-  --sh-space-20: 5rem;
-
-  /* ---- Radius ---- */
-  --sh-radius-sm: 0.375rem;
-  --sh-radius-md: 0.5rem;
-  --sh-radius-lg: 0.75rem;
-  --sh-radius-xl: 1rem;
-  --sh-radius-2xl: 1.5rem;
-  --sh-radius-full: 9999px;
-
-  /* ---- Shadows ---- */
-  --sh-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --sh-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --sh-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --sh-shadow-glow-sea: 0 0 20px rgba(0, 122, 255, 0.12);
-  --sh-shadow-glow-accent: 0 0 20px rgba(255, 107, 53, 0.12);
-
-  /* ---- Transitions ---- */
-  --sh-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --sh-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --sh-transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
-}
 
 /* ---- Reset & Base ----
    Kept inside @layer base so Tailwind utilities (in @layer utilities) can
@@ -1288,26 +1201,5 @@
   .sh-layout-cell--normal {
     grid-column: auto;
     grid-row: auto;
-  }
-}
-/* ==========================================================================
-   Reduced motion strategy (Phase 4)
-   Honour the user's prefers-reduced-motion preference. We *shorten* animations
-   and transitions instead of deleting them, so essential state-change feedback
-   (focus, open/closed surfaces) still reads — just without travel. Smooth
-   scrolling is disabled. See components/sei/styles/reduced-motion.ts.
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
   }
 }
