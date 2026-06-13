@@ -212,7 +212,7 @@ function SEIToastItem({
   }, [clearTimer]);
 
   const resume = useCallback(() => {
-    if (toast.duration <= 0 || remainingMs.current <= 0) return;
+    if (toast.duration <= 0 || remainingMs.current <= 0 || startedAt.current != null) return;
     clearTimer();
     startedAt.current = Date.now();
     timeoutRef.current = setTimeout(() => onDismiss(toast.id), remainingMs.current);

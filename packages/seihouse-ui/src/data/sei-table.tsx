@@ -12,6 +12,7 @@ export type SEISortValue = string | number | boolean | Date | null | undefined;
 export type SEIRowKey<T> = keyof T | ((row: T) => SEISortValue);
 
 function readSortValue<T>(row: T, key: SEIRowKey<T>): SEISortValue {
+  if (row == null) return undefined;
   return typeof key === "function" ? key(row) : (row[key] as SEISortValue);
 }
 
@@ -150,8 +151,7 @@ export function SEITableRow({
     <tr
       aria-selected={selected || undefined}
       className={cn(
-        selected && "bg-[rgba(0,122,255,0.1)]",
-        zebra && "even:bg-white/[0.025]",
+        selected ? "bg-[rgba(0,122,255,0.1)]" : zebra && "even:bg-white/[0.025]",
         hover && "hover:bg-white/[0.045]",
         className,
       )}

@@ -39,4 +39,12 @@ describe("sortRows", () => {
     expect(sorted).not.toBe(rows);
     expect(rows.map((row) => row.id)).toEqual(["a", "b", "c", "d"]);
   });
+
+  it("keeps unexpected nullish rows at the end without throwing", () => {
+    const rowsWithNull = [rows[0], null, rows[1]] as Array<Row | null>;
+
+    expect(
+      sortRows(rowsWithNull, (row) => row?.plays, "asc").map((row) => row?.id ?? null),
+    ).toEqual(["b", "a", null]);
+  });
 });
