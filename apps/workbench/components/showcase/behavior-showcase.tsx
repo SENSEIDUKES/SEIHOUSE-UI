@@ -336,7 +336,9 @@ export function BehaviorShowcase() {
                     </button>
                   }
                 />
-                <SEITooltipContent>{mockMetrics[0].helper}</SEITooltipContent>
+                <SEITooltipContent data-testid="metric-tooltip">
+                  {mockMetrics[0].helper}
+                </SEITooltipContent>
               </SEITooltip>
             </div>
 

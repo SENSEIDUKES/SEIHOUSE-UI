@@ -114,11 +114,41 @@ export {
   type SEITooltipProviderProps,
   type SEITooltipTriggerProps,
 } from "./behavior/sei-tooltip";
+export {
+  SEICombobox,
+  SEIComboboxControl,
+  SEIComboboxItem,
+  SEIComboboxLabel,
+  SEIComboboxList,
+  SEIComboboxPopover,
+  type SEIComboboxControlProps,
+  type SEIComboboxItemProps,
+  type SEIComboboxLabelProps,
+  type SEIComboboxListProps,
+  type SEIComboboxPopoverProps,
+  type SEIComboboxProps,
+} from "./behavior/sei-combobox";
+export {
+  fuzzyFilter,
+  SEICommand,
+  SEICommandGroup,
+  SEICommandInput,
+  SEICommandItem,
+  SEICommandList,
+  SEICommandShortcut,
+  type SEICommandGroupProps,
+  type SEICommandInputProps,
+  type SEICommandItemProps,
+  type SEICommandListProps,
+  type SEICommandProps,
+  type SEICommandShortcutProps,
+} from "./behavior/sei-command";
 export { SEIComboboxPreview, type SEIComboboxPreviewProps } from "./behavior/sei-combobox-preview";
 export { SEICommandPalette, type SEICommandPaletteProps } from "./behavior/sei-command-palette";
 export { SEICommandPreview, type SEICommandPreviewProps } from "./behavior/sei-command-preview";
 export { SEIMultiSelectCombobox, type SEIMultiSelectComboboxProps } from "./behavior/sei-multi-select-combobox";
 export { fuzzyMatch, highlightSegments, type FuzzyResult } from "./behavior/fuzzy";
+export { pushRecent } from "./behavior/recent";
 
 export { cn } from "./styles/cn";
 export {

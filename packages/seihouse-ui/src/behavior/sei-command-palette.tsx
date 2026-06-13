@@ -1,30 +1,23 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Clock, CornerDownLeft, Search } from "lucide-react";
+import { Clock, CornerDownLeft } from "lucide-react";
 import { Dialog } from "@base-ui/react/dialog";
-import {
-  Autocomplete,
-  Header,
-  Input,
-  Menu,
-  MenuItem,
-  MenuSection,
-  SearchField,
-} from "react-aria-components";
 
 import { cn } from "../styles/cn";
-import {
-  seiCommandGroupHeader,
-  seiInteractiveItemVariants,
-  seiOverlayVariants,
-  seiPopupSurfaceVariants,
-} from "../styles/variants";
-import {
-  type CommandGroup,
-  type CommandItem,
-} from "../types/behavior";
+import { seiOverlayVariants, seiPopupSurfaceVariants } from "../styles/variants";
+import { type CommandGroup, type CommandItem } from "../types/behavior";
 import { fuzzyMatch, highlightSegments } from "./fuzzy";
+import { pushRecent } from "./recent";
+import {
+  fuzzyFilter,
+  SEICommand,
+  SEICommandGroup,
+  SEICommandInput,
+  SEICommandItem,
+  SEICommandList,
+  SEICommandShortcut,
+} from "./sei-command";
 
 /**
  * SEICommandPalette — global command palette preview.
@@ -32,15 +25,21 @@ import { fuzzyMatch, highlightSegments } from "./fuzzy";
  * - Opens with Cmd+K (Mac) / Ctrl+K (Win/Linux) via a global key listener, or
  *   from any controlled trigger.
  * - Modal behavior (focus trap, Escape, outside-click, focus return) comes from
- *   Base UI Dialog. The search + grouped menu come from React Aria
- *   (`Autocomplete` + `Menu`), which provides keyboard navigation across groups.
- * - Fuzzy subsequence search (see `fuzzy.ts`) with match highlighting.
+ *   Base UI Dialog. The search + grouped menu reuse the compositional SEICommand
+ *   parts (React Aria `Autocomplete` + `Menu`), which provide keyboard
+ *   navigation across groups via aria-activedescendant.
+ * - Fuzzy subsequence search (see `fuzzy.ts`) with match highlighting; results
+ *   are ranked by fuzzy score while you type.
  * - A "Recent Commands" section recalls recent selections (persisted to
  *   localStorage). Selecting a command only calls `onCommand`.
  */
 
 const RECENT_KEY = "sei-lab:recent-commands";
 const RECENT_CAP = 6;
+
+/** The text React Aria filters/scores each item against. */
+const itemText = (groupLabel: string, item: CommandItem) =>
+  `${groupLabel} ${item.label} ${item.hint ?? ""}`;
 
 function HighlightedText({ text, query }: { text: string; query: string }) {
   if (!query.trim()) return <>{text}</>;
@@ -135,9 +134,23 @@ export function SEICommandPalette({
     [commandIndex, recentIds],
   );
 
+  // Rank each group's items by fuzzy score while the user types.
+  const rankedGroups = useMemo(() => {
+    const q = query.trim();
+    if (!q) return groups;
+    return groups.map((group) => ({
+      ...group,
+      items: [...group.items].sort(
+        (a, b) =>
+          fuzzyMatch(itemText(group.label, b), q).score -
+          fuzzyMatch(itemText(group.label, a), q).score,
+      ),
+    }));
+  }, [groups, query]);
+
   const handleAction = useCallback(
     (id: string) => {
-      const next = [id, ...recentIds.filter((r) => r !== id)].slice(0, RECENT_CAP);
+      const next = pushRecent(recentIds, id, RECENT_CAP);
       setRecentIds(next);
       try {
         window.localStorage.setItem(RECENT_KEY, JSON.stringify(next));
@@ -153,11 +166,11 @@ export function SEICommandPalette({
   const showRecent = query.trim() === "" && recentItems.length > 0;
 
   const renderItem = (item: CommandItem, groupLabel: string) => (
-    <MenuItem
+    <SEICommandItem
       key={`${groupLabel}::${item.id}`}
       id={`${groupLabel}::${item.id}`}
-      textValue={`${groupLabel} ${item.label} ${item.hint ?? ""}`}
-      className={cn(seiInteractiveItemVariants(), "group/cmd")}
+      textValue={itemText(groupLabel, item)}
+      className="group/cmd"
     >
       <item.icon aria-hidden="true" className="size-4 shrink-0 text-[var(--sh-color-mist)]" />
       <span className="flex min-w-0 flex-1 flex-col">
@@ -168,16 +181,12 @@ export function SEICommandPalette({
           <span className="truncate text-xs text-[var(--sh-color-mist)]">{item.hint}</span>
         ) : null}
       </span>
-      {item.shortcut ? (
-        <kbd className="rounded-md border border-white/12 bg-white/[0.05] px-1.5 py-0.5 font-mono text-[0.65rem] text-[var(--sh-color-mist)]">
-          {item.shortcut}
-        </kbd>
-      ) : null}
+      {item.shortcut ? <SEICommandShortcut>{item.shortcut}</SEICommandShortcut> : null}
       <CornerDownLeft
         aria-hidden="true"
         className="size-3.5 shrink-0 text-[var(--sh-color-sea)] opacity-0 group-data-[focused]/cmd:opacity-100"
       />
-    </MenuItem>
+    </SEICommandItem>
   );
 
   return (
@@ -201,56 +210,32 @@ export function SEICommandPalette({
             close.
           </Dialog.Description>
 
-          <Autocomplete filter={(textValue, input) => fuzzyMatch(textValue, input).matched} inputValue={query} onInputChange={setQuery}>
-            <SearchField
-              aria-label="Command search"
-              className="flex items-center gap-2.5 border-b border-white/10 px-4"
-            >
-              <Search aria-hidden="true" className="size-4 shrink-0 text-[var(--sh-color-mist)]" />
-              <Input
-                autoFocus
-                placeholder="Type a command or search…"
-                className="h-12 w-full bg-transparent text-sm text-[var(--sh-color-ivory)] placeholder:text-[var(--sh-color-mist)] focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
-              />
-              <kbd className="hidden rounded-md border border-white/12 bg-white/[0.05] px-1.5 py-0.5 font-mono text-[0.65rem] text-[var(--sh-color-mist)] sm:block">
-                ESC
-              </kbd>
-            </SearchField>
+          <SEICommand surface={false} filter={fuzzyFilter} inputValue={query} onInputChange={setQuery}>
+            <SEICommandInput autoFocus placeholder="Type a command or search…">
+              <SEICommandShortcut className="hidden sm:block">ESC</SEICommandShortcut>
+            </SEICommandInput>
 
-            <Menu
-              aria-label="Commands"
+            <SEICommandList
+              className="max-h-[min(60vh,28rem)]"
               onAction={(key) => {
                 const raw = String(key);
                 handleAction(raw.includes("::") ? raw.slice(raw.indexOf("::") + 2) : raw);
               }}
-              className="max-h-[min(60vh,28rem)] overflow-y-auto p-1.5 outline-none"
-              renderEmptyState={() => (
-                <div className="px-3 py-10 text-center text-sm text-[var(--sh-color-mist)]">
-                  No commands match. (Mock palette — nothing is executed.)
-                </div>
-              )}
+              emptyMessage="No commands match. (Mock palette — nothing is executed.)"
             >
               {showRecent ? (
-                <MenuSection className="mb-1">
-                  <Header className={seiCommandGroupHeader}>
-                    <Clock aria-hidden="true" className="size-3.5" />
-                    Recent Commands
-                  </Header>
+                <SEICommandGroup label="Recent Commands" icon={Clock}>
                   {recentItems.map((item) => renderItem(item, "Recent"))}
-                </MenuSection>
+                </SEICommandGroup>
               ) : null}
 
-              {groups.map((group) => (
-                <MenuSection key={group.id} className="mb-1 last:mb-0">
-                  <Header className={seiCommandGroupHeader}>
-                    <group.icon aria-hidden="true" className="size-3.5" />
-                    {group.label}
-                  </Header>
+              {rankedGroups.map((group) => (
+                <SEICommandGroup key={group.id} label={group.label} icon={group.icon}>
                   {group.items.map((item) => renderItem(item, group.label))}
-                </MenuSection>
+                </SEICommandGroup>
               ))}
-            </Menu>
-          </Autocomplete>
+            </SEICommandList>
+          </SEICommand>
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>

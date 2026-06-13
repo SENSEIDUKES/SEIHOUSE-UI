@@ -67,6 +67,8 @@ export interface SEITooltipContentProps
   side?: TooltipPositionerProps["side"];
   align?: TooltipPositionerProps["align"];
   sideOffset?: TooltipPositionerProps["sideOffset"];
+  /** Padding kept between the tooltip and the viewport edge during collision handling. */
+  collisionPadding?: TooltipPositionerProps["collisionPadding"];
   children?: ReactNode;
 }
 
@@ -76,13 +78,19 @@ export function SEITooltipContent({
   side = "top",
   align = "center",
   sideOffset = 6,
+  collisionPadding = 8,
   children,
   ...props
 }: SEITooltipContentProps) {
   const styles = seiTooltipStyles({ variant });
   return (
     <Tooltip.Portal>
-      <Tooltip.Positioner side={side} align={align} sideOffset={sideOffset}>
+      <Tooltip.Positioner
+        side={side}
+        align={align}
+        sideOffset={sideOffset}
+        collisionPadding={collisionPadding}
+      >
         <Tooltip.Popup className={cn(styles.popup(), className)} {...props}>
           {children}
         </Tooltip.Popup>

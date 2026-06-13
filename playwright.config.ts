@@ -29,7 +29,7 @@ export default defineConfig({
   webServer: {
     // Use a production build so routes are pre-compiled (no lazy dev-compile
     // flakiness on the first request). Reused locally if a server is already up.
-    command: `pnpm --dir apps/workbench build && pnpm --dir apps/workbench start -- -p ${PORT}`,
+    command: `pnpm --dir apps/workbench build && PORT=${PORT} pnpm --dir apps/workbench start`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

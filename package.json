@@ -14,6 +14,7 @@
     "lint": "pnpm --dir apps/workbench lint",
     "test:e2e": "playwright test",
     "test:a11y": "playwright test test/accessibility",
+    "test:unit": "vitest run",
     "typecheck": "pnpm --dir packages/seihouse-ui typecheck && pnpm --dir apps/workbench typecheck"
   },
   "dependencies": {
@@ -36,6 +37,7 @@
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
   }
 }
