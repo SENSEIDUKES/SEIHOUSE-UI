@@ -20,7 +20,7 @@ import { focusRing } from "../styles/variants";
 export const seiPopoverStyles = tv({
   slots: {
     popup: [
-      "z-50 w-[var(--available-width)] max-w-xs rounded-2xl border p-4 shadow-[0_30px_90px_rgba(0,0,0,0.5)]",
+      "z-50 max-w-[min(20rem,var(--available-width))] rounded-2xl border p-4 shadow-[0_30px_90px_rgba(0,0,0,0.5)]",
       "origin-[var(--transform-origin)] transition-[opacity,transform] duration-150 ease-out",
       "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
       "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
@@ -85,6 +85,9 @@ export interface SEIPopoverContentProps
   side?: PositionerProps["side"];
   align?: PositionerProps["align"];
   sideOffset?: PositionerProps["sideOffset"];
+  /** Padding kept between the popup and the viewport edge during collision handling. */
+  collisionPadding?: PositionerProps["collisionPadding"];
+  collisionAvoidance?: PositionerProps["collisionAvoidance"];
   showArrow?: boolean;
   children?: ReactNode;
 }
@@ -95,6 +98,8 @@ export function SEIPopoverContent({
   side = "bottom",
   align = "center",
   sideOffset = 8,
+  collisionPadding = 8,
+  collisionAvoidance,
   showArrow = false,
   children,
   ...props
@@ -103,7 +108,13 @@ export function SEIPopoverContent({
   return (
     <SEIPopoverContext.Provider value={variant}>
       <Popover.Portal>
-        <Popover.Positioner side={side} align={align} sideOffset={sideOffset}>
+        <Popover.Positioner
+          side={side}
+          align={align}
+          sideOffset={sideOffset}
+          collisionPadding={collisionPadding}
+          collisionAvoidance={collisionAvoidance}
+        >
           <Popover.Popup className={cn(styles.popup(), className)} {...props}>
             {showArrow ? (
               <Popover.Arrow className={styles.arrow()}>
