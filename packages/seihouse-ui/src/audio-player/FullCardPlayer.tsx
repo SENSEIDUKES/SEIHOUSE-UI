@@ -70,7 +70,7 @@ export function FullCardPlayer({ track, className }: FullCardPlayerProps) {
                 />
               </div>
               <div className="flex justify-between font-mono text-[0.68rem] text-[var(--sh-color-mist)]">
-                <span>01:{String(safeProgress).padStart(2, "0")}</span>
+                <span>01:{String(Math.floor(safeProgress)).padStart(2, "0")}</span>
                 <span>{track.duration}</span>
               </div>
             </div>
