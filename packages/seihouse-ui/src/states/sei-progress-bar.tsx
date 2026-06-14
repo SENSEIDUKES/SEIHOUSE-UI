@@ -59,9 +59,7 @@ export function SEIProgressBar({
         <div className="flex items-center justify-between gap-3 text-xs font-medium text-[var(--sh-color-mist)]">
           {label ? <span>{label}</span> : <span />}
           {showValue && !indeterminate ? (
-            <span className="tabular-nums text-[var(--sh-color-cloud)]">
-              {clamped}%
-            </span>
+            <span className="tabular-nums text-[var(--sh-color-cloud)]">{clamped}%</span>
           ) : null}
         </div>
       )}
@@ -78,9 +76,7 @@ export function SEIProgressBar({
       >
         {indeterminate ? (
           <>
-            <style
-              dangerouslySetInnerHTML={{ __html: INDETERMINATE_KEYFRAMES }}
-            />
+            <style dangerouslySetInnerHTML={{ __html: INDETERMINATE_KEYFRAMES }} />
             <span
               aria-hidden="true"
               className={cn(
@@ -94,11 +90,7 @@ export function SEIProgressBar({
         ) : (
           <span
             aria-hidden="true"
-            className={cn(
-              "absolute inset-y-0 left-0 rounded-full",
-              toneMap[tone],
-              motionSafe,
-            )}
+            className={cn("absolute inset-y-0 left-0 rounded-full", toneMap[tone], motionSafe)}
             style={{ width: `${clamped}%` }}
           />
         )}

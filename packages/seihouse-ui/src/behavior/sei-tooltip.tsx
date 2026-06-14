@@ -36,10 +36,13 @@ export const seiTooltipStyles = tv({
 
 type SEITooltipVariant = NonNullable<VariantProps<typeof seiTooltipStyles>["variant"]>;
 
-export interface SEITooltipProviderProps
-  extends React.ComponentProps<typeof Tooltip.Provider> {}
+export interface SEITooltipProviderProps extends React.ComponentProps<typeof Tooltip.Provider> {}
 
-export function SEITooltipProvider({ delay = 250, closeDelay = 0, ...props }: SEITooltipProviderProps) {
+export function SEITooltipProvider({
+  delay = 250,
+  closeDelay = 0,
+  ...props
+}: SEITooltipProviderProps) {
   return <Tooltip.Provider delay={delay} closeDelay={closeDelay} {...props} />;
 }
 
@@ -49,8 +52,10 @@ export function SEITooltip(props: SEITooltipProps) {
   return <Tooltip.Root {...props} />;
 }
 
-export interface SEITooltipTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Tooltip.Trigger>, "className"> {
+export interface SEITooltipTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Tooltip.Trigger>,
+  "className"
+> {
   className?: string;
 }
 
@@ -60,8 +65,10 @@ export function SEITooltipTrigger({ className, ...props }: SEITooltipTriggerProp
 
 type TooltipPositionerProps = React.ComponentPropsWithoutRef<typeof Tooltip.Positioner>;
 
-export interface SEITooltipContentProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Tooltip.Popup>, "className"> {
+export interface SEITooltipContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Tooltip.Popup>,
+  "className"
+> {
   variant?: SEITooltipVariant;
   className?: string;
   side?: TooltipPositionerProps["side"];

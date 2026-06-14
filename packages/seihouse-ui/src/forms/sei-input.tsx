@@ -6,8 +6,7 @@ import { cn } from "../styles/cn";
 import { seiFieldControlVariants, type SEIFieldControlVariantProps } from "./sei-field";
 
 export interface SEIInputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">,
-    SEIFieldControlVariantProps {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">, SEIFieldControlVariantProps {
   /** Decorative or interactive node rendered inside the field, before the input. */
   iconLeft?: ReactNode;
   /** Decorative or interactive node rendered inside the field, after the input. */

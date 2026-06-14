@@ -64,16 +64,16 @@ export function SEIMultiSelectCombobox({
   };
 
   const byId = useMemo(() => new Map(options.map((o) => [o.id, o])), [options]);
-  const selectedOptions = selected
-    .map((id) => byId.get(id))
-    .filter(Boolean) as MultiSelectOption[];
+  const selectedOptions = selected.map((id) => byId.get(id)).filter(Boolean) as MultiSelectOption[];
 
   const lowerQuery = inputValue.trim().toLowerCase();
   // Available = not-yet-selected options matching the current query.
   const available = useMemo(
     () =>
       options.filter(
-        (o) => !selected.includes(o.id) && (lowerQuery === "" || o.label.toLowerCase().includes(lowerQuery)),
+        (o) =>
+          !selected.includes(o.id) &&
+          (lowerQuery === "" || o.label.toLowerCase().includes(lowerQuery)),
       ),
     [options, selected, lowerQuery],
   );
@@ -161,7 +161,10 @@ export function SEIMultiSelectCombobox({
               Clear all
             </button>
           ) : null}
-          <ChevronsUpDown aria-hidden="true" className="size-4 shrink-0 text-[var(--sh-color-mist)]" />
+          <ChevronsUpDown
+            aria-hidden="true"
+            className="size-4 shrink-0 text-[var(--sh-color-mist)]"
+          />
         </div>
 
         <Popover className="w-[var(--trigger-width)] rounded-2xl border border-white/12 bg-[rgba(18,20,26,0.98)] p-1.5 shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-xl">

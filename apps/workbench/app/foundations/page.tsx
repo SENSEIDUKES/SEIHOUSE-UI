@@ -30,17 +30,13 @@ export default function FoundationsPage() {
             Foundation Diagnostics
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--sh-color-cloud)]">
-            The systems future SEIHouse apps depend on — tokens, surfaces, states, forms,
-            layout, scroll, media, and layering. This exposes infrastructure, not finished
-            screens. Everything is mock-only and application-agnostic.
+            The systems future SEIHouse apps depend on — tokens, surfaces, states, forms, layout,
+            scroll, media, and layering. This exposes infrastructure, not finished screens.
+            Everything is mock-only and application-agnostic.
           </p>
         </div>
 
-        <div
-          className="flex flex-wrap gap-1.5 py-6"
-          role="tablist"
-          aria-label="Foundation systems"
-        >
+        <div className="flex flex-wrap gap-1.5 py-6" role="tablist" aria-label="Foundation systems">
           {foundationSections.map((section) => (
             <button
               key={section.id}

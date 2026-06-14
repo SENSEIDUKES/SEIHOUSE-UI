@@ -78,9 +78,7 @@ export function RegistryPanel({ item, state = item.state, className }: RegistryP
           </SEIButton>
         </div>
 
-        <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">
-          {item.verification}
-        </p>
+        <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">{item.verification}</p>
 
         <div className="grid gap-3 md:grid-cols-2">
           <div className={styles.idLine()}>
@@ -95,7 +93,11 @@ export function RegistryPanel({ item, state = item.state, className }: RegistryP
 
         <div className="flex flex-wrap gap-2">
           {item.seals.map((seal) => (
-            <SEIBadge key={seal} variant={currentState === "verified" ? "success" : "outline"} size="sm">
+            <SEIBadge
+              key={seal}
+              variant={currentState === "verified" ? "success" : "outline"}
+              size="sm"
+            >
               {seal}
             </SEIBadge>
           ))}

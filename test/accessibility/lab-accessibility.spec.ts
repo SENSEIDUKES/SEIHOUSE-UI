@@ -52,7 +52,14 @@ test.describe("lab accessibility", () => {
     if (serious.length) {
       console.warn("axe serious (non-blocking):", serious.map((v) => v.id).join(", "));
     }
-    expect(critical, JSON.stringify(critical.map((v) => v.id), null, 2)).toEqual([]);
+    expect(
+      critical,
+      JSON.stringify(
+        critical.map((v) => v.id),
+        null,
+        2,
+      ),
+    ).toEqual([]);
   });
 
   test("no critical/serious axe violations on /workbench", async ({ page }) => {
@@ -63,7 +70,14 @@ test.describe("lab accessibility", () => {
     if (serious.length) {
       console.warn("axe serious (non-blocking):", serious.map((v) => v.id).join(", "));
     }
-    expect(critical, JSON.stringify(critical.map((v) => v.id), null, 2)).toEqual([]);
+    expect(
+      critical,
+      JSON.stringify(
+        critical.map((v) => v.id),
+        null,
+        2,
+      ),
+    ).toEqual([]);
   });
 
   test("no critical/serious axe violations on /lab/raw", async ({ page }) => {
@@ -74,6 +88,13 @@ test.describe("lab accessibility", () => {
     if (serious.length) {
       console.warn("axe serious (non-blocking):", serious.map((v) => v.id).join(", "));
     }
-    expect(critical, JSON.stringify(critical.map((v) => v.id), null, 2)).toEqual([]);
+    expect(
+      critical,
+      JSON.stringify(
+        critical.map((v) => v.id),
+        null,
+        2,
+      ),
+    ).toEqual([]);
   });
 });

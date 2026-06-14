@@ -1,17 +1,11 @@
-import type {
-  ElementType,
-  HTMLAttributes,
-  KeyboardEvent,
-  ReactNode,
-} from "react";
+import type { ElementType, HTMLAttributes, KeyboardEvent, ReactNode } from "react";
 
 import { cn } from "../styles/cn";
 import { interactionStates, transitionSurface } from "../styles/variants";
 
 type SEIMediaRowElement = "div" | "li" | "a";
 
-export interface SEIMediaRowProps
-  extends Omit<HTMLAttributes<HTMLElement>, "title"> {
+export interface SEIMediaRowProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   /** Leading media slot (e.g. SEIThumbnail or SEIAvatar). */
   thumbnail?: ReactNode;
   /** Primary line. */
@@ -78,14 +72,10 @@ export function SEIMediaRow({
       <span className="flex min-w-0 flex-1 flex-col">
         <span className="truncate text-sm font-semibold text-white">{title}</span>
         {subtitle ? (
-          <span className="truncate text-xs text-[var(--sh-color-cloud)]">
-            {subtitle}
-          </span>
+          <span className="truncate text-xs text-[var(--sh-color-cloud)]">{subtitle}</span>
         ) : null}
       </span>
-      {meta ? (
-        <span className="shrink-0 text-xs text-[var(--sh-color-mist)]">{meta}</span>
-      ) : null}
+      {meta ? <span className="shrink-0 text-xs text-[var(--sh-color-mist)]">{meta}</span> : null}
     </Component>
   );
 }

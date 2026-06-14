@@ -9,22 +9,11 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@seihouse/ui": [
-        "../../packages/seihouse-ui/src/index.ts"
-      ]
+      "@/*": ["./*"],
+      "@seihouse/ui": ["../../packages/seihouse-ui/src/index.ts"]
     },
     "allowJs": false
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

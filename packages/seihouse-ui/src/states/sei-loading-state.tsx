@@ -5,8 +5,7 @@ import { seiPanelVariants } from "../styles/variants";
 import { SEISpinner } from "./sei-spinner";
 import { stateSizeScale, type StateSize } from "./state-shell";
 
-export interface SEILoadingStateProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+export interface SEILoadingStateProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   title?: ReactNode;
   description?: ReactNode;
   size?: StateSize;
@@ -39,7 +38,10 @@ export function SEILoadingState({
       )}
       {...props}
     >
-      <SEISpinner size={spinnerSizeMap[size]} label={typeof title === "string" ? title : "Loading"} />
+      <SEISpinner
+        size={spinnerSizeMap[size]}
+        label={typeof title === "string" ? title : "Loading"}
+      />
       <div className={cn("flex flex-col items-center", scale.maxText)}>
         <p
           className={cn(
@@ -51,10 +53,7 @@ export function SEILoadingState({
         </p>
         {description ? (
           <p
-            className={cn(
-              "mt-1.5 leading-relaxed text-[var(--sh-color-mist)]",
-              scale.description,
-            )}
+            className={cn("mt-1.5 leading-relaxed text-[var(--sh-color-mist)]", scale.description)}
           >
             {description}
           </p>

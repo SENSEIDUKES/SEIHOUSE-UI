@@ -42,12 +42,7 @@ export function SEIStatusDot({
           )}
         />
       ) : null}
-      <span
-        className={cn(
-          "relative inline-flex size-2.5 rounded-full",
-          toneMap[tone],
-        )}
-      />
+      <span className={cn("relative inline-flex size-2.5 rounded-full", toneMap[tone])} />
     </span>
   );
 }
@@ -67,19 +62,14 @@ export function SEIStatusLine({
   ...props
 }: SEIStatusLineProps) {
   return (
-    <div
-      className={cn("flex items-start gap-2.5", className)}
-      {...props}
-    >
+    <div className={cn("flex items-start gap-2.5", className)} {...props}>
       <SEIStatusDot tone={tone} className="mt-1.5" />
       <div className="flex min-w-0 flex-col">
         <span className="text-sm font-medium leading-tight text-[var(--sh-color-ivory)]">
           {label}
         </span>
         {description ? (
-          <span className="text-xs leading-snug text-[var(--sh-color-mist)]">
-            {description}
-          </span>
+          <span className="text-xs leading-snug text-[var(--sh-color-mist)]">{description}</span>
         ) : null}
       </div>
     </div>

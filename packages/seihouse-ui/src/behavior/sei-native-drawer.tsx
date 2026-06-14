@@ -33,7 +33,8 @@ export const seiNativeDrawerStyles = tv({
     handle: "mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full bg-white/20",
     header: "flex items-start justify-between gap-4 px-5 py-4",
     body: "flex-1 overflow-y-auto px-5 py-2 text-sm leading-relaxed",
-    footer: "flex flex-wrap items-center justify-end gap-2 border-t px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]",
+    footer:
+      "flex flex-wrap items-center justify-end gap-2 border-t px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]",
     title: "text-base font-semibold tracking-[-0.02em]",
     description: "mt-1 text-sm leading-relaxed",
     close: [
@@ -65,10 +66,12 @@ export const seiNativeDrawerStyles = tv({
         close: "border-white/12 bg-white/[0.05] hover:bg-white/10",
       },
       soft: {
-        content: "border-[rgba(0,122,255,0.22)] bg-[rgba(8,16,30,0.98)] text-[var(--sh-color-ivory)]",
+        content:
+          "border-[rgba(0,122,255,0.22)] bg-[rgba(8,16,30,0.98)] text-[var(--sh-color-ivory)]",
         title: "text-[#bcdcff]",
         description: "text-[var(--sh-color-cloud)]",
-        close: "border-[rgba(0,122,255,0.28)] bg-[rgba(0,122,255,0.1)] hover:bg-[rgba(0,122,255,0.18)]",
+        close:
+          "border-[rgba(0,122,255,0.28)] bg-[rgba(0,122,255,0.1)] hover:bg-[rgba(0,122,255,0.18)]",
         header: "border-[rgba(0,122,255,0.18)]",
         footer: "border-[rgba(0,122,255,0.18)]",
       },
@@ -121,7 +124,10 @@ interface DrawerContextValue {
   tone: SEINativeDrawerTone;
   side: SEINativeDrawerSide;
 }
-const SEINativeDrawerContext = createContext<DrawerContextValue>({ tone: "default", side: "bottom" });
+const SEINativeDrawerContext = createContext<DrawerContextValue>({
+  tone: "default",
+  side: "bottom",
+});
 
 export interface SEINativeDrawerProps {
   /** Maps to vaul's `direction`. */
@@ -144,8 +150,10 @@ export function SEINativeDrawer({ side = "bottom", ...props }: SEINativeDrawerPr
   );
 }
 
-export interface SEINativeDrawerTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Drawer.Trigger>, "className"> {
+export interface SEINativeDrawerTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Drawer.Trigger>,
+  "className"
+> {
   className?: string;
 }
 
@@ -154,7 +162,8 @@ export function SEINativeDrawerTrigger({ className, ...props }: SEINativeDrawerT
 }
 
 export interface SEINativeDrawerContentProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Drawer.Content>, "className">,
+  extends
+    Omit<React.ComponentPropsWithoutRef<typeof Drawer.Content>, "className">,
     SEINativeDrawerVariantProps {
   className?: string;
   overlayClassName?: string;
@@ -241,8 +250,10 @@ export function SEINativeDrawerFooter({
   return <div className={cn(styles.footer(), className)}>{children}</div>;
 }
 
-export interface SEINativeDrawerTitleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Drawer.Title>, "className"> {
+export interface SEINativeDrawerTitleProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Drawer.Title>,
+  "className"
+> {
   className?: string;
 }
 
@@ -251,8 +262,10 @@ export function SEINativeDrawerTitle({ className, ...props }: SEINativeDrawerTit
   return <Drawer.Title className={cn(styles.title(), className)} {...props} />;
 }
 
-export interface SEINativeDrawerDescriptionProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof Drawer.Description>, "className"> {
+export interface SEINativeDrawerDescriptionProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof Drawer.Description>,
+  "className"
+> {
   className?: string;
 }
 

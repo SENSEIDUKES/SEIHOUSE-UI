@@ -11,8 +11,7 @@ const vaultFragmentCardStyles = tv({
   slots: {
     card: "h-full",
     header: "flex items-start gap-4",
-    icon:
-      "grid size-12 shrink-0 place-items-center rounded-2xl border border-white/12 bg-white/[0.055] text-white",
+    icon: "grid size-12 shrink-0 place-items-center rounded-2xl border border-white/12 bg-white/[0.055] text-white",
     context: "text-sm leading-relaxed text-[var(--sh-color-cloud)]",
   },
   variants: {

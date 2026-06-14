@@ -1,5 +1,14 @@
 import type { ComponentType } from "react";
-import { ArrowRight, Command, Radio, ShieldCheck, Vault } from "lucide-react";
+import {
+  ArrowRight,
+  Command,
+  Music,
+  Radio,
+  Search,
+  ShieldCheck,
+  SlidersHorizontal,
+  Vault,
+} from "lucide-react";
 
 import {
   mockAlbums,
@@ -26,6 +35,27 @@ import {
 import { SEIBadge } from "@seihouse/ui";
 import { SEIButton } from "@seihouse/ui";
 import { SEIPanel } from "@seihouse/ui";
+import {
+  SEIAvatar,
+  SEICheckbox,
+  SEIContainer,
+  SEIField,
+  SEIFilterBar,
+  SEIInput,
+  SEIMediaRow,
+  SEIPageHeader,
+  SEIProgressBar,
+  SEIScrollArea,
+  SEIStatusLine,
+  SEISwitch,
+  SEITable,
+  SEITableBody,
+  SEITableCell,
+  SEITableHead,
+  SEITableHeader,
+  SEITableRow,
+  SEIThumbnail,
+} from "@seihouse/ui";
 import {
   SEIDialog,
   SEIDialogClose,
@@ -83,7 +113,9 @@ function SeaPortalShellContext() {
           </div>
           <div>
             <p className="text-sm font-bold tracking-[-0.02em] text-white">SEA Portal</p>
-            <p className="font-mono text-[0.65rem] text-[var(--sh-color-mist)]">mock shell · no auth</p>
+            <p className="font-mono text-[0.65rem] text-[var(--sh-color-mist)]">
+              mock shell · no auth
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -164,7 +196,11 @@ function RegistryConfirmationContext() {
       <div className="flex flex-wrap items-center gap-3">
         <SEIDialog>
           <SEIDialogTrigger
-            render={<SEIButton variant="solid" icon={ShieldCheck}>Register this work</SEIButton>}
+            render={
+              <SEIButton variant="solid" icon={ShieldCheck}>
+                Register this work
+              </SEIButton>
+            }
           />
           <SEIDialogContent variant="default" className="max-w-md">
             <SEIDialogTitle>Register this work?</SEIDialogTitle>
@@ -257,6 +293,133 @@ function PluginSettingsDrawerContext() {
   );
 }
 
+function FoundationFormStateContext() {
+  return (
+    <SEIPanel variant="default" padding="md" className="w-full">
+      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 pb-4">
+        <div>
+          <h3 className="text-sm font-semibold text-white">Registry intake</h3>
+          <p className="mt-1 text-sm text-[var(--sh-color-cloud)]">
+            Form controls, status lines, and progress states in one mocked setup panel.
+          </p>
+        </div>
+        <SEIStatusLine
+          tone="success"
+          label="Autosaved"
+          description="No network request was made."
+        />
+      </div>
+
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <SEIField
+          label="Release title"
+          htmlFor="context-release-title"
+          helperText="Used for the mock registry preview."
+          required
+        >
+          {({ describedBy }) => (
+            <SEIInput
+              id="context-release-title"
+              aria-describedby={describedBy}
+              defaultValue="North Room"
+            />
+          )}
+        </SEIField>
+        <SEIField
+          label="Search collaborators"
+          htmlFor="context-collaborator"
+          helperText="Mock-only collaborator lookup."
+        >
+          {({ describedBy }) => (
+            <SEIInput
+              id="context-collaborator"
+              aria-describedby={describedBy}
+              iconLeft={<Search aria-hidden="true" className="size-4" />}
+              placeholder="Find creator"
+            />
+          )}
+        </SEIField>
+      </div>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2">
+        <SEISwitch defaultSelected>Enable registry reminders</SEISwitch>
+        <SEICheckbox defaultSelected>Include vault notes</SEICheckbox>
+      </div>
+
+      <div className="mt-5">
+        <SEIProgressBar value={76} label="Metadata readiness" showValue tone="sea" />
+      </div>
+    </SEIPanel>
+  );
+}
+
+function LayoutMediaListContext() {
+  const rows = mockVaultFragments.slice(0, 3);
+  return (
+    <SEIContainer size="lg" className="w-full">
+      <SEIPageHeader
+        eyebrow="Vault"
+        title="Fragment review"
+        description="Layout, scroll, media rows, avatars, and a compact table in a review surface."
+        actions={
+          <SEIButton variant="solid" size="sm" icon={SlidersHorizontal}>
+            Tune view
+          </SEIButton>
+        }
+      />
+
+      <SEIPanel variant="default" padding="md" className="mt-5 w-full">
+        <SEIFilterBar aria-label="Filter fragments" resultCount={rows.length} className="mb-4">
+          <SEIBadge variant="soft">Voice notes</SEIBadge>
+          <SEIBadge variant="outline">Needs split review</SEIBadge>
+        </SEIFilterBar>
+
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_17rem]">
+          <SEIScrollArea
+            maxHeight="16rem"
+            label="Context media list"
+            className="rounded-2xl border border-white/10"
+          >
+            <div className="space-y-2 p-2">
+              {rows.map((fragment, index) => (
+                <SEIMediaRow
+                  key={fragment.id}
+                  interactive
+                  thumbnail={
+                    <SEIThumbnail alt={fragment.title} fallbackIcon={Music} className="size-12" />
+                  }
+                  title={fragment.title}
+                  subtitle={`${fragment.type} · ${fragment.status}`}
+                  meta={<SEIAvatar name={mockArtists[index]?.name ?? "SEA"} size="sm" tone="sea" />}
+                />
+              ))}
+            </div>
+          </SEIScrollArea>
+
+          <div className="overflow-hidden rounded-2xl border border-white/10">
+            <SEITable density="compact">
+              <SEITableHeader>
+                <SEITableRow hover={false}>
+                  <SEITableHead>Item</SEITableHead>
+                  <SEITableHead align="right">Ready</SEITableHead>
+                </SEITableRow>
+              </SEITableHeader>
+              <SEITableBody>
+                {rows.map((fragment, index) => (
+                  <SEITableRow key={fragment.id} zebra>
+                    <SEITableCell>{fragment.title}</SEITableCell>
+                    <SEITableCell align="right">{index === 0 ? "Yes" : "Review"}</SEITableCell>
+                  </SEITableRow>
+                ))}
+              </SEITableBody>
+            </SEITable>
+          </div>
+        </div>
+      </SEIPanel>
+    </SEIContainer>
+  );
+}
+
 export const contextRegistry: ContextEntry[] = [
   {
     id: "sea-portal",
@@ -299,6 +462,18 @@ export const contextRegistry: ContextEntry[] = [
     name: "Plugin settings drawer",
     description: "A plugin slot whose settings open in a swipeable drawer.",
     component: PluginSettingsDrawerContext,
+  },
+  {
+    id: "foundation-form-state",
+    name: "Foundation form and state",
+    description: "Forms, status, and progress primitives composed in a registry intake panel.",
+    component: FoundationFormStateContext,
+  },
+  {
+    id: "layout-media-list",
+    name: "Layout media list",
+    description: "Layout, scroll, media, and table primitives composed in a vault review surface.",
+    component: LayoutMediaListContext,
   },
 ];
 

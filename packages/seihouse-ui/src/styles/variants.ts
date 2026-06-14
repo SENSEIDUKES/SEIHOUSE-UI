@@ -39,16 +39,14 @@ export const seiButtonVariants = tv({
     variant: {
       default:
         "border border-white/10 bg-[var(--sh-color-ivory)] text-[var(--sh-color-black)] shadow-[0_16px_40px_rgba(242,242,247,0.12)] hover:-translate-y-0.5 hover:bg-white",
-      soft:
-        "border border-[rgba(0,122,255,0.2)] bg-[var(--sh-color-sea-subtle)] text-[#8fc8ff] hover:-translate-y-0.5 hover:border-[rgba(0,122,255,0.38)] hover:bg-[rgba(0,122,255,0.14)]",
+      soft: "border border-[rgba(0,122,255,0.2)] bg-[var(--sh-color-sea-subtle)] text-[#8fc8ff] hover:-translate-y-0.5 hover:border-[rgba(0,122,255,0.38)] hover:bg-[rgba(0,122,255,0.14)]",
       outline:
         "border border-white/14 bg-transparent text-[var(--sh-color-ivory)] hover:-translate-y-0.5 hover:border-white/28 hover:bg-white/[0.055]",
       ghost:
         "border border-transparent bg-transparent text-[var(--sh-color-cloud)] hover:bg-white/[0.055] hover:text-white",
       solid:
         "border border-[rgba(0,122,255,0.45)] bg-[var(--sh-color-sea)] text-white shadow-[0_16px_38px_rgba(0,122,255,0.24)] hover:-translate-y-0.5 hover:bg-[#2490ff]",
-      dark:
-        "border border-white/10 bg-[#08090d] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:-translate-y-0.5 hover:border-white/20 hover:bg-[#10131a]",
+      dark: "border border-white/10 bg-[#08090d] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:-translate-y-0.5 hover:border-white/20 hover:bg-[#10131a]",
       light:
         "border border-black/10 bg-white text-[#111318] shadow-[0_18px_42px_rgba(255,255,255,0.12)] hover:-translate-y-0.5 hover:bg-[#f5f5f7]",
       "glass-test":
@@ -81,8 +79,7 @@ export const seiBadgeVariants = tv({
   ],
   variants: {
     variant: {
-      default:
-        "border-white/10 bg-white/[0.055] text-[var(--sh-color-cloud)]",
+      default: "border-white/10 bg-white/[0.055] text-[var(--sh-color-cloud)]",
       soft: "border-[rgba(0,122,255,0.18)] bg-[var(--sh-color-sea-subtle)] text-[#8fc8ff]",
       outline: "border-white/16 bg-transparent text-[var(--sh-color-cloud)]",
       ghost: "border-transparent bg-transparent text-[var(--sh-color-mist)]",
@@ -90,12 +87,12 @@ export const seiBadgeVariants = tv({
       dark: "border-white/10 bg-[#07080c] text-white",
       light: "border-black/10 bg-white text-[#15171c]",
       "glass-test": "border-white/14 bg-white/[0.075] text-white backdrop-blur-xl",
-      "media-test":
-        "border-[rgba(255,107,53,0.28)] bg-[rgba(255,107,53,0.12)] text-[#ffad8d]",
+      "media-test": "border-[rgba(255,107,53,0.28)] bg-[rgba(255,107,53,0.12)] text-[#ffad8d]",
       success: "border-[rgba(52,199,89,0.26)] bg-[rgba(52,199,89,0.11)] text-[#8ff0aa]",
       warning: "border-[rgba(255,159,10,0.28)] bg-[rgba(255,159,10,0.12)] text-[#ffd08a]",
       danger: "border-[rgba(255,69,58,0.28)] bg-[rgba(255,69,58,0.12)] text-[#ff9b94]",
-      registry: "border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.075)] text-[var(--sh-color-ivory)]",
+      registry:
+        "border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.075)] text-[var(--sh-color-ivory)]",
     },
     size: {
       sm: "min-h-6 px-2 text-[0.625rem]",
@@ -117,8 +114,7 @@ export const seiPanelVariants = tv({
   ],
   variants: {
     variant: {
-      default:
-        "border-white/10 bg-[rgba(18,20,26,0.86)] text-[var(--sh-color-ivory)]",
+      default: "border-white/10 bg-[rgba(18,20,26,0.86)] text-[var(--sh-color-ivory)]",
       soft: "border-[rgba(0,122,255,0.16)] bg-[rgba(0,122,255,0.065)] text-[var(--sh-color-ivory)]",
       outline: "border-white/14 bg-transparent text-[var(--sh-color-ivory)]",
       ghost: "border-transparent bg-transparent shadow-none text-[var(--sh-color-ivory)]",
@@ -208,14 +204,11 @@ export const registrySealVariants = tv({
   variants: {
     status: {
       draft: "border-white/12 bg-white/[0.045] text-[var(--sh-color-cloud)]",
-      registered:
-        "border-[rgba(0,122,255,0.28)] bg-[rgba(0,122,255,0.10)] text-[#8fc8ff]",
-      verified:
-        "border-[rgba(52,199,89,0.32)] bg-[rgba(52,199,89,0.11)] text-[#8ff0aa]",
+      registered: "border-[rgba(0,122,255,0.28)] bg-[rgba(0,122,255,0.10)] text-[#8fc8ff]",
+      verified: "border-[rgba(52,199,89,0.32)] bg-[rgba(52,199,89,0.11)] text-[#8ff0aa]",
       archived:
         "border-[rgba(174,174,178,0.18)] bg-[rgba(174,174,178,0.08)] text-[var(--sh-color-cloud)] opacity-85",
-      experimental:
-        "border-[rgba(255,107,53,0.32)] bg-[rgba(255,107,53,0.12)] text-[#ffad8d]",
+      experimental: "border-[rgba(255,107,53,0.32)] bg-[rgba(255,107,53,0.12)] text-[#ffad8d]",
     },
     compact: {
       true: "px-2.5 py-1.5 text-xs",
@@ -257,7 +250,8 @@ export const seiPopupSurfaceVariants = tv({
   base: "border shadow-[0_30px_90px_rgba(0,0,0,0.5)]",
   variants: {
     tone: {
-      default: "border-white/12 bg-[rgba(18,20,26,0.97)] text-[var(--sh-color-ivory)] backdrop-blur-xl",
+      default:
+        "border-white/12 bg-[rgba(18,20,26,0.97)] text-[var(--sh-color-ivory)] backdrop-blur-xl",
       soft: "border-[rgba(0,122,255,0.22)] bg-[rgba(8,16,30,0.97)] text-[var(--sh-color-ivory)] backdrop-blur-xl",
       dark: "border-white/10 bg-[#07080c] text-white",
       light: "border-black/10 bg-white text-[#111318]",

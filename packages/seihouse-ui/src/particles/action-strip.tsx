@@ -32,15 +32,25 @@ export function ActionStrip({
         align === "between" && "justify-between",
         align === "end" && "justify-end",
         align === "start" && "justify-start",
-        className
+        className,
       )}
     >
       <div className="flex flex-wrap items-center gap-2">
-        <SEIButton size="sm" variant="solid" iconRight={primary.icon} aria-label={primary.ariaLabel}>
+        <SEIButton
+          size="sm"
+          variant="solid"
+          iconRight={primary.icon}
+          aria-label={primary.ariaLabel}
+        >
           {primary.label}
         </SEIButton>
         {secondary ? (
-          <SEIButton size="sm" variant="outline" iconRight={secondary.icon} aria-label={secondary.ariaLabel}>
+          <SEIButton
+            size="sm"
+            variant="outline"
+            iconRight={secondary.icon}
+            aria-label={secondary.ariaLabel}
+          >
             {secondary.label}
           </SEIButton>
         ) : null}

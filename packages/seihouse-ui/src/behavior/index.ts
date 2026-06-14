@@ -4,6 +4,7 @@ export * from "./sei-native-drawer";
 export * from "./sei-tabs";
 export * from "./sei-popover";
 export * from "./sei-tooltip";
+export * from "./sei-menu";
 export * from "./sei-combobox-preview";
 export * from "./sei-multi-select-combobox";
 export * from "./sei-command-preview";

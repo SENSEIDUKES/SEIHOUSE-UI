@@ -7,17 +7,32 @@ export { SEICard, type SEICardProps } from "./primitives/sei-card";
 export { SEIPanel, type SEIPanelProps } from "./primitives/sei-panel";
 export { SEISection, type SEISectionProps } from "./primitives/sei-section";
 
-export { ActionStrip, type ActionStripAction, type ActionStripProps } from "./particles/action-strip";
+export {
+  ActionStrip,
+  type ActionStripAction,
+  type ActionStripProps,
+} from "./particles/action-strip";
 export { AlbumCard, type AlbumCardProps } from "./particles/album-card";
 export { ArtistCard, type ArtistCardProps } from "./particles/artist-card";
 export { DojoModuleCard, type DojoModuleCardProps } from "./particles/dojo-module-card";
 export { MediaCard, type MediaCardProps } from "./particles/media-card";
 export { MetricCard, type MetricCardProps } from "./particles/metric-card";
-export { PlayerShellExpanded, type PlayerShellExpandedProps } from "./particles/player-shell-expanded";
+export {
+  PlayerShellExpanded,
+  type PlayerShellExpandedProps,
+} from "./particles/player-shell-expanded";
 export { PlayerShellPreview, type PlayerShellPreviewProps } from "./particles/player-shell-preview";
-export { PluginSlotPreview, type PluginSlotKind, type PluginSlotPreviewProps } from "./particles/plugin-slot-preview";
+export {
+  PluginSlotPreview,
+  type PluginSlotKind,
+  type PluginSlotPreviewProps,
+} from "./particles/plugin-slot-preview";
 export { RegistryPanel, type RegistryPanelProps } from "./particles/registry-panel";
-export { RegistrySeal, type RegistrySealProps, type RegistryStatus } from "./particles/registry-seal";
+export {
+  RegistrySeal,
+  type RegistrySealProps,
+  type RegistryStatus,
+} from "./particles/registry-seal";
 export { ShowcaseBlock, type ShowcaseBlockProps } from "./particles/showcase-block";
 export { ShowcaseHero, type ShowcaseHeroProps } from "./particles/showcase-hero";
 export { VaultFragmentCard, type VaultFragmentCardProps } from "./particles/vault-fragment-card";
@@ -115,6 +130,28 @@ export {
   type SEITooltipTriggerProps,
 } from "./behavior/sei-tooltip";
 export {
+  SEIMenu,
+  SEIMenuCheckboxItem,
+  SEIMenuContent,
+  SEIMenuGroup,
+  SEIMenuItem,
+  SEIMenuLabel,
+  SEIMenuRadioGroup,
+  SEIMenuRadioItem,
+  SEIMenuSeparator,
+  SEIMenuTrigger,
+  type SEIMenuCheckboxItemProps,
+  type SEIMenuContentProps,
+  type SEIMenuGroupProps,
+  type SEIMenuItemProps,
+  type SEIMenuLabelProps,
+  type SEIMenuProps,
+  type SEIMenuRadioGroupProps,
+  type SEIMenuRadioItemProps,
+  type SEIMenuSeparatorProps,
+  type SEIMenuTriggerProps,
+} from "./behavior/sei-menu";
+export {
   SEICombobox,
   SEIComboboxControl,
   SEIComboboxItem,
@@ -146,7 +183,10 @@ export {
 export { SEIComboboxPreview, type SEIComboboxPreviewProps } from "./behavior/sei-combobox-preview";
 export { SEICommandPalette, type SEICommandPaletteProps } from "./behavior/sei-command-palette";
 export { SEICommandPreview, type SEICommandPreviewProps } from "./behavior/sei-command-preview";
-export { SEIMultiSelectCombobox, type SEIMultiSelectComboboxProps } from "./behavior/sei-multi-select-combobox";
+export {
+  SEIMultiSelectCombobox,
+  type SEIMultiSelectComboboxProps,
+} from "./behavior/sei-multi-select-combobox";
 export { fuzzyMatch, highlightSegments, type FuzzyResult } from "./behavior/fuzzy";
 export { pushRecent } from "./behavior/recent";
 
@@ -242,6 +282,43 @@ export {
   type SEIMediaRowProps,
 } from "./media";
 
+// --- Feedback primitives (Phase 7) ---
+export {
+  SEIToastProvider,
+  toastReducer,
+  useSEIToast,
+  type SEIToastAction,
+  type SEIToastInput,
+  type SEIToastProviderProps,
+  type SEIToastRecord,
+  type SEIToastTone,
+} from "./feedback";
+
+// --- Data primitives (Phase 7) ---
+export {
+  compareSortValues,
+  SEITable,
+  SEITableBody,
+  SEITableCaption,
+  SEITableCell,
+  SEITableHead,
+  SEITableHeader,
+  SEITableRow,
+  SEITableSelectionCell,
+  sortRows,
+  type SEIRowKey,
+  type SEISortDirection,
+  type SEISortValue,
+  type SEITableBodyProps,
+  type SEITableCaptionProps,
+  type SEITableCellProps,
+  type SEITableHeadProps,
+  type SEITableHeaderProps,
+  type SEITableProps,
+  type SEITableRowProps,
+  type SEITableSelectionCellProps,
+} from "./data";
+
 export { cn } from "./styles/cn";
 export {
   focusRing,
@@ -275,7 +352,13 @@ export {
   seiGlowAccent,
   type SEISurfaceVariantProps,
 } from "./styles/surfaces";
-export { motionSafe, motionSafeFade, motionSafeTransform, prefersReducedMotion, reducedMotionNotes } from "./styles/reduced-motion";
+export {
+  motionSafe,
+  motionSafeFade,
+  motionSafeTransform,
+  prefersReducedMotion,
+  reducedMotionNotes,
+} from "./styles/reduced-motion";
 
 export type {
   Album,

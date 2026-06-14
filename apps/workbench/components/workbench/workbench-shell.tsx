@@ -261,7 +261,9 @@ function PreviewArea({
                 <h3 className="text-sm font-semibold text-white">{ctx.name}</h3>
                 <p className="text-xs text-[var(--sh-color-mist)]">{ctx.description}</p>
               </div>
-              <div className={cn("rounded-[1.35rem] border border-white/10 p-5", canvasStyles[canvas])}>
+              <div
+                className={cn("rounded-[1.35rem] border border-white/10 p-5", canvasStyles[canvas])}
+              >
                 <div className={cn("mx-auto w-full", widthStyles[width])}>
                   <Context />
                 </div>
@@ -378,7 +380,11 @@ export function WorkbenchShell({ activeSlug }: { activeSlug?: string }) {
             <ControlLabel>Variant</ControlLabel>
             <div className="flex flex-wrap gap-1.5">
               {entry.variants.map((option) => (
-                <SegButton key={option} active={variant === option} onClick={() => setVariant(option)}>
+                <SegButton
+                  key={option}
+                  active={variant === option}
+                  onClick={() => setVariant(option)}
+                >
                   {option}
                 </SegButton>
               ))}
@@ -406,7 +412,11 @@ export function WorkbenchShell({ activeSlug }: { activeSlug?: string }) {
             <ControlLabel>Canvas</ControlLabel>
             <div className="flex flex-wrap gap-1.5">
               {(["dark", "light", "plain", "glass"] as const).map((option) => (
-                <SegButton key={option} active={canvas === option} onClick={() => setCanvas(option)}>
+                <SegButton
+                  key={option}
+                  active={canvas === option}
+                  onClick={() => setCanvas(option)}
+                >
                   {option}
                 </SegButton>
               ))}

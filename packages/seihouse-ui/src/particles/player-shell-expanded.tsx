@@ -1,4 +1,13 @@
-import { ListMusic, Pause, Play, Radio, SkipBack, SkipForward, SlidersHorizontal, Volume2 } from "lucide-react";
+import {
+  ListMusic,
+  Pause,
+  Play,
+  Radio,
+  SkipBack,
+  SkipForward,
+  SlidersHorizontal,
+  Volume2,
+} from "lucide-react";
 import { tv, type VariantProps } from "tailwind-variants";
 
 import type { PlayerTrack } from "../types/music";
@@ -32,10 +41,12 @@ const playerShellExpandedStyles = tv({
         controls: "justify-end",
       },
       dark: {
-        artwork: "bg-[radial-gradient(circle_at_36%_26%,rgba(0,122,255,0.28),transparent_34%),#050609]",
+        artwork:
+          "bg-[radial-gradient(circle_at_36%_26%,rgba(0,122,255,0.28),transparent_34%),#050609]",
       },
       light: {
-        artwork: "border-black/10 bg-[radial-gradient(circle_at_34%_24%,rgba(0,122,255,0.22),transparent_34%),white]",
+        artwork:
+          "border-black/10 bg-[radial-gradient(circle_at_34%_24%,rgba(0,122,255,0.22),transparent_34%),white]",
       },
     },
   },
@@ -106,10 +117,20 @@ export function PlayerShellExpanded({
           </div>
 
           <div className={styles.controls()}>
-            <SEIButton variant="ghost" size="sm" icon={SkipBack} aria-label="Previous track visual" />
+            <SEIButton
+              variant="ghost"
+              size="sm"
+              icon={SkipBack}
+              aria-label="Previous track visual"
+            />
             <SEIButton variant="solid" size="md" icon={Play} aria-label="Play visual" />
             <SEIButton variant="ghost" size="sm" icon={Pause} aria-label="Pause visual" />
-            <SEIButton variant="ghost" size="sm" icon={SkipForward} aria-label="Next track visual" />
+            <SEIButton
+              variant="ghost"
+              size="sm"
+              icon={SkipForward}
+              aria-label="Next track visual"
+            />
             <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-[var(--sh-color-mist)]">
               <Volume2 aria-hidden="true" className="size-4" />
               <span className="h-1.5 w-16 rounded-full bg-white/15">
@@ -128,7 +149,10 @@ export function PlayerShellExpanded({
               </div>
               <div className="space-y-2 text-sm text-[var(--sh-color-cloud)]">
                 {track.queue.map((item) => (
-                  <div key={item} className="rounded-xl border border-white/8 bg-white/[0.035] px-3 py-2">
+                  <div
+                    key={item}
+                    className="rounded-xl border border-white/8 bg-white/[0.035] px-3 py-2"
+                  >
                     {item}
                   </div>
                 ))}
@@ -136,12 +160,18 @@ export function PlayerShellExpanded({
             </div>
             <div className="rounded-[1.1rem] border border-white/10 bg-white/[0.04] p-4">
               <div className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                <SlidersHorizontal aria-hidden="true" className="size-4 text-[var(--sh-color-accent)]" />
+                <SlidersHorizontal
+                  aria-hidden="true"
+                  className="size-4 text-[var(--sh-color-accent)]"
+                />
                 Environment
               </div>
               <div className="grid gap-2 text-sm text-[var(--sh-color-cloud)]">
                 {Object.entries(track.metadata).map(([key, value]) => (
-                  <div key={key} className="flex justify-between gap-3 rounded-xl bg-white/[0.035] px-3 py-2">
+                  <div
+                    key={key}
+                    className="flex justify-between gap-3 rounded-xl bg-white/[0.035] px-3 py-2"
+                  >
                     <span className="text-[var(--sh-color-mist)]">{key}</span>
                     <span>{value}</span>
                   </div>

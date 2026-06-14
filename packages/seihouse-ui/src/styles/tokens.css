@@ -41,8 +41,7 @@
   --sh-surface-glass-border: rgba(255, 255, 255, 0.06);
 
   /* ---- Typography ---- */
-  --sh-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
+  --sh-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --sh-font-mono: "SF Mono", "JetBrains Mono", "Fira Code", monospace;
 
   --sh-text-xs: 0.75rem;
@@ -138,16 +137,8 @@
 
   /* ---- Scroll shadows ---- (edge fades for SEIScrollArea) */
   --sh-scroll-shadow-size: 1.75rem;
-  --sh-scroll-shadow-top: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.38),
-    rgba(0, 0, 0, 0)
-  );
-  --sh-scroll-shadow-bottom: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.38),
-    rgba(0, 0, 0, 0)
-  );
+  --sh-scroll-shadow-top: linear-gradient(to bottom, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0));
+  --sh-scroll-shadow-bottom: linear-gradient(to top, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0));
 
   /* ---- Mobile safe-area insets ---- (notches / home indicators) */
   --sh-safe-top: env(safe-area-inset-top, 0px);

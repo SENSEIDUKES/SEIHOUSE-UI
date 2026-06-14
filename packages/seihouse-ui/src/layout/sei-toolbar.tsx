@@ -60,12 +60,7 @@ export interface SEIActionBarProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /** Footer-style bar for grouping primary/secondary actions. */
-export function SEIActionBar({
-  align = "end",
-  children,
-  className,
-  ...props
-}: SEIActionBarProps) {
+export function SEIActionBar({ align = "end", children, className, ...props }: SEIActionBarProps) {
   return (
     <div
       className={cn(

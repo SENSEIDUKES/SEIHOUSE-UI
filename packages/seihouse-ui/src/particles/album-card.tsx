@@ -21,25 +21,30 @@ const albumCardStyles = tv({
     variant: {
       default: {
         media: "min-h-44 p-5",
-        artwork: "bg-[radial-gradient(circle_at_30%_20%,rgba(0,122,255,0.46),transparent_38%),rgba(255,255,255,0.06)]",
+        artwork:
+          "bg-[radial-gradient(circle_at_30%_20%,rgba(0,122,255,0.46),transparent_38%),rgba(255,255,255,0.06)]",
       },
       compact: {
         media: "min-h-28 p-4",
-        artwork: "aspect-[16/9] bg-[radial-gradient(circle_at_30%_20%,rgba(0,122,255,0.36),transparent_40%),rgba(255,255,255,0.055)]",
+        artwork:
+          "aspect-[16/9] bg-[radial-gradient(circle_at_30%_20%,rgba(0,122,255,0.36),transparent_40%),rgba(255,255,255,0.055)]",
       },
       feature: {
         card: "md:col-span-2",
         media: "min-h-56 p-6",
-        artwork: "aspect-[16/10] bg-[radial-gradient(circle_at_24%_14%,rgba(0,122,255,0.55),transparent_42%),radial-gradient(circle_at_80%_76%,rgba(255,107,53,0.36),transparent_35%),rgba(255,255,255,0.07)]",
+        artwork:
+          "aspect-[16/10] bg-[radial-gradient(circle_at_24%_14%,rgba(0,122,255,0.55),transparent_42%),radial-gradient(circle_at_80%_76%,rgba(255,107,53,0.36),transparent_35%),rgba(255,255,255,0.07)]",
         title: "text-2xl",
       },
       dark: {
         media: "min-h-44 p-5 bg-[#050609]",
-        artwork: "bg-[radial-gradient(circle_at_35%_25%,rgba(0,122,255,0.28),transparent_40%),#08090d]",
+        artwork:
+          "bg-[radial-gradient(circle_at_35%_25%,rgba(0,122,255,0.28),transparent_40%),#08090d]",
       },
       light: {
         media: "min-h-44 p-5 bg-[#f7f6f1]",
-        artwork: "border-black/10 bg-[radial-gradient(circle_at_30%_20%,rgba(0,122,255,0.22),transparent_40%),white] text-[#111318]",
+        artwork:
+          "border-black/10 bg-[radial-gradient(circle_at_30%_20%,rgba(0,122,255,0.22),transparent_40%),white] text-[#111318]",
       },
       "media-test": {
         media:
@@ -89,7 +94,12 @@ export function AlbumCard({ album, variant = "default", className }: AlbumCardPr
       media={
         <div className={styles.media()}>
           <div className={styles.artwork()}>
-            <span className={cn("absolute right-5 top-5 size-24 rounded-full blur-2xl", toneGlow[album.artworkTone])} />
+            <span
+              className={cn(
+                "absolute right-5 top-5 size-24 rounded-full blur-2xl",
+                toneGlow[album.artworkTone],
+              )}
+            />
             <div className="relative z-10 grid size-12 place-items-center rounded-2xl border border-white/15 bg-black/25 text-white backdrop-blur-xl">
               <Disc3 aria-hidden="true" className="size-5" />
             </div>

@@ -19,7 +19,11 @@ const artistCardStyles = tv({
     variant: {
       default: { avatar: "size-20", layout: "items-start" },
       compact: { avatar: "size-14", layout: "items-center", bio: "line-clamp-2" },
-      profile: { card: "md:col-span-2", avatar: "size-28", layout: "flex-col sm:flex-row sm:items-center" },
+      profile: {
+        card: "md:col-span-2",
+        avatar: "size-28",
+        layout: "flex-col sm:flex-row sm:items-center",
+      },
       dark: { avatar: "size-20 bg-[#07080c]" },
       light: { avatar: "size-20 border-black/10 bg-white text-[#111318]" },
     },
@@ -60,7 +64,12 @@ export function ArtistCard({ artist, variant = "default", className }: ArtistCar
     >
       <div className={styles.layout()}>
         <div className={styles.avatar()}>
-          <span className={cn("absolute inset-0 bg-gradient-to-br to-transparent", toneRing[artist.avatarTone])} />
+          <span
+            className={cn(
+              "absolute inset-0 bg-gradient-to-br to-transparent",
+              toneRing[artist.avatarTone],
+            )}
+          />
           <UserRound aria-hidden="true" className="relative z-10 size-8" />
         </div>
         <div className="min-w-0 flex-1 space-y-3">

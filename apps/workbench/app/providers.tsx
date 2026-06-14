@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { SEITooltipProvider } from "@seihouse/ui";
+import { SEIToastProvider, SEITooltipProvider } from "@seihouse/ui";
 
 /**
  * App-wide client providers. The tooltip provider is mounted once here so every
@@ -9,5 +9,9 @@ import { SEITooltipProvider } from "@seihouse/ui";
  * relying on per-section providers.
  */
 export function Providers({ children }: { children: ReactNode }) {
-  return <SEITooltipProvider>{children}</SEITooltipProvider>;
+  return (
+    <SEIToastProvider>
+      <SEITooltipProvider>{children}</SEITooltipProvider>
+    </SEIToastProvider>
+  );
 }

@@ -182,11 +182,7 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
                 Phase 4
               </SEIBadge>
               <SEIBadge variant="registry">Mock data only</SEIBadge>
-              <SEIButton
-                variant="ghost"
-                size="sm"
-                iconRight={<ArrowRight className="size-3.5" />}
-              >
+              <SEIButton variant="ghost" size="sm" iconRight={<ArrowRight className="size-3.5" />}>
                 One-page lab
               </SEIButton>
             </div>
@@ -206,7 +202,10 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
       </header>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-20 lg:px-6">
-        <section id="mission" className="grid gap-6 py-10 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+        <section
+          id="mission"
+          className="grid gap-6 py-10 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch"
+        >
           <ShowcaseHero
             variant="media"
             entry={mockShowcaseEntries[0]}
@@ -246,17 +245,20 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
           <div className="grid gap-5 md:grid-cols-3">
             <ShowcaseBlock title="Reusable particles" variant="default">
               <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">
-                Each particle accepts className, composes Phase 1 primitives, and exposes local variants only where the particle needs product-specific styling.
+                Each particle accepts className, composes Phase 1 primitives, and exposes local
+                variants only where the particle needs product-specific styling.
               </p>
             </ShowcaseBlock>
             <ShowcaseBlock title="Music-business aware" variant="soft">
               <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">
-                Mock content covers release worlds, creators, registry panels, vault recovery, learning modules, and internal dashboard summaries.
+                Mock content covers release worlds, creators, registry panels, vault recovery,
+                learning modules, and internal dashboard summaries.
               </p>
             </ShowcaseBlock>
             <ShowcaseBlock title="Deferred behavior" variant="outline">
               <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">
-                Audio playback, auth, APIs, registry databases, plugin execution, and final brand-system decisions remain out of scope.
+                Audio playback, auth, APIs, registry databases, plugin execution, and final
+                brand-system decisions remain out of scope.
               </p>
             </ShowcaseBlock>
           </div>
@@ -327,7 +329,11 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
           eyebrow="03 / Music-Business Particles"
           title="Albums, artists, vault fragments, and Dojo modules."
           description="These components are reusable product-style particles, not app workflows. They use realistic fake data and stay flexible across style lanes."
-          aside={<SEIBadge variant="media-test" icon={Disc3}>Particles</SEIBadge>}
+          aside={
+            <SEIBadge variant="media-test" icon={Disc3}>
+              Particles
+            </SEIBadge>
+          }
         >
           <div id="music-particles" className="space-y-6">
             <div className="grid gap-5 lg:grid-cols-3">
@@ -357,7 +363,11 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
           eyebrow="04 / Behavior Primitives"
           title="Accessible interaction foundations powered by Base UI and React Aria."
           description="Phase 3 adds the first headless behavior libraries. Base UI and React Aria provide focus management, keyboard navigation, and ARIA wiring; SEIHouse keeps full visual control through Tailwind variants. Everything below is mocked — no audio, backend, auth, or registry runtime."
-          aside={<SEIBadge variant="soft" icon={MousePointerClick}>Headless behavior</SEIBadge>}
+          aside={
+            <SEIBadge variant="soft" icon={MousePointerClick}>
+              Headless behavior
+            </SEIBadge>
+          }
         >
           <BehaviorShowcase />
         </SEISection>
@@ -366,7 +376,11 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
           eyebrow="05 / Behavior Hardening"
           title="Native drawer, multi-select tagging, a global command palette, tests, and reduced motion."
           description="Phase 4 hardens the behavior layer for real apps: a swipe/snap drawer (vaul), a multi-select metadata combobox, a ⌘K command palette with fuzzy search and recent commands, Playwright + axe tests, a reduced-motion strategy, and shared variants promoted into styles/variants.ts. Still mocked — no audio, backend, auth, or registry runtime."
-          aside={<SEIBadge variant="soft" icon={Wrench}>Hardening</SEIBadge>}
+          aside={
+            <SEIBadge variant="soft" icon={Wrench}>
+              Hardening
+            </SEIBadge>
+          }
         >
           <BehaviorHardeningShowcase />
         </SEISection>
@@ -375,7 +389,11 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
           eyebrow="06 / Experience Blocks"
           title="Hero, player shell, and future plugin placeholders."
           description="These particles preview higher-order product surfaces without adding runtime behavior."
-          aside={<SEIBadge variant="warning" icon={Play}>Visual only</SEIBadge>}
+          aside={
+            <SEIBadge variant="warning" icon={Play}>
+              Visual only
+            </SEIBadge>
+          }
         >
           <div id="experience-blocks" className="space-y-6">
             <ShowcaseHero
@@ -397,7 +415,11 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
           eyebrow="07 / Registry / Status"
           title="Registry panels and status seals for mocked verification states."
           description="RegistryPanel composes SEIPanel, RegistrySeal, badges, and buttons as a reusable product particle. No registry service or database is included."
-          aside={<SEIBadge variant="registry" icon={ShieldCheck}>Status systems</SEIBadge>}
+          aside={
+            <SEIBadge variant="registry" icon={ShieldCheck}>
+              Status systems
+            </SEIBadge>
+          }
         >
           <div id="registry" className="space-y-6">
             <div className="grid gap-5 lg:grid-cols-3">
@@ -405,7 +427,11 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
                 <RegistryPanel key={item.id} item={item} />
               ))}
             </div>
-            <ShowcaseBlock variant="media-test" title="RegistrySeal state sweep" contentClassName="flex flex-wrap gap-3">
+            <ShowcaseBlock
+              variant="media-test"
+              title="RegistrySeal state sweep"
+              contentClassName="flex flex-wrap gap-3"
+            >
               <RegistrySeal status="draft" registryId="D-001" />
               <RegistrySeal status="registered" registryId="SEI-042" />
               <RegistrySeal status="verified" registryId="V-777" />
@@ -419,7 +445,11 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
           eyebrow="08 / Dashboard / Utility"
           title="Metrics and actions for internal dashboards and creator tools."
           description="MetricCard and ActionStrip support quick dashboard summaries, creator operations, and responsive action rows."
-          aside={<SEIBadge variant="soft" icon={LayoutDashboard}>Utility</SEIBadge>}
+          aside={
+            <SEIBadge variant="soft" icon={LayoutDashboard}>
+              Utility
+            </SEIBadge>
+          }
         >
           <div id="dashboard" className="space-y-6">
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -427,7 +457,17 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
                 <MetricCard
                   key={metric.label}
                   {...metric}
-                  variant={index % 5 === 0 ? "soft" : index % 5 === 1 ? "default" : index % 5 === 2 ? "outline" : index % 5 === 3 ? "dark" : "light"}
+                  variant={
+                    index % 5 === 0
+                      ? "soft"
+                      : index % 5 === 1
+                        ? "default"
+                        : index % 5 === 2
+                          ? "outline"
+                          : index % 5 === 3
+                            ? "dark"
+                            : "light"
+                  }
                 />
               ))}
             </div>
@@ -478,7 +518,9 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
                     <span className="h-12 rounded-2xl bg-black/30" />
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <SEIBadge variant={lane.variant === "light" ? "light" : "outline"}>{lane.name}</SEIBadge>
+                    <SEIBadge variant={lane.variant === "light" ? "light" : "outline"}>
+                      {lane.name}
+                    </SEIBadge>
                     <SEIButton size="sm" variant={lane.variant} icon={Palette}>
                       Test
                     </SEIButton>
@@ -491,7 +533,9 @@ export function SEIComponentShowcase({ route = "/" }: { route?: string }) {
 
         <footer className="relative z-10 flex flex-col gap-3 border-t border-white/10 py-10 text-sm text-[var(--sh-color-mist)] sm:flex-row sm:items-center sm:justify-between">
           <span>SEIHOUSE-UI · Phase 4 behavior hardening lab</span>
-          <span className="font-mono text-xs">@seihouse/ui · behavior · Base UI · React Aria · vaul · Playwright + axe</span>
+          <span className="font-mono text-xs">
+            @seihouse/ui · behavior · Base UI · React Aria · vaul · Playwright + axe
+          </span>
         </footer>
       </div>
     </main>

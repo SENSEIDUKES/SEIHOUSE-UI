@@ -1,16 +1,12 @@
 import type { ElementType, HTMLAttributes, ReactNode } from "react";
 
 import { cn } from "../styles/cn";
-import {
-  seiCardVariants,
-  type SEICardVariantProps,
-} from "../styles/variants";
+import { seiCardVariants, type SEICardVariantProps } from "../styles/variants";
 
 type SEICardElement = "article" | "div" | "section";
 
 export interface SEICardProps
-  extends Omit<HTMLAttributes<HTMLElement>, "title">,
-    SEICardVariantProps {
+  extends Omit<HTMLAttributes<HTMLElement>, "title">, SEICardVariantProps {
   as?: SEICardElement;
   eyebrow?: ReactNode;
   title?: ReactNode;
@@ -55,7 +51,9 @@ export function SEICard({
                 {eyebrow}
               </div>
             ) : null}
-            {metadata ? <div className="text-sm text-[var(--sh-color-mist)]">{metadata}</div> : null}
+            {metadata ? (
+              <div className="text-sm text-[var(--sh-color-mist)]">{metadata}</div>
+            ) : null}
           </div>
         )}
 
@@ -71,9 +69,7 @@ export function SEICard({
         )}
 
         {description ? (
-          <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">
-            {description}
-          </p>
+          <p className="text-sm leading-relaxed text-[var(--sh-color-cloud)]">{description}</p>
         ) : null}
 
         {children}

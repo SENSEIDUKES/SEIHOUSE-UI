@@ -21,8 +21,7 @@ const toneClasses: Record<SEIAvatarTone, string> = {
   accent: "border-[rgba(255,107,53,0.32)] bg-[rgba(255,107,53,0.14)] text-[#ffad8d]",
 };
 
-export interface SEIAvatarProps
-  extends Omit<HTMLAttributes<HTMLSpanElement>, "children"> {
+export interface SEIAvatarProps extends Omit<HTMLAttributes<HTMLSpanElement>, "children"> {
   /** Image source. When absent or it fails to load, initials render instead. */
   src?: string;
   /** Person/entity name — used for initials and the image alt text. */

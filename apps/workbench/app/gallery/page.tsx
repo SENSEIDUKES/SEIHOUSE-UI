@@ -16,10 +16,13 @@ export const metadata: Metadata = {
 
 const layerAnchors: Record<string, string> = {
   foundation: "foundation",
+  state: "states",
+  form: "forms",
   behavior: "behavior",
+  layout: "layout",
+  media: "media",
   "music-particle": "music-particles",
   registry: "registry",
-  layout: "layout",
 };
 
 export default function GalleryPage() {

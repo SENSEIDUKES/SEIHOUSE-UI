@@ -1,15 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  RefreshCw,
-  Search,
-  Filter,
-  Inbox,
-  Music,
-  Plus,
-  Star,
-} from "lucide-react";
+import { RefreshCw, Search, Filter, Inbox, Music, Plus, Star } from "lucide-react";
 
 import {
   SEIButton,
@@ -239,8 +231,7 @@ export function InteractionSection() {
           </SEIButton>
         </div>
         <p className="text-xs text-[var(--sh-color-mist)]">
-          Tab through to see the shared <code>focusRing</code>. All movement is reduced-motion
-          safe.
+          Tab through to see the shared <code>focusRing</code>. All movement is reduced-motion safe.
         </p>
       </DiagBlock>
 
@@ -297,10 +288,18 @@ export function StatesSection() {
           <SEIProgressBar value={progress} label="Upload" showValue tone="sea" />
           <SEIProgressBar indeterminate label="Importing" tone="accent" />
           <div className="flex gap-2">
-            <SEIButton size="sm" variant="outline" onClick={() => setProgress((p) => Math.max(0, p - 10))}>
+            <SEIButton
+              size="sm"
+              variant="outline"
+              onClick={() => setProgress((p) => Math.max(0, p - 10))}
+            >
               −10
             </SEIButton>
-            <SEIButton size="sm" variant="outline" onClick={() => setProgress((p) => Math.min(100, p + 10))}>
+            <SEIButton
+              size="sm"
+              variant="outline"
+              onClick={() => setProgress((p) => Math.min(100, p + 10))}
+            >
               +10
             </SEIButton>
           </div>
@@ -326,7 +325,11 @@ export function StatesSection() {
               icon={Inbox}
               title="No fragments yet"
               description="Recovered audio will appear here once imported."
-              action={<SEIButton size="sm" variant="soft" icon={Plus}>Add</SEIButton>}
+              action={
+                <SEIButton size="sm" variant="soft" icon={Plus}>
+                  Add
+                </SEIButton>
+              }
             />
           </DiagTile>
           <DiagTile>
@@ -336,7 +339,11 @@ export function StatesSection() {
             <SEIErrorState
               title="Couldn’t load"
               description="The request timed out."
-              action={<SEIButton size="sm" variant="outline" icon={RefreshCw}>Retry</SEIButton>}
+              action={
+                <SEIButton size="sm" variant="outline" icon={RefreshCw}>
+                  Retry
+                </SEIButton>
+              }
             />
           </DiagTile>
           <DiagTile>
@@ -455,21 +462,37 @@ export function LayoutSection() {
             eyebrow="Vault"
             title="Recovered fragments"
             description="12 items · last synced 2m ago"
-            actions={<SEIButton size="sm" variant="solid" icon={Plus}>Import</SEIButton>}
+            actions={
+              <SEIButton size="sm" variant="solid" icon={Plus}>
+                Import
+              </SEIButton>
+            }
           />
           <SEIToolbar
             aria-label="Fragment actions"
-            start={<SEIBadge variant="soft" size="sm">12 selected</SEIBadge>}
+            start={
+              <SEIBadge variant="soft" size="sm">
+                12 selected
+              </SEIBadge>
+            }
             end={
               <div className="flex gap-2">
-                <SEIButton size="sm" variant="ghost">Export</SEIButton>
-                <SEIButton size="sm" variant="outline">Tag</SEIButton>
+                <SEIButton size="sm" variant="ghost">
+                  Export
+                </SEIButton>
+                <SEIButton size="sm" variant="outline">
+                  Tag
+                </SEIButton>
               </div>
             }
           />
           <SEIActionBar align="end">
-            <SEIButton size="sm" variant="ghost">Cancel</SEIButton>
-            <SEIButton size="sm" variant="solid">Save</SEIButton>
+            <SEIButton size="sm" variant="ghost">
+              Cancel
+            </SEIButton>
+            <SEIButton size="sm" variant="solid">
+              Save
+            </SEIButton>
           </SEIActionBar>
         </div>
       </DiagBlock>
@@ -479,8 +502,12 @@ export function LayoutSection() {
           <SEIBadge variant="outline" size="sm" iconLeft={<Filter className="size-3" />}>
             Type: Audio
           </SEIBadge>
-          <SEIBadge variant="outline" size="sm">Status: Draft</SEIBadge>
-          <SEIBadge variant="outline" size="sm">Year: 2026</SEIBadge>
+          <SEIBadge variant="outline" size="sm">
+            Status: Draft
+          </SEIBadge>
+          <SEIBadge variant="outline" size="sm">
+            Year: 2026
+          </SEIBadge>
         </SEIFilterBar>
       </DiagBlock>
 
@@ -488,7 +515,11 @@ export function LayoutSection() {
         <div className="h-48 overflow-hidden rounded-2xl border border-white/10">
           <SEISplitPane
             startWidth="160px"
-            start={<div className="h-full bg-white/[0.03] p-3 text-xs text-[var(--sh-color-cloud)]">List</div>}
+            start={
+              <div className="h-full bg-white/[0.03] p-3 text-xs text-[var(--sh-color-cloud)]">
+                List
+              </div>
+            }
             end={<div className="h-full p-3 text-xs text-[var(--sh-color-cloud)]">Detail</div>}
           />
         </div>
@@ -498,14 +529,16 @@ export function LayoutSection() {
         <div className="relative h-48 overflow-y-auto rounded-2xl border border-white/10">
           <SEIContainer size="sm" padding="md" className="py-4">
             <p className="text-sm text-[var(--sh-color-cloud)]">
-              Centered, width-constrained content. Scroll to see the sticky footer pin to the
-              bottom of this region.
+              Centered, width-constrained content. Scroll to see the sticky footer pin to the bottom
+              of this region.
             </p>
             <div className="h-40" />
           </SEIContainer>
           <SEIStickyFooter className="border-t border-white/10 bg-[#0a0a0c]/85 px-4 py-2 backdrop-blur-xl">
             <div className="flex justify-end">
-              <SEIButton size="sm" variant="solid">Confirm</SEIButton>
+              <SEIButton size="sm" variant="solid">
+                Confirm
+              </SEIButton>
             </div>
           </SEIStickyFooter>
         </div>
@@ -522,7 +555,11 @@ export function ScrollSection() {
   return (
     <div className="space-y-10">
       <DiagBlock title="Scroll area" hint="scroll shadows · keyboard-accessible">
-        <SEIScrollArea label="Fragment list" maxHeight="14rem" className="rounded-2xl border border-white/10">
+        <SEIScrollArea
+          label="Fragment list"
+          maxHeight="14rem"
+          className="rounded-2xl border border-white/10"
+        >
           <ul className="divide-y divide-white/5">
             {Array.from({ length: 18 }).map((_, i) => (
               <li key={i} className="px-4 py-3 text-sm text-[var(--sh-color-cloud)]">
@@ -552,7 +589,11 @@ export function ScrollSection() {
       </DiagBlock>
 
       <DiagBlock title="Dense list mode" hint="compact rows in a scroll area">
-        <SEIScrollArea label="Dense tracks" maxHeight="13rem" className="rounded-2xl border border-white/10">
+        <SEIScrollArea
+          label="Dense tracks"
+          maxHeight="13rem"
+          className="rounded-2xl border border-white/10"
+        >
           {Array.from({ length: 20 }).map((_, i) => (
             <SEIMediaRow
               key={i}
@@ -561,7 +602,9 @@ export function ScrollSection() {
               thumbnail={<SEIAvatar name={`Track ${i + 1}`} size="sm" tone="sea" />}
               title={`Track ${i + 1}`}
               subtitle="2:4"
-              meta={<span className="font-mono text-xs text-[var(--sh-color-mist)]">3:0{i % 6}</span>}
+              meta={
+                <span className="font-mono text-xs text-[var(--sh-color-mist)]">3:0{i % 6}</span>
+              }
             />
           ))}
         </SEIScrollArea>
@@ -610,7 +653,10 @@ export function MediaSection() {
       <DiagBlock title="Aspect ratio & media row" hint="intrinsic boxes · compact rows">
         <DiagGrid cols={2}>
           <DiagTile label="aspect 21/9">
-            <SEIAspectRatio ratio="21/9" className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
+            <SEIAspectRatio
+              ratio="21/9"
+              className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]"
+            >
               <div className="grid h-full place-items-center text-xs text-[var(--sh-color-mist)]">
                 21 / 9
               </div>
@@ -623,7 +669,11 @@ export function MediaSection() {
               thumbnail={<SEIThumbnail alt="Cover" ratio={1} radius="md" className="w-12" />}
               title="Midnight Sessions"
               subtitle="Sensei Dukes · 2026"
-              meta={<SEIBadge variant="soft" size="sm">Album</SEIBadge>}
+              meta={
+                <SEIBadge variant="soft" size="sm">
+                  Album
+                </SEIBadge>
+              }
             />
           </DiagTile>
         </DiagGrid>

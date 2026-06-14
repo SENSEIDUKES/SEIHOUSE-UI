@@ -14,9 +14,7 @@ function axe(page: Page) {
 test.describe("foundation diagnostics", () => {
   test("/foundations loads with its tablist", async ({ page }) => {
     await page.goto("/foundations");
-    await expect(
-      page.getByRole("heading", { name: "Foundation Diagnostics" }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Foundation Diagnostics" })).toBeVisible();
     await expect(page.getByRole("tablist", { name: "Foundation systems" })).toBeVisible();
   });
 
@@ -35,7 +33,14 @@ test.describe("foundation diagnostics", () => {
     if (serious.length) {
       console.warn("axe serious (non-blocking):", serious.map((v) => v.id).join(", "));
     }
-    expect(critical, JSON.stringify(critical.map((v) => v.id), null, 2)).toEqual([]);
+    expect(
+      critical,
+      JSON.stringify(
+        critical.map((v) => v.id),
+        null,
+        2,
+      ),
+    ).toEqual([]);
   });
 
   test("no critical axe violations in the Forms view", async ({ page }) => {
@@ -43,7 +48,14 @@ test.describe("foundation diagnostics", () => {
     await page.getByRole("tab", { name: "Forms" }).click();
     const results = await axe(page).analyze();
     const critical = results.violations.filter((v) => v.impact === "critical");
-    expect(critical, JSON.stringify(critical.map((v) => v.id), null, 2)).toEqual([]);
+    expect(
+      critical,
+      JSON.stringify(
+        critical.map((v) => v.id),
+        null,
+        2,
+      ),
+    ).toEqual([]);
   });
 
   test("form primitives are keyboard operable", async ({ page }) => {

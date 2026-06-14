@@ -7,8 +7,7 @@ import { cn } from "../styles/cn";
 import { seiFieldControlVariants, type SEIFieldControlVariantProps } from "./sei-field";
 
 export interface SEISelectProps
-  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size">,
-    SEIFieldControlVariantProps {
+  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size">, SEIFieldControlVariantProps {
   /** Wrapper className (the positioned container holding the chevron overlay). */
   wrapperClassName?: string;
 }
