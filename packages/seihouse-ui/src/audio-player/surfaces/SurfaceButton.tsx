@@ -75,6 +75,7 @@ export const SurfaceButton = forwardRef<HTMLButtonElement, SurfaceButtonProps>(
         ref={ref}
         type={type}
         className={cn(surfaceButtonStyles({ size, shape: resolvedShape, state }), className)}
+        disabled={isDisabled}
         aria-disabled={isDisabled || undefined}
         data-state={state ?? "default"}
         {...props}
