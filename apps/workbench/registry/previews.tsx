@@ -29,6 +29,7 @@ import {
   AlbumCard,
   ArtistCard,
   DojoModuleCard,
+  FullCardPlayer,
   MetricCard,
   PlayerShellExpanded,
   PluginSlotPreview,
@@ -564,6 +565,10 @@ export function PlayerShellWorkbenchPreview({ variant, mockIndex }: ComponentPre
       className="w-full"
     />
   );
+}
+
+export function FullCardPlayerWorkbenchPreview({ mockIndex }: ComponentPreviewProps) {
+  return <FullCardPlayer track={pick(mockPlayerTracks, mockIndex)} className="w-full" />;
 }
 
 const pluginSlotMocks = [

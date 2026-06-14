@@ -242,6 +242,35 @@ export {
   type SEIMediaRowProps,
 } from "./media";
 
+// --- SAP audio-player surfaces (Phase 6) ---
+export {
+  FullCardPlayer,
+  SAPController,
+  PlayerSurfaceButtons,
+  SurfaceButton,
+  SEICanvasHost,
+  SEICanvasActionMenu,
+  usePlayerSurface,
+  surfaceReducer,
+  initialSurfaceState,
+  SEI_CANVAS_MENU_V1,
+  ACTION_MENU_TRIGGER_ICON,
+  isInteractive,
+  type FullCardPlayerProps,
+  type SAPControllerProps,
+  type PlayerSurfaceButtonsProps,
+  type SurfaceButtonProps,
+  type SEICanvasHostProps,
+  type SEICanvasActionMenuProps,
+  type PlayerSurfaceController,
+  type PlayerSurface,
+  type SurfaceState,
+  type SurfaceAction,
+  type MenuNode,
+  type MenuItemState,
+  type MenuActionId,
+} from "./audio-player";
+
 export { cn } from "./styles/cn";
 export {
   focusRing,
