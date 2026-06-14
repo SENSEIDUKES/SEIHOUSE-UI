@@ -179,7 +179,8 @@ export function SEICanvasActionMenu({
   const overlay = open ? (
     <div
       className={cn("fixed inset-0", seiLayer.modal)}
-      role="menu"
+      role="dialog"
+      aria-modal="true"
       aria-label={ariaLabel}
     >
       {/* Backdrop — dim + light blur. Click anywhere empty closes. */}
